@@ -5,6 +5,7 @@ exports.up = function(knex) {
     tbl
       .integer("deck_id")
       .notNullable()
+      .unsigned()
       .references("decks.deck_id")
       .onUpdate("CASCADE")
       .onDelete("CASCADE");
