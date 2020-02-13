@@ -10,7 +10,9 @@ exports.up = function(knex) {
       .onUpdate("CASCADE")
       .onDelete("CASCADE");
 
-    tbl.timestamps([useTimestamps], [defaultToNow]);
+    tbl.timestamp("created_at").defaultTo(knex.fn.now());
+
+    tbl.timestamp("updated_at").defaultTo(knex.fn.now());
 
     tbl.string("category").notNullable();
 

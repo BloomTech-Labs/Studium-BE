@@ -2,12 +2,11 @@
 // database init
 module.exports = {
   development: {
-    client: "sqlite3",
-    connection: { filename: "./database/synaps.db3" },
-    useNullAsDefault: true,
-    migrations: {
-      directory: "./database/migrations",
-      tableName: "dbmigrations"
+    client: "postgresql",
+    connection: {
+      database: "my_db",
+      user: "username",
+      password: "password"
     },
     pool: {
       afterCreate: (conn, done) => {
