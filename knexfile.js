@@ -8,6 +8,12 @@ module.exports = {
     migrations: {
       directory: "./database/migrations",
       tableName: "dbmigrations"
+    },
+    pool: {
+      afterCreate: (conn, done) => {
+        // runs after a connection is made to the sqlite engine
+        conn.run("PRAGMA foreign_keys = ON", done); // turn on FK enforcement
+      }
     }
   },
 
@@ -19,8 +25,10 @@ module.exports = {
       password: "password"
     },
     pool: {
-      min: 2,
-      max: 10
+      afterCreate: (conn, done) => {
+        // runs after a connection is made to the sqlite engine
+        conn.run("PRAGMA foreign_keys = ON", done); // turn on FK enforcement
+      }
     },
     migrations: {
       tableName: "knex_migrations"
@@ -35,8 +43,10 @@ module.exports = {
       password: "password"
     },
     pool: {
-      min: 2,
-      max: 10
+      afterCreate: (conn, done) => {
+        // runs after a connection is made to the sqlite engine
+        conn.run("PRAGMA foreign_keys = ON", done); // turn on FK enforcement
+      }
     },
     migrations: {
       tableName: "knex_migrations"
