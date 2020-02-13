@@ -9,13 +9,17 @@ exports.up = function(knex) {
       .onUpdate("CASCADE")
       .onDelete("CASCADE");
 
-    tbl.timestamp("created_at").defaultTo(knex.fn.now());
-
-    tbl.timestamp("updated_at").defaultTo(knex.fn.now());
+    tbl.timestamps([useTimestamps], [defaultToNow]);
 
     tbl.string("category").notNullable();
 
     tbl.string("deck_name").notNullable();
+
+    tbl.text("tags");
+
+    tbl.boolean("public");
+
+    tbl.blob("deck-image");
   });
 };
 
