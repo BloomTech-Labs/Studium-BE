@@ -6,7 +6,8 @@ module.exports = {
     connection: {
       database: "synaps",
       user: "postgres",
-      password: "incoh3r3nt&"
+      password: "incoh3r3nt&",
+      port: "5500"
     },
     migrations: {
       directory: "./database/migrations"
@@ -15,10 +16,8 @@ module.exports = {
       directory: "./database/seeds"
     },
     pool: {
-      afterCreate: (conn, done) => {
-        // runs after a connection is made to the sqlite engine
-        conn.run("PRAGMA foreign_keys = ON", done); // turn on FK enforcement
-      }
+      min: 2,
+      max: 10
     }
   },
 
@@ -27,7 +26,8 @@ module.exports = {
     connection: {
       database: "synaps",
       user: "postgres",
-      password: "incoh3r3nt&"
+      password: "incoh3r3nt&",
+      port: "5500"
     },
     migrations: {
       directory: "./database/migrations"
@@ -36,31 +36,20 @@ module.exports = {
       directory: "./database/seeds"
     },
     pool: {
-      afterCreate: (conn, done) => {
-        // runs after a connection is made to the sqlite engine
-        conn.run("PRAGMA foreign_keys = ON", done); // turn on FK enforcement
-      }
+      min: 2,
+      max: 10
     }
   },
 
   production: {
     client: "postgresql",
-    connection: {
-      database: "synaps",
-      user: "postgres",
-      password: "incoh3r3nt&"
-    },
+    connection: process.env.DATABSE_URL,
     migrations: {
       directory: "./database/migrations"
     },
-    seeds: {
-      directory: "./database/seeds"
-    },
     pool: {
-      afterCreate: (conn, done) => {
-        // runs after a connection is made to the sqlite engine
-        conn.run("PRAGMA foreign_keys = ON", done); // turn on FK enforcement
-      }
+      min: 2,
+      max: 10
     }
   }
 };
