@@ -22,7 +22,7 @@ exports.up = function(knex) {
 
     tbl.boolean("public");
 
-    tbl.bytea("deck-image");
+    tbl.binary("deck-image");
   });
 };
 

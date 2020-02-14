@@ -20,9 +20,9 @@ exports.up = function(knex) {
 
     tbl.string("text");
 
-    tbl.bytea("image_front");
+    tbl.binary("image_front");
 
-    tbl.bytea("image_back");
+    tbl.binary("image_back");
   });
 };
 
