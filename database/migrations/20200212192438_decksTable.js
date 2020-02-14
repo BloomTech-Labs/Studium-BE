@@ -10,9 +10,9 @@ exports.up = function(knex) {
       .onUpdate("CASCADE")
       .onDelete("CASCADE");
 
-    tbl.integer("created_at").defaultTo(knex.fn.now());
+    tbl.integer("created_at").Number(defaultTo(knex.fn.now()));
 
-    tbl.integer("updated_at").defaultTo(knex.fn.now());
+    tbl.integer("updated_at").Number(defaultTo(knex.fn.now()));
 
     tbl.string("category").notNullable();
 
