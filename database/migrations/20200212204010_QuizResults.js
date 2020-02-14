@@ -20,7 +20,7 @@ exports.up = function(knex) {
 
     tbl.integer("comfort_level").notNullable();
 
-    tbl.time("ts").defaultTo(knex.fn.now());
+    tbl.integer("ts").defaultTo(knex.fn.now());
   });
 };
 

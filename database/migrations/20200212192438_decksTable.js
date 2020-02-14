@@ -10,9 +10,9 @@ exports.up = function(knex) {
       .onUpdate("CASCADE")
       .onDelete("CASCADE");
 
-    tbl.timestamp("created_at").defaultTo(knex.fn.now());
+    tbl.integer("created_at").defaultTo(knex.fn.now());
 
-    tbl.timestamp("updated_at").defaultTo(knex.fn.now());
+    tbl.integer("updated_at").defaultTo(knex.fn.now());
 
     tbl.string("category").notNullable();
 
@@ -22,7 +22,7 @@ exports.up = function(knex) {
 
     tbl.boolean("public");
 
-    tbl.blob("deck-image");
+    tbl.bytea("deck-image");
   });
 };
 

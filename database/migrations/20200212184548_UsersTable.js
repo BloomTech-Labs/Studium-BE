@@ -11,9 +11,9 @@ exports.up = function(knex) {
       .notNullable()
       .unique();
 
-    tbl.timestamp("created_at").defaultTo(knex.fn.now());
+    tbl.integer("created_at").defaultTo(knex.fn.now());
 
-    tbl.timestamp("updated_at").defaultTo(knex.fn.now());
+    tbl.integer("updated_at").defaultTo(knex.fn.now());
   });
 };
 
