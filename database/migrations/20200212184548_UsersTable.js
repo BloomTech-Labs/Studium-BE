@@ -7,6 +7,11 @@ exports.up = function(knex) {
     tbl.string("last_name").notNullable();
 
     tbl
+      .string("uid")
+      .notNullable()
+      .unique();
+
+    tbl
       .string("username")
       .notNullable()
       .unique();
