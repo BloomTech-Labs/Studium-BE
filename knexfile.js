@@ -4,10 +4,10 @@ module.exports = {
   development: {
     client: "postgresql",
     connection: {
-      database: "synaps",
-      user: "postgres",
-      password: "incoh3r3nt&",
-      port: "5500"
+      database: process.env.DATABASE,
+      user: process.env.USER,
+      password: process.env.PASSWORD,
+      port: process.env.DATABASE_PORT
     },
     migrations: {
       directory: "./database/migrations"
