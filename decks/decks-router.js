@@ -1,29 +1,20 @@
 const router = require("express").Router();
 
-const Users = require("./users-model.js");
+const Decks = require("./decks-model.js");
 const restricted = require("../auth/authenticate-middleware.js");
 
-router.post("/", (req, res) => {
-  let newUser = req.body;
-  Users.add(newUser)
-    .then(user => res.status(201).json(user))
-    .catch(err =>
-      res.status(501).json({ message: "error adding the user", error: err })
-    );
-});
-
 router.get("/", restricted, (req, res) => {
-  Users.getAll()
-    .then(users => {
-      res.json(users);
+  Decks.getAll()
+    .then(Decks => {
+      res.json(Decks);
     })
     .catch(err => {
-      res.status(500).json({ message: "There was an error getting users." });
+      res.status(500).json({ message: "There was an error getting Decks." });
     });
 });
 
 router.get("/:id", (req, res) => {
-  Users.findById(req.params.id)
+  Decks.findById(req.params.id)
     .then(user => {
       if (user) {
         res.status(200).json(user);
@@ -42,7 +33,7 @@ router.get("/:id", (req, res) => {
 
 router.put("/:id", restricted, (req, res) => {
   const changes = req.body;
-  Users.update(req.params.id, changes)
+  Decks.update(req.params.id, changes)
     .then(user => {
       if (user) {
         res.status(200).json(user);
@@ -60,7 +51,7 @@ router.put("/:id", restricted, (req, res) => {
 });
 
 router.delete("/:id", restricted, (req, res) => {
-  Users.remove(req.params.id)
+  Decks.remove(req.params.id)
     .then(count => {
       if (count > 0) {
         res.status(200).json({ message: "The user has been removed" });
