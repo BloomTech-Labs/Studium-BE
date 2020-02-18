@@ -20,6 +20,7 @@ server.use( "/api/auth", authRouter );
 server.use( "/api/users", usersRouter );
 server.use( "/api/decks", decksRouter );
 server.use( "/api", ( req, res ) => {
+  console.log( "inside of server up message" );
   return res.status( 200 ).json( { message: "Server up and running" } );
 } );
 

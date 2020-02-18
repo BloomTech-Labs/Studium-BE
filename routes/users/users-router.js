@@ -2,11 +2,50 @@ const router = require( "express" ).Router();
 
 const Users = require( "./users-model.js" );
 const restricted = require( "../auth/authenticate-middleware.js" );
+const uidMiddleWear = require( "../utils/findUIDMiddleware.js" );
+
+/**
+ * @api {post} /api/users/me    Gets current user
+ * @apiVersion 1.0.0
+ * @apiName GetUserByUID
+ * @apiGroup Users
+ *
+ * @apiParam {String} uid  Users google uid.
+ *
+ * @apiExample Request example:
+ * const request = axios.create({
+ *     baseURL: 'https://staging-lambda-synaps-be.herokuapp.com/',
+        timeout: 1000,
+ * });
+ * request.post('/api/users/me', {
+ *   uid: "123456080978"
+ * });
+ *
+ * @apiUse Error
+ *
+ * @apiSuccessExample User Data
+ *
+ {
+    "user_id": 1,
+    "first_name": "Jeremiah",
+    "last_name": "Tenbrink",
+    "uid": "12345",
+    "username": "Jeremiah Tenbrink",
+    "created_at": "2020-02-18 14:10:08.566262-07",
+    "updated_at": "2020-02-18 14:10:08.566262-07"
+}
+ *
+ */
+router.post( "/me", uidMiddleWear, ( req, res ) => {
+  const user = req.user;
+  return res.status( 200 ).json( user );
+  
+} );
 
 /**
  * @api {post} /api/users     Create a new user.
  * @apiVersion 1.0.0
- * @apiName GetAllUsers
+ * @apiName PostNewUsers
  * @apiGroup Users
  *
  * @apiParam {String} first_name  Users first name.
@@ -50,9 +89,9 @@ router.post( "/", ( req, res ) => {
 } );
 
 /**
- * @api {get} /api/users     Gets all users
+ * @api {get} /api/users/all     Gets all users
  * @apiVersion 1.0.0
- * @apiName CreateUser
+ * @apiName GetAllUsers
  * @apiGroup Users
  *
  * @apiExample Request example:
@@ -88,7 +127,8 @@ router.post( "/", ( req, res ) => {
  ]
  *
  */
-router.get( "/", ( req, res ) => {
+router.get( "/all", ( req, res ) => {
+  
   Users.getAll()
     .then( users => {
       res.json( users );
@@ -96,24 +136,6 @@ router.get( "/", ( req, res ) => {
     .catch( err => {
       res.status( 500 )
         .json( { message: "There was an error getting users." } );
-    } );
-} );
-
-router.get( "/:id", ( req, res ) => {
-  Users.findById( req.params.id )
-    .then( user => {
-      if( user ){
-        res.status( 200 ).json( user );
-      }else{
-        res.status( 404 ).json( { message: "User not found" } );
-      }
-    } )
-    .catch( error => {
-      // log error to database
-      console.log( error );
-      res.status( 500 ).json( {
-        message: "Error retrieving the user"
-      } );
     } );
 } );
 
