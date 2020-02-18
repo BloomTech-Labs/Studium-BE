@@ -46,10 +46,6 @@ module.exports = {
     connection: process.env.DATABSE_URL,
     migrations: {
       directory: "./data/migrations"
-    },
-    pool: {
-      min: 2,
-      max: 10
     }
   }
 };
