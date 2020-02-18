@@ -4,9 +4,9 @@ const Users = require( "./users-model.js" );
 const restricted = require( "../auth/authenticate-middleware.js" );
 
 /**
- * @api {post} /api/users     Get a user with the id.
+ * @api {post} /api/users     Create a new user.
  * @apiVersion 1.0.0
- * @apiName CreateUser
+ * @apiName GetAllUsers
  * @apiGroup Users
  *
  * @apiParam {String} first_name  Users first name.
@@ -49,7 +49,46 @@ router.post( "/", ( req, res ) => {
       .json( { message: "error adding the user", error: err.message } ) );
 } );
 
-router.get( "/", restricted, ( req, res ) => {
+/**
+ * @api {get} /api/users     Gets all users
+ * @apiVersion 1.0.0
+ * @apiName CreateUser
+ * @apiGroup Users
+ *
+ * @apiExample Request example:
+ * const request = axios.create({
+ *     baseURL: 'https://staging-lambda-synaps-be.herokuapp.com/',
+        timeout: 1000,
+ * });
+ * request.get('/api/users');
+ *
+ * @apiUse Error
+ *
+ * @apiSuccessExample User Data
+ *
+ [  {
+        "user_id": 1,
+        "first_name": "Jeremiah",
+        "last_name": "Tenbrink",
+        "uid": "12345",
+        "username": "Jeremiah Tenbrink",
+        "created_at": "2020-02-18 14:10:08.566262-07",
+        "updated_at": "2020-02-18 14:10:08.566262-07"
+    },
+ {
+        "user_id": 5,
+        "first_name": "Jeremiah",
+        "last_name": "Tenbrink",
+        "uid": "someothersui",
+        "username": "Jeremiah",
+        "created_at": "2020-02-18 14:12:47.906184-07",
+        "updated_at": "2020-02-18 14:12:47.906184-07"
+    }, ...
+ 
+ ]
+ *
+ */
+router.get( "/", ( req, res ) => {
   Users.getAll()
     .then( users => {
       res.json( users );
