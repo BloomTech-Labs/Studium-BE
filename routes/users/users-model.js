@@ -1,51 +1,41 @@
-const db = require('../../database/dbConfig.js');
+const db = require( "../../data/dbConfig.js" );
 
 module.exports = {
-  add,
-  find,
-  findBy,
-  findById,
-  getAll, 
-  update, 
-  remove, 
-  findUserProducts
+  add, find, findBy, findById, getAll, update, remove
 };
 
-function find() {
-  return db('users').select('id', 'username');
+function find(){
+  return db( "users" ).select( "id", "username" );
 }
 
-function findBy(filter) {
-  return db('users').where(filter);
+function findBy( filter ){
+  return db( "users" ).where( filter );
 }
 
-async function add(user) {
-  const [id] = await db('users').insert(user);
-
-  return findById(id);
+async function add( user ){
+  const [ newUser ] = await db( "users" ).insert( user ).returning( "*" );
+  
+  return newUser;
 }
 
-function findById(id) {
-  return db('users')
-    .where({ id })
+function findById( user_id ){
+  return db( "users" )
+    .where( { id } )
     .first();
 }
 
-function getAll() {
-  return db('users');
+function getAll(){
+  return db( "users" );
 }
 
-function update(id, changes) {
-  return db('users')
-    .where({ id })
-    .update(changes, '*');
+function update( id, changes ){
+  return db( "users" )
+    .where( { id } )
+    .update( changes, "*" );
 }
 
-function remove(id) {
-  return db('users')
-    .where({ id })
+function remove( id ){
+  return db( "users" )
+    .where( { id } )
     .del();
 }
-
-
-
