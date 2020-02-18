@@ -45,7 +45,7 @@ module.exports = {
     client: "pg",
     connection: process.env.DATABSE_URL,
     migrations: {
-      directory: "./database/migrations"
+      directory: "./data/migrations"
     },
     pool: {
       min: 2,
