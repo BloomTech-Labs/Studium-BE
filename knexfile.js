@@ -1,3 +1,5 @@
+//DON'T FORGET TO ADD SCRIPTS BELOW!
+
 // Update with your config settings.
 require("dotenv").config();
 module.exports = {

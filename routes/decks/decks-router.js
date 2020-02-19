@@ -16,7 +16,7 @@ router.post("/", findUIDMiddleWare, (req, res) => {
     );
 });
 
-router.get("/", restricted, (req, res) => {
+router.get("/", findUIDMiddleWare, (req, res) => {
   Decks.getAll()
     .then(Decks => {
       res.json(Decks);

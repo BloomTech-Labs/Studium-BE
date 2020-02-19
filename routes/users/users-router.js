@@ -1,8 +1,8 @@
-const router = require( "express" ).Router();
+const router = require("express").Router();
 
-const Users = require( "./users-model.js" );
-const restricted = require( "../auth/authenticate-middleware.js" );
-const uidMiddleWear = require( "../utils/findUIDMiddleware.js" );
+const Users = require("./users-model.js");
+const restricted = require("../auth/authenticate-middleware.js");
+const uidMiddleWear = require("../utils/findUIDMiddleware.js");
 
 /**
  * @api {post} /api/users/me    Gets current user
@@ -36,11 +36,10 @@ const uidMiddleWear = require( "../utils/findUIDMiddleware.js" );
 }
  *
  */
-router.post( "/me", uidMiddleWear, ( req, res ) => {
+router.post("/me", uidMiddleWear, (req, res) => {
   const user = req.user;
-  return res.status( 200 ).json( user );
-  
-} );
+  return res.status(200).json(user);
+});
 
 /**
  * @api {post} /api/users     Create a new user.
@@ -80,13 +79,15 @@ router.post( "/me", uidMiddleWear, ( req, res ) => {
 }
  *
  */
-router.post( "/", ( req, res ) => {
-  let newUser = req.body;
-  Users.add( newUser )
-    .then( user => res.status( 201 ).json( user ) )
-    .catch( err => res.status( 501 )
-      .json( { message: "error adding the user", error: err.message } ) );
-} );
+router.post("/login", (req, res) => {
+  let user = req.user;
+
+  res.status(200).json({
+    message: `Welcome ${user.username}, you are now logged in!`,
+    token: token,
+    user: user
+  });
+});
 
 /**
  * @api {get} /api/users/all     Gets all users
@@ -127,53 +128,52 @@ router.post( "/", ( req, res ) => {
  ]
  *
  */
-router.get( "/all", ( req, res ) => {
-  
+
+router.get("/all", (req, res) => {
   Users.getAll()
-    .then( users => {
-      res.json( users );
-    } )
-    .catch( err => {
-      res.status( 500 )
-        .json( { message: "There was an error getting users." } );
-    } );
-} );
+    .then(users => {
+      res.json(users);
+    })
+    .catch(err => {
+      res.status(500).json({ message: "There was an error getting users." });
+    });
+});
 
-router.put( "/:id", restricted, ( req, res ) => {
+router.put("/:id", restricted, (req, res) => {
   const changes = req.body;
-  Users.update( req.params.id, changes )
-    .then( user => {
-      if( user ){
-        res.status( 200 ).json( user );
-      }else{
-        res.status( 404 ).json( { message: "The user could not be found" } );
+  Users.update(req.params.id, changes)
+    .then(user => {
+      if (user) {
+        res.status(200).json(user);
+      } else {
+        res.status(404).json({ message: "The user could not be found" });
       }
-    } )
-    .catch( error => {
+    })
+    .catch(error => {
       // log error to database
-      console.log( error );
-      res.status( 500 ).json( {
+      console.log(error);
+      res.status(500).json({
         message: "Error updating the user."
-      } );
-    } );
-} );
+      });
+    });
+});
 
-router.delete( "/:id", restricted, ( req, res ) => {
-  Users.remove( req.params.id )
-    .then( count => {
-      if( count > 0 ){
-        res.status( 200 ).json( { message: "The user has been removed" } );
-      }else{
-        res.status( 404 ).json( { message: "The user could not be found" } );
+router.delete("/:id", restricted, (req, res) => {
+  Users.remove(req.params.id)
+    .then(count => {
+      if (count > 0) {
+        res.status(200).json({ message: "The user has been removed" });
+      } else {
+        res.status(404).json({ message: "The user could not be found" });
       }
-    } )
-    .catch( error => {
+    })
+    .catch(error => {
       // log error to database
-      console.log( error );
-      res.status( 500 ).json( {
+      console.log(error);
+      res.status(500).json({
         message: "Error removing the user"
-      } );
-    } );
-} );
+      });
+    });
+});
 
 module.exports = router;
