@@ -5,7 +5,7 @@ const bodyParser = require("body-parser");
 const path = require("path");
 const uidMiddleWear = require("../routes/utils/findUIDMiddleware.js");
 
-const authRouter = require("../routes/auth/auth-router.js");
+const registerRouter = require("../routes/auth/registerRouter.js");
 const usersRouter = require("../routes/users/users-router.js");
 const decksRouter = require("../routes/decks/decks-router.js");
 
@@ -17,7 +17,7 @@ server.use(cors());
 server.use(express.json());
 server.use(bodyParser.urlencoded({ extended: true }));
 
-server.use("/api/auth", authRouter);
+server.use("/api/register", registerRouter);
 server.use("/api/users", uidMiddleWear, usersRouter);
 server.use("/api/decks", uidMiddleWear, decksRouter);
 server.use("/api", (req, res) => {

@@ -1,8 +1,6 @@
 const router = require("express").Router();
 
 const Users = require("./users-model.js");
-const restricted = require("../auth/authenticate-middleware.js");
-const uidMiddleWear = require("../utils/findUIDMiddleware.js");
 
 /**
  * @api {post} /api/users/me    Gets current user
@@ -36,7 +34,7 @@ const uidMiddleWear = require("../utils/findUIDMiddleware.js");
 }
  *
  */
-router.post("/me", uidMiddleWear, (req, res) => {
+router.post("/me", (req, res) => {
   const user = req.user;
   return res.status(200).json(user);
 });
@@ -139,7 +137,7 @@ router.get("/all", (req, res) => {
     });
 });
 
-router.put("/:id", restricted, (req, res) => {
+router.put("/:id", (req, res) => {
   const changes = req.body;
   Users.update(req.params.id, changes)
     .then(user => {
@@ -158,7 +156,7 @@ router.put("/:id", restricted, (req, res) => {
     });
 });
 
-router.delete("/:id", restricted, (req, res) => {
+router.delete("/:id", (req, res) => {
   Users.remove(req.params.id)
     .then(count => {
       if (count > 0) {

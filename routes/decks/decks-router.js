@@ -1,10 +1,8 @@
 const router = require("express").Router();
 
 const Decks = require("./decks-model.js");
-const restricted = require("../auth/authenticate-middleware.js");
-const findUIDMiddleWare = require("../utils/findUIDMiddleware.js");
 
-router.post("/", findUIDMiddleWare, (req, res) => {
+router.post("/", (req, res) => {
   let user = req.user;
   let newDeck = req.body;
   newDeck.user_id = user.user_id;
@@ -16,7 +14,7 @@ router.post("/", findUIDMiddleWare, (req, res) => {
     );
 });
 
-router.get("/", findUIDMiddleWare, (req, res) => {
+router.get("/", (req, res) => {
   Decks.getAll()
     .then(Decks => {
       res.json(Decks);
@@ -44,7 +42,7 @@ router.get("/:id", (req, res) => {
     });
 });
 
-router.get("/user", findUIDMiddleWare, (req, res) => {
+router.get("/user", (req, res) => {
   let { user_id } = req.user;
 
   Decks.findBy(user_id)
@@ -60,7 +58,7 @@ router.get("/user", findUIDMiddleWare, (req, res) => {
     });
 });
 
-router.put("/:id", restricted, (req, res) => {
+router.put("/:id", (req, res) => {
   const changes = req.body;
   Decks.update(req.params.id, changes)
     .then(deck => {
@@ -79,7 +77,7 @@ router.put("/:id", restricted, (req, res) => {
     });
 });
 
-router.delete("/:id", restricted, (req, res) => {
+router.delete("/:id", (req, res) => {
   Decks.remove(req.params.id)
     .then(count => {
       if (count > 0) {
