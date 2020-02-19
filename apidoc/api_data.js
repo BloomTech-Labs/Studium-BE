@@ -39,7 +39,7 @@ define({ "api": [
     "groupTitle": "Decks",
     "sampleRequest": [
       {
-        "url": "https://production-lambda-synaps-be.herokuapp.com/api/decks/user"
+        "url": "http://localhost:5000/api/decks/user"
       }
     ],
     "error": {
@@ -97,7 +97,7 @@ define({ "api": [
     "groupTitle": "Users",
     "sampleRequest": [
       {
-        "url": "https://production-lambda-synaps-be.herokuapp.com/api/users/all"
+        "url": "http://localhost:5000/api/users/all"
       }
     ],
     "error": {
@@ -168,7 +168,7 @@ define({ "api": [
     "groupTitle": "Users",
     "sampleRequest": [
       {
-        "url": "https://production-lambda-synaps-be.herokuapp.com/api/users/me"
+        "url": "http://localhost:5000/api/users/me"
       }
     ],
     "error": {
@@ -260,7 +260,99 @@ define({ "api": [
     "groupTitle": "Users",
     "sampleRequest": [
       {
-        "url": "https://production-lambda-synaps-be.herokuapp.com/api/users"
+        "url": "http://localhost:5000/api/users"
+      }
+    ],
+    "error": {
+      "fields": {
+        "Error XXX": [
+          {
+            "group": "Error XXX",
+            "type": "Number",
+            "optional": false,
+            "field": "status",
+            "description": "<p>The status code response.</p>"
+          },
+          {
+            "group": "Error XXX",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>Error message</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error Example:",
+          "content": "ERROR XXX\n{\n    \"status\": xxx,\n    \"message\": \"Some Error Message\"\n}",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
+    "type": "put",
+    "url": "/api/users",
+    "title": "Update user",
+    "version": "1.0.0",
+    "name": "UpdateUser",
+    "group": "Users",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "uid",
+            "description": "<p>Users google UID.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "first_name",
+            "description": "<p>Users first name.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "last_name",
+            "description": "<p>Users last name.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "username",
+            "description": "<p>Users username.</p>"
+          }
+        ]
+      }
+    },
+    "examples": [
+      {
+        "title": "Request example:",
+        "content": "const request = axios.create({\n    baseURL: 'https://staging-lambda-synaps-be.herokuapp.com/',\n        timeout: 1000,\n});\nrequest.put('/api/user', {\n  first_name: \"New name\"\n});",
+        "type": "json"
+      }
+    ],
+    "success": {
+      "examples": [
+        {
+          "title": "User Data",
+          "content": "\n {\n    \"user_id\": 1,\n    \"first_name\": \"New name\",\n    \"last_name\": \"Tenbrink\",\n    \"uid\": \"12345\",\n    \"username\": \"Jeremiah Tenbrink\",\n    \"created_at\": \"2020-02-18 14:10:08.566262-07\",\n    \"updated_at\": \"2020-02-18 14:10:08.566262-07\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "routes/users/users-router.js",
+    "groupTitle": "Users",
+    "sampleRequest": [
+      {
+        "url": "http://localhost:5000/api/users"
       }
     ],
     "error": {

@@ -8,14 +8,12 @@ if( env === "debug" ){
 module.exports = ( req, res, next ) => {
   
   const write = ( chalk, type = undefined ) => {
-    
-    if( env === "debug" ){
-      if( type ){
-        console.log( type + ": " + chalk );
-      }else{
-        console.log( chalk );
-      }
+    if( type ){
+      console.log( type + ": " + chalk );
+    }else{
+      console.log( chalk );
     }
+    
   };
   
   const blank = ( number ) => {
@@ -31,26 +29,46 @@ module.exports = ( req, res, next ) => {
     return name;
   };
   
-  res.logger = {
-    info: ( name, message ) => {
-      name = attachUrl( name );
-      write( chalk.blue( message ), chalk.bold.blue( name ) );
-    }, errorMessage: ( name, message ) => {
-      name = attachUrl( name );
-      write( chalk.red( message ), chalk.red( name ) );
-    }, error: ( message, error ) => {
-      blank( 2 );
-      
-      write( chalk.red( message ) );
-      write( chalk.red( error ) );
-      blank( 2 );
-    }, success: ( name, message ) => {
-      name = attachUrl( name );
-      write( chalk.green( message ), chalk.bold.greenBright( name ) );
-    }, route: ( method ) => {
-      write( chalk.magenta( req.originalUrl ), chalk.bold.magenta( method ) );
-    },
+  const logIfDebug = ( message, name = undefined ) => {
+    if( env === "debug" ){
+      write( message, name );
+    }
+  };
+  
+  const info = ( name, message ) => {
     
+    name = attachUrl( name );
+    logIfDebug( chalk.blue( message ), chalk.bold.blue( name ) );
+  };
+  
+  const errorMessage = ( name, message ) => {
+    name = attachUrl( name );
+    write( chalk.red( message ), chalk.red( name ) );
+  };
+  
+  const error = ( message, error ) => {
+    blank( 2 );
+    message = attachUrl( message );
+    write( chalk.red( message ) );
+    write( chalk.red( error ) );
+    blank( 2 );
+  };
+  
+  const success = ( name, message ) => {
+    name = attachUrl( name );
+    logIfDebug( chalk.green( message ), chalk.bold.greenBright( name ) );
+  };
+  
+  const route = ( method ) => {
+    if( req.originalUrl.includes( "api/" ) ){
+      logIfDebug( chalk.magenta( req.originalUrl ),
+        chalk.bold.magenta( method )
+      );
+    }
+  };
+  
+  res.logger = {
+    info, errorMessage, error, success, route
   };
   next();
 };

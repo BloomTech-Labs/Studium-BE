@@ -28,10 +28,10 @@ function getAll(){
   return db( "users" );
 }
 
-function update( id, changes ){
+function update( newUser ){
   return db( "users" )
-    .where( { id } )
-    .update( changes, "*" );
+    .where( { user_id: newUser.user_id } )
+    .update( newUser, "*" );
 }
 
 function remove( id ){

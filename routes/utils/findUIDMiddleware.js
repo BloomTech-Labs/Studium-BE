@@ -4,7 +4,11 @@ const createError = require( "./createError" );
 
 module.exports = ( req, res, next ) => {
   const { uid } = req.body;
-  
+  if( uid === "" || uid === undefined ){
+    const error = createError( 500, DEBUG_NAME, "You must send in a uid" );
+    next( error );
+    return;
+  }
   UserDb.findBy( { uid } )
     .then( user => {
       if( user.length > 0 ){
@@ -12,15 +16,18 @@ module.exports = ( req, res, next ) => {
         req.user = user[ 0 ];
         next();
       }else{
-        res.logger.errorMessage( DEBUG_NAME, "Did not find user: " + uid );
-        res.status( 401 )
-          .json( { message: "Could not find user for that uid." } );
+        next( createError( 500,
+          DEBUG_NAME,
+          "Could not find a user with that uid. "
+        ) );
       }
       
     } )
     .catch( err => {
-      console.log( "Error in uid middle wear." );
-      res.status( 404 )
-        .json( { message: "uid not found", error: err.message } );
+      next( createError( err.status || 500,
+        DEBUG_NAME,
+        "Server error, Check server logs.",
+        err
+      ) );
     } );
 };

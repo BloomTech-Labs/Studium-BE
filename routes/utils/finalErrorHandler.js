@@ -1,6 +1,7 @@
 module.exports = ( err, req, res, next ) => {
-  res.status( 500 );
   res.logger( "Setting website error message." );
-  res.render( "error", { message: "Internal server error." } );
   res.logger( "Waiting for next request." );
+  res.status( err.message || 500 ).json( {
+    status: err.status || 500, message: err.userMessage || "Server error"
+  } );
 };
