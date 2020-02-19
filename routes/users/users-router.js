@@ -1,4 +1,5 @@
 const router = require( "express" ).Router();
+const DEBUG_NAME = "USERS";
 
 const Users = require( "./users-model.js" );
 const restricted = require( "../auth/authenticate-middleware.js" );
@@ -38,7 +39,10 @@ const uidMiddleWear = require( "../utils/findUIDMiddleware.js" );
  */
 router.post( "/me", uidMiddleWear, ( req, res ) => {
   const user = req.user;
-  return res.status( 200 ).json( user );
+  if( user ){
+    res.logger.success( DEBUG_NAME, "Returning user" );
+    return res.status( 200 ).json( user );
+  }
   
 } );
 
@@ -83,7 +87,12 @@ router.post( "/me", uidMiddleWear, ( req, res ) => {
 router.post( "/", ( req, res ) => {
   let newUser = req.body;
   Users.add( newUser )
-    .then( user => res.status( 201 ).json( user ) )
+    .then( user => {
+      res.logger.success( DEBUG_NAME,
+        "Created new" + " user. Returning user."
+      );
+      res.status( 201 ).json( user );
+    } )
     .catch( err => res.status( 501 )
       .json( { message: "error adding the user", error: err.message } ) );
 } );
@@ -131,6 +140,7 @@ router.get( "/all", ( req, res ) => {
   
   Users.getAll()
     .then( users => {
+      res.logger.success( DEBUG_NAME, "Returning all users." );
       res.json( users );
     } )
     .catch( err => {

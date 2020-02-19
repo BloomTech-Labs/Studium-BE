@@ -4,7 +4,7 @@ define({
   "description": "Api for Synaps. A web application for flash cards.",
   "title": "Synaps Api",
   "url": "https://production-lambda-synaps-be.herokuapp.com",
-  "sampleUrl": "http://localhost:5000",
+  "sampleUrl": "https://production-lambda-synaps-be.herokuapp.com",
   "template": {
     "withGenerator": true,
     "withCompare": true
@@ -13,7 +13,7 @@ define({
   "apidoc": "0.3.0",
   "generator": {
     "name": "apidoc",
-    "time": "2020-02-18T22:40:39.718Z",
+    "time": "2020-02-19T02:13:41.334Z",
     "url": "http://apidocjs.com",
     "version": "0.20.0"
   }

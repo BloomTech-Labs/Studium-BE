@@ -12,6 +12,7 @@ module.exports = ( req, res, next ) => {
       }else{
         req.decodedJwt = decodedToken;
         next();
+        next();
       }
     } );
   }else{
