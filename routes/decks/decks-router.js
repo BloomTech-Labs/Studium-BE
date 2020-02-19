@@ -45,7 +45,7 @@ router.get("/:id", (req, res) => {
 router.get("/user", (req, res) => {
   let { user_id } = req.user;
 
-  Decks.findBy(user_id)
+  Decks.findBy({ user_id })
     .then(decks => {
       if (decks) {
         res.status(200).json(decks);
