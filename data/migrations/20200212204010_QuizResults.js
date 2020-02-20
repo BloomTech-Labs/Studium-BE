@@ -1,7 +1,5 @@
 exports.up = function(knex) {
   return knex.schema.createTable("quiz_results", tbl => {
-    tbl.increments("quiz_result_id");
-
     tbl
       .integer("card_id")
       .notNullable()
@@ -17,6 +15,8 @@ exports.up = function(knex) {
       .references("users.user_id")
       .onUpdate("CASCADE")
       .onDelete("CASCADE");
+
+    tbl.primary(["card_id", "user_id"]);
 
     tbl.integer("comfort_level").notNullable();
 

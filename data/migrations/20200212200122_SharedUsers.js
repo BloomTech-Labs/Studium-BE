@@ -1,7 +1,5 @@
 exports.up = function(knex) {
   return knex.schema.createTable("shared_users", tbl => {
-    tbl.increments("shared_user_id");
-
     tbl
       .integer("user_id")
       .notNullable()
@@ -17,6 +15,8 @@ exports.up = function(knex) {
       .references("decks.deck_id")
       .onUpdate("CASCADE")
       .onDelete("CASCADE");
+
+    tbl.primary(["user_id", "deck_id"]);
   });
 };
 
