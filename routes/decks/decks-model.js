@@ -1,41 +1,51 @@
-const db = require( "../../data/dbConfig.js" );
+const db = require("../../data/dbConfig.js");
 
 module.exports = {
-  add, find, findBy, findById, getAll, update, remove
+  add,
+  find,
+  findBy,
+  findById,
+  getAll,
+  update,
+  remove
 };
 
-function find(){
-  return db( "decks" );
+function find() {
+  return db("decks");
 }
 
-function findBy( filter ){
-  return db( "decks" ).where( filter );
+// function findShared(deck_id){
+//   return db()
+// }
+
+function findBy(filter) {
+  return db("decks").where(filter);
 }
 
-async function add( deck ){
-  const [ id ] = await db( "decks" ).insert( deck );
-  
-  return findById( id );
+async function add(deck) {
+  const [id] = await db("decks").insert(deck);
+
+  return findById(id);
 }
 
-function findById( id ){
-  return db( "decks" )
-    .where( { id } )
+function findById(id) {
+  return db("decks")
+    .where({ id })
     .first();
 }
 
-function getAll(){
-  return db( "decks" );
+function getAll() {
+  return db("decks");
 }
 
-function update( id, changes ){
-  return db( "decks" )
-    .where( { id } )
-    .update( changes, "*" );
+function update(id, changes) {
+  return db("decks")
+    .where({ id })
+    .update(changes, "*");
 }
 
-function remove( id ){
-  return db( "decks" )
-    .where( { id } )
+function remove(id) {
+  return db("decks")
+    .where({ id })
     .del();
 }

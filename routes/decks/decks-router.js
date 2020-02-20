@@ -58,6 +58,8 @@ router.get("/user", (req, res) => {
     });
 });
 
+router.get("/shared", (req, res) => {});
+
 router.put("/:id", (req, res) => {
   const changes = req.body;
   Decks.update(req.params.id, changes)
