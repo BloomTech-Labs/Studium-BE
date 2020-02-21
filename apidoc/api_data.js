@@ -1,5 +1,104 @@
 define({ "api": [
   {
+    "type": "put",
+    "url": "/api/users/:id",
+    "title": "Edits an existing user",
+    "version": "1.0.0",
+    "name": "EditExistingUser",
+    "group": "Users",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "user_id",
+            "description": "<p>Users unique id number</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "uid",
+            "description": "<p>Users google number</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "username",
+            "description": "<p>Users display name</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "created_at",
+            "description": "<p>timestamp for first time created</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "updated_at",
+            "description": "<p>timestamp for last time updated</p>"
+          }
+        ]
+      }
+    },
+    "examples": [
+      {
+        "title": "Request example:",
+        "content": "\nconst request = axios.create({\nbaseURL: 'https://localhost:5000',\ntimeout: 1000\n});\n\nrequest.put('api/users/1', {\n\"username\": \"newUserName\"\n})",
+        "type": "json"
+      }
+    ],
+    "success": {
+      "examples": [
+        {
+          "title": "User Data",
+          "content": "\n{\n \"user_id\": 1,\n \"username\": \"newUserName\",\n\"uid\": \"1859027\",\n\"created_at\": \"2020-02-18 14:10:08.566262-07\",\n\"updated_at\": \"2020-02-20 20:26:08.566262-07\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "routes/users/users-router.js",
+    "groupTitle": "Users",
+    "sampleRequest": [
+      {
+        "url": "http://localhost:5000/api/users/:id"
+      }
+    ],
+    "error": {
+      "fields": {
+        "Error XXX": [
+          {
+            "group": "Error XXX",
+            "type": "Number",
+            "optional": false,
+            "field": "status",
+            "description": "<p>The status code response.</p>"
+          },
+          {
+            "group": "Error XXX",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>Error message</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error Example:",
+          "content": "ERROR XXX\n{\n    \"status\": xxx,\n    \"message\": \"Some Error Message\"\n}",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
     "type": "get",
     "url": "/api/users/all",
     "title": "Gets all users",
@@ -17,7 +116,7 @@ define({ "api": [
       "examples": [
         {
           "title": "User Data",
-          "content": "\n[  {\n       \"user_id\": 1,\n       \"first_name\": \"Jeremiah\",\n       \"last_name\": \"Tenbrink\",\n       \"uid\": \"12345\",\n       \"username\": \"Jeremiah Tenbrink\",\n       \"created_at\": \"2020-02-18 14:10:08.566262-07\",\n       \"updated_at\": \"2020-02-18 14:10:08.566262-07\"\n   },\n{\n       \"user_id\": 5,\n       \"first_name\": \"Jeremiah\",\n       \"last_name\": \"Tenbrink\",\n       \"uid\": \"someothersui\",\n       \"username\": \"Jeremiah\",\n       \"created_at\": \"2020-02-18 14:12:47.906184-07\",\n       \"updated_at\": \"2020-02-18 14:12:47.906184-07\"\n   }, ...\n\n]",
+          "content": "\n[  {\n       \"user_id\": 1,\n       \"uid\": \"12345\",\n       \"username\": \"Jeremiah Tenbrink\",\n       \"created_at\": \"2020-02-18 14:10:08.566262-07\",\n       \"updated_at\": \"2020-02-18 14:10:08.566262-07\"\n   },\n{\n       \"user_id\": 5,\n       \"uid\": \"someothersui\",\n       \"username\": \"Jeremiah\",\n       \"created_at\": \"2020-02-18 14:12:47.906184-07\",\n       \"updated_at\": \"2020-02-18 14:12:47.906184-07\"\n   }, ...\n\n]",
           "type": "json"
         }
       ]
@@ -88,7 +187,7 @@ define({ "api": [
       "examples": [
         {
           "title": "User Data",
-          "content": "\n {\n    \"user_id\": 1,\n    \"first_name\": \"Jeremiah\",\n    \"last_name\": \"Tenbrink\",\n    \"uid\": \"12345\",\n    \"username\": \"Jeremiah Tenbrink\",\n    \"created_at\": \"2020-02-18 14:10:08.566262-07\",\n    \"updated_at\": \"2020-02-18 14:10:08.566262-07\"\n}",
+          "content": "\n {\n    \"user_id\": 1,\n    \"uid\": \"12345\",\n    \"username\": \"Jeremiah Tenbrink\",\n    \"created_at\": \"2020-02-18 14:10:08.566262-07\",\n    \"updated_at\": \"2020-02-18 14:10:08.566262-07\"\n}",
           "type": "json"
         }
       ]
@@ -130,7 +229,7 @@ define({ "api": [
   },
   {
     "type": "post",
-    "url": "/api/users",
+    "url": "/api/register",
     "title": "Create a new user.",
     "version": "1.0.0",
     "name": "PostNewUsers",
@@ -138,20 +237,6 @@ define({ "api": [
     "parameter": {
       "fields": {
         "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "first_name",
-            "description": "<p>Users first name.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "last_name",
-            "description": "<p>Users last name.</p>"
-          },
           {
             "group": "Parameter",
             "type": "String",
@@ -172,7 +257,7 @@ define({ "api": [
     "examples": [
       {
         "title": "Request example:",
-        "content": "const request = axios.create({\n    baseURL: 'https://staging-lambda-synaps-be.herokuapp.com/',\n        timeout: 1000,\n});\nrequest.post('/api/users', {\n   first_name: \"Jeremiah\",\n   last_name: \"Tenbrink\",\n   uid: \"1kdhio39578sil;\",\n   username: \"Jeremiah Tenbrink\"\n});",
+        "content": "const request = axios.create({\n    baseURL: 'https://staging-lambda-synaps-be.herokuapp.com/',\n        timeout: 1000,\n});\nrequest.post('/api/register', {\n   uid: \"1kdhio39578sil;\",\n   username: \"Jeremiah Tenbrink\"\n});",
         "type": "json"
       }
     ],
@@ -180,16 +265,16 @@ define({ "api": [
       "examples": [
         {
           "title": "User Data",
-          "content": "\n {\n    \"user_id\": 10,\n    \"first_name\": \"Jeremiah\",\n    \"last_name\": \"Tenbrink\",\n    \"uid\": \"someothersuisomethingfdafdadfadfsdadfda\",\n    \"username\": \"Jeremiah343223656654\",\n    \"created_at\": \"2020-02-18 14:15:20.463231-07\",\n    \"updated_at\": \"2020-02-18 14:15:20.463231-07\"\n}",
+          "content": "\n {\n    \"user_id\": 10,\n    \"uid\": \"someothersuisomethingfdafdadfadfsdadfda\",\n    \"username\": \"Jeremiah343223656654\",\n    \"created_at\": \"2020-02-18 14:15:20.463231-07\",\n    \"updated_at\": \"2020-02-18 14:15:20.463231-07\"\n}",
           "type": "json"
         }
       ]
     },
-    "filename": "routes/users/users-router.js",
+    "filename": "routes/auth/registerRouter.js",
     "groupTitle": "Users",
     "sampleRequest": [
       {
-        "url": "http://localhost:5000/api/users"
+        "url": "http://localhost:5000/api/register"
       }
     ],
     "error": {

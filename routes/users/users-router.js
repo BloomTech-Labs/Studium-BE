@@ -25,8 +25,6 @@ const Users = require("./users-model.js");
  *
  {
     "user_id": 1,
-    "first_name": "Jeremiah",
-    "last_name": "Tenbrink",
     "uid": "12345",
     "username": "Jeremiah Tenbrink",
     "created_at": "2020-02-18 14:10:08.566262-07",
@@ -37,54 +35,6 @@ const Users = require("./users-model.js");
 router.post("/me", (req, res) => {
   const user = req.user;
   return res.status(200).json(user);
-});
-
-/**
- * @api {post} /api/users     Create a new user.
- * @apiVersion 1.0.0
- * @apiName PostNewUsers
- * @apiGroup Users
- *
- * @apiParam {String} first_name  Users first name.
- * @apiParam {String} last_name   Users last name.
- * @apiParam {String} uid         Users google UID.
- * @apiParam {String} username    Users username.
- *
- * @apiExample Request example:
- * const request = axios.create({
- *     baseURL: 'https://staging-lambda-synaps-be.herokuapp.com/',
-        timeout: 1000,
- * });
- * request.post('/api/users', {
- *    first_name: "Jeremiah",
- *    last_name: "Tenbrink",
- *    uid: "1kdhio39578sil;",
- *    username: "Jeremiah Tenbrink"
- * });
- *
- * @apiUse Error
- *
- * @apiSuccessExample User Data
- *
- {
-    "user_id": 10,
-    "first_name": "Jeremiah",
-    "last_name": "Tenbrink",
-    "uid": "someothersuisomethingfdafdadfadfsdadfda",
-    "username": "Jeremiah343223656654",
-    "created_at": "2020-02-18 14:15:20.463231-07",
-    "updated_at": "2020-02-18 14:15:20.463231-07"
-}
- *
- */
-router.post("/login", (req, res) => {
-  let user = req.user;
-
-  res.status(200).json({
-    message: `Welcome ${user.username}, you are now logged in!`,
-    token: token,
-    user: user
-  });
 });
 
 /**
@@ -106,8 +56,6 @@ router.post("/login", (req, res) => {
  *
  [  {
         "user_id": 1,
-        "first_name": "Jeremiah",
-        "last_name": "Tenbrink",
         "uid": "12345",
         "username": "Jeremiah Tenbrink",
         "created_at": "2020-02-18 14:10:08.566262-07",
@@ -115,8 +63,6 @@ router.post("/login", (req, res) => {
     },
  {
         "user_id": 5,
-        "first_name": "Jeremiah",
-        "last_name": "Tenbrink",
         "uid": "someothersui",
         "username": "Jeremiah",
         "created_at": "2020-02-18 14:12:47.906184-07",
@@ -136,6 +82,42 @@ router.get("/all", (req, res) => {
       res.status(500).json({ message: "There was an error getting users." });
     });
 });
+
+/**
+ * @api  {put} /api/users/:id   Edits an existing user
+ * @apiVersion  1.0.0
+ * @apiName EditExistingUser
+ * @apiGroup  Users
+ *
+ * @apiParam  {Number}      user_id       Users unique id number
+ * @apiParam  {String}      uid           Users google number
+ * @apiParam  {String}      username       Users display name
+ * @apiParam  {String}      [created_at]  timestamp for first time created
+ * @apiParam  {String}      [updated_at]  timestamp for last time updated
+ *
+ * @apiExample  Request example:
+ *
+ * const request = axios.create({
+ * baseURL: 'https://localhost:5000',
+ * timeout: 1000
+ * });
+ *
+ * request.put('api/users/1', {
+ * "username": "newUserName"
+ * })
+ *
+ * @apiUse Error
+ *
+ * @apiSuccessExample User Data
+ *
+ * {
+ *  "user_id": 1,
+ *  "username": "newUserName",
+ * "uid": "1859027",
+ * "created_at": "2020-02-18 14:10:08.566262-07",
+ * "updated_at": "2020-02-20 20:26:08.566262-07"
+ * }
+ */
 
 router.put("/:id", (req, res) => {
   const changes = req.body;
