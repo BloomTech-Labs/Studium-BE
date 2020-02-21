@@ -9,6 +9,7 @@ module.exports = ( req, res, next ) => {
     next( error );
     return;
   }
+  
   UserDb.findBy( { uid } )
     .then( user => {
       if( user.length > 0 ){
@@ -21,7 +22,6 @@ module.exports = ( req, res, next ) => {
           "Could not find a user with that uid. "
         ) );
       }
-      
     } )
     .catch( err => {
       next( createError( err.status || 500,
