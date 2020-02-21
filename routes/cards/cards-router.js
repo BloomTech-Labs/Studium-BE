@@ -1,8 +1,8 @@
 const router = require("express").Router();
 
 const cards = require("./cards-model.js");
-const deckIdMiddleWare = require("../routes/utils/findDeckIDMiddleware");
-const uidMiddleWear = require("../routes/utils/findUIDMiddleware.js");
+const deckIdMiddleWare = require("../utils/findDeckIDMiddleware");
+const uidMiddleWear = require("../utils/findUIDMiddleware.js");
 
 router.post("/", deckIdMiddleWare, (req, res) => {
   let deck = req.deck;
