@@ -1,6 +1,8 @@
 const router = require("express").Router();
+const DEBUG_NAME = "USERS";
 
 const Users = require("./users-model.js");
+const createError = require("../utils/createError");
 
 /**
  * @api {post} /api/users/me    Gets current user
@@ -34,7 +36,73 @@ const Users = require("./users-model.js");
  */
 router.post("/me", (req, res) => {
   const user = req.user;
-  return res.status(200).json(user);
+  if (user) {
+    res.logger.success(DEBUG_NAME, "Returning user");
+    return res.status(200).json(user);
+  }
+});
+
+/**
+ * @api {post} /api/users     Create a new user.
+ * @apiVersion 1.0.0
+ * @apiName PostNewUsers
+ * @apiGroup Users
+ *
+ * @apiParam {String} first_name  Users first name.
+ * @apiParam {String} last_name   Users last name.
+ * @apiParam {String} uid         Users google UID.
+ * @apiParam {String} username    Users username.
+ *
+ * @apiExample Request example:
+ * const request = axios.create({
+ *     baseURL: 'https://staging-lambda-synaps-be.herokuapp.com/',
+        timeout: 1000,
+ * });
+ * request.post('/api/users', {
+ *    first_name: "Jeremiah",
+ *    last_name: "Tenbrink",
+ *    uid: "1kdhio39578sil;",
+ *    username: "Jeremiah Tenbrink"
+ * });
+ *
+ * @apiUse Error
+ *
+ * @apiSuccessExample User Data
+ *
+ {
+    "user_id": 10,
+    "first_name": "Jeremiah",
+    "last_name": "Tenbrink",
+    "uid": "someothersuisomethingfdafdadfadfsdadfda",
+    "username": "Jeremiah343223656654",
+    "created_at": "2020-02-18 14:15:20.463231-07",
+    "updated_at": "2020-02-18 14:15:20.463231-07"
+}
+ *
+ */
+router.post("/", (req, res, next) => {
+  let newUser = req.body;
+
+  if (
+    !newUser.first_name ||
+    !newUser.last_name ||
+    !newUser.uid ||
+    !newUser.username
+  ) {
+    next(
+      createError(400, DEBUG_NAME, "You must enter all of the required params.")
+    );
+    return;
+  }
+
+  Users.add(newUser)
+    .then(user => {
+      res.logger.success(DEBUG_NAME, "Created new user. Returning user.");
+      res.status(201).json(user);
+    })
+    .catch(err =>
+      next(createError(err.status, DEBUG_NAME, "Server error", err))
+    );
 });
 
 /**
