@@ -2,7 +2,7 @@ const DecksDb = require("../decks/decks-model.js");
 
 module.exports = (req, res, next) => {
   console.log("inside of deck_id middle wear");
-  const { deck_id } = req.body;
+  const { deck_id } = req.params;
 
   DecksDb.findBy({ deck_id })
     .then(deck => {

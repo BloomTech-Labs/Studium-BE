@@ -14,7 +14,7 @@ const createError = require("../utils/createError");
  *
  * @apiExample Request example:
  * const request = axios.create({
- *     baseURL: 'https://staging-lambda-synaps-be.herokuapp.com/',
+ *     baseURL: 'http://localhost:5000/',
         timeout: 1000,
  * });
  * request.post('/api/users/me', {
@@ -43,69 +43,6 @@ router.post("/me", (req, res) => {
 });
 
 /**
- * @api {post} /api/users     Create a new user.
- * @apiVersion 1.0.0
- * @apiName PostNewUsers
- * @apiGroup Users
- *
- * @apiParam {String} first_name  Users first name.
- * @apiParam {String} last_name   Users last name.
- * @apiParam {String} uid         Users google UID.
- * @apiParam {String} username    Users username.
- *
- * @apiExample Request example:
- * const request = axios.create({
- *     baseURL: 'https://staging-lambda-synaps-be.herokuapp.com/',
-        timeout: 1000,
- * });
- * request.post('/api/users', {
- *    first_name: "Jeremiah",
- *    last_name: "Tenbrink",
- *    uid: "1kdhio39578sil;",
- *    username: "Jeremiah Tenbrink"
- * });
- *
- * @apiUse Error
- *
- * @apiSuccessExample User Data
- *
- {
-    "user_id": 10,
-    "first_name": "Jeremiah",
-    "last_name": "Tenbrink",
-    "uid": "someothersuisomethingfdafdadfadfsdadfda",
-    "username": "Jeremiah343223656654",
-    "created_at": "2020-02-18 14:15:20.463231-07",
-    "updated_at": "2020-02-18 14:15:20.463231-07"
-}
- *
- */
-router.post("/", (req, res, next) => {
-  let newUser = req.body;
-
-  if (
-    !newUser.first_name ||
-    !newUser.last_name ||
-    !newUser.uid ||
-    !newUser.username
-  ) {
-    next(
-      createError(400, DEBUG_NAME, "You must enter all of the required params.")
-    );
-    return;
-  }
-
-  Users.add(newUser)
-    .then(user => {
-      res.logger.success(DEBUG_NAME, "Created new user. Returning user.");
-      res.status(201).json(user);
-    })
-    .catch(err =>
-      next(createError(err.status, DEBUG_NAME, "Server error", err))
-    );
-});
-
-/**
  * @api {get} /api/users/all     Gets all users
  * @apiVersion 1.0.0
  * @apiName GetAllUsers
@@ -113,7 +50,7 @@ router.post("/", (req, res, next) => {
  *
  * @apiExample Request example:
  * const request = axios.create({
- *     baseURL: 'https://staging-lambda-synaps-be.herokuapp.com/',
+ *     baseURL: 'http://localhost:5000/',
         timeout: 1000,
  * });
  * request.get('/api/users');
@@ -205,6 +142,29 @@ router.put("/:id", (req, res) => {
       });
     });
 });
+
+/**
+ * @api {delete} /api/users/:id     Delete an existing user.
+ * @apiVersion 1.0.0
+ * @apiName DeleteUser
+ * @apiGroup Users
+ *
+ * @apiParam {String} id         Users unique id number
+ * @apiParam {String} username    Users username.
+ *
+ * @apiExample Request example:
+ * const request = axios.create({
+ *     baseURL: 'http://localhost:5000/',
+ *       timeout: 1000,
+ * });
+ * request.delete('/api/users/:id');
+ *
+ * @apiUse Error
+ *
+ * @apiSuccessExample User Data
+ *
+ * { message: "The user has been removed" }
+ */
 
 router.delete("/:id", (req, res) => {
   Users.remove(req.params.id)

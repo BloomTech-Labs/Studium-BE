@@ -4,7 +4,7 @@ const cards = require("./cards-model.js");
 const deckIdMiddleWare = require("../utils/findDeckIDMiddleware");
 const uidMiddleWear = require("../utils/findUIDMiddleware.js");
 
-router.post("/", deckIdMiddleWare, (req, res) => {
+router.post("/:id", deckIdMiddleWare, (req, res) => {
   let deck = req.deck;
   let newCard = req.body;
   newCard.deck_id = deck.deck_id;
@@ -17,7 +17,7 @@ router.post("/", deckIdMiddleWare, (req, res) => {
     );
 });
 
-router.get("/", deckIdMiddleWare, (req, res) => {
+router.get("/:id", deckIdMiddleWare, (req, res) => {
   let { deck_id } = req.deck;
 
   cards
@@ -30,9 +30,10 @@ router.get("/", deckIdMiddleWare, (req, res) => {
     });
 });
 
-router.get("/:id", (req, res) => {
+router.get("/:id", deckIdMiddleWare, (req, res) => {
+  let { deck_id } = req.deck;
   cards
-    .findById(req.params.id)
+    .findById(deck_id)
     .then(card => {
       if (card.length > 0) {
         res.status(200).json(card);
@@ -66,10 +67,11 @@ router.get("/user", uidMiddleWear, (req, res) => {
     });
 });
 
-router.put("/:id", (req, res) => {
+router.put("/:id", deckIdMiddleWare, (req, res) => {
+  let { deck_id } = req.deck;
   const changes = req.body;
   cards
-    .update(req.params.id, changes)
+    .update(deck_id, changes)
     .then(card => {
       if (card.length > 0) {
         res.status(200).json(card);
@@ -86,9 +88,10 @@ router.put("/:id", (req, res) => {
     });
 });
 
-router.delete("/:id", (req, res) => {
+router.delete("/:id", deckIdMiddleWare, (req, res) => {
+  let { deck_id } = req.deck;
   cards
-    .remove(req.params.id)
+    .remove(deck_id)
     .then(count => {
       if (count > 0) {
         res.status(200).json({ message: "The card has been removed" });

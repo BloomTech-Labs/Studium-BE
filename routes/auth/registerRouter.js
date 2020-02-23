@@ -12,7 +12,7 @@ const Users = require("../users/users-model.js");
  *
  * @apiExample Request example:
  * const request = axios.create({
- *     baseURL: 'https://staging-lambda-synaps-be.herokuapp.com/',
+ *     baseURL: 'http://localhost:5000/',
         timeout: 1000,
  * });
  * request.post('/api/register', {
