@@ -43,8 +43,8 @@ function update(newUser) {
     .update(newUser, "*");
 }
 
-function remove(id) {
+function remove(user_id) {
   return db("users")
-    .where({ id })
+    .where({ user_id })
     .del();
 }

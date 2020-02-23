@@ -77,25 +77,25 @@ define({ "api": [
     "version": "1.0.0",
     "name": "DeleteUser",
     "group": "Users",
-    "parameter": {
+    "header": {
       "fields": {
-        "Parameter": [
+        "Header": [
           {
-            "group": "Parameter",
+            "group": "Header",
             "type": "String",
             "optional": false,
-            "field": "id",
-            "description": "<p>Users unique id number</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "username",
-            "description": "<p>Users username.</p>"
+            "field": "auth",
+            "description": "<p>Users google uid.</p>"
           }
         ]
-      }
+      },
+      "examples": [
+        {
+          "title": "Header Example:",
+          "content": "\n{\n \"auth\": \"321sdf516156s\"\n}",
+          "type": "json"
+        }
+      ]
     },
     "examples": [
       {

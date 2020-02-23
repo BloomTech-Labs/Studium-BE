@@ -15,7 +15,6 @@ const decksRouter = require("../routes/decks/decks-router.js");
 const cardsRouter = require("../routes/cards/cards-router.js");
 
 const findUIDMiddleWare = require("../routes/utils/findUIDMiddleware.js");
-const findDeckIDMiddleware = require("../routes/utils/findDeckIDMiddleware");
 
 const server = express();
 const apiDocsPath = path.join(__dirname, "../apidoc");

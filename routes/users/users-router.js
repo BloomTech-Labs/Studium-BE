@@ -161,9 +161,14 @@ router.put("/", (req, res) => {
  * @apiVersion 1.0.0
  * @apiName DeleteUser
  * @apiGroup Users
+
+ * @apiHeader {String} auth  Users google uid.
  *
- * @apiParam {String} id         Users unique id number
- * @apiParam {String} username    Users username.
+ * @apiHeaderExample  {json}  Header Example:
+ *
+ * {
+ *  "auth": "321sdf516156s"
+ * }
  *
  * @apiExample Request example:
  * const request = axios.create({
