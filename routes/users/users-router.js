@@ -5,17 +5,17 @@ const Users = require("./users-model.js");
 const createError = require("../utils/createError");
 
 /**
- * @api {post} /api/users/me    Gets current user
+ * @api {get} /api/users/me    Gets current user
  * @apiVersion 1.0.0
  * @apiName GetUserByUID
  * @apiGroup Users
  *
- * @apiHeader {String} Auth  Users google uid.
+ * @apiHeader {String} auth  Users google uid.
  * 
  * @apiHeaderExample  {json}  Header Example:
  * 
  * {
- *  "Auth": "321sdf516156s"
+ *  "auth": "321sdf516156s"
  * }
  *
  * @apiExample Request example:
@@ -38,7 +38,7 @@ const createError = require("../utils/createError");
 }
  *
  */
-router.post("/me", (req, res) => {
+router.get("/me", (req, res) => {
   const user = req.user;
   if (user) {
     res.logger.success(DEBUG_NAME, "Returning user");
