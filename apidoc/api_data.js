@@ -312,23 +312,30 @@ define({ "api": [
     "version": "1.0.0",
     "name": "GetUserByUID",
     "group": "Users",
-    "parameter": {
+    "header": {
       "fields": {
-        "Parameter": [
+        "Header": [
           {
-            "group": "Parameter",
+            "group": "Header",
             "type": "String",
             "optional": false,
-            "field": "uid",
+            "field": "Auth",
             "description": "<p>Users google uid.</p>"
           }
         ]
-      }
+      },
+      "examples": [
+        {
+          "title": "Header Example:",
+          "content": "\n{\n \"Auth\": \"321sdf516156s\"\n}",
+          "type": "json"
+        }
+      ]
     },
     "examples": [
       {
         "title": "Request example:",
-        "content": "const request = axios.create({\n    baseURL: 'http://localhost:5000/',\n        timeout: 1000,\n});\nrequest.post('/api/users/me', {\n  uid: \"123456080978\"\n});",
+        "content": "const request = axios.create({\n    baseURL: 'http://localhost:5000/',\n        timeout: 1000,\n});\nrequest.get('/api/users/me');",
         "type": "json"
       }
     ],

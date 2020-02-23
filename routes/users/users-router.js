@@ -10,16 +10,20 @@ const createError = require("../utils/createError");
  * @apiName GetUserByUID
  * @apiGroup Users
  *
- * @apiParam {String} uid  Users google uid.
+ * @apiHeader {String} Auth  Users google uid.
+ * 
+ * @apiHeaderExample  {json}  Header Example:
+ * 
+ * {
+ *  "Auth": "321sdf516156s"
+ * }
  *
  * @apiExample Request example:
  * const request = axios.create({
  *     baseURL: 'http://localhost:5000/',
         timeout: 1000,
  * });
- * request.post('/api/users/me', {
- *   uid: "123456080978"
- * });
+ * request.get('/api/users/me');
  *
  * @apiUse Error
  *
@@ -124,9 +128,10 @@ router.get("/all", (req, res) => {
  * }
  */
 
-router.put("/:id", (req, res) => {
+router.put("/", (req, res) => {
+  const user = req.user;
   const changes = req.body;
-  Users.update(req.params.id, changes)
+  Users.update(user.user_id, changes)
     .then(user => {
       if (user) {
         res.status(200).json(user);
@@ -166,8 +171,9 @@ router.put("/:id", (req, res) => {
  * { message: "The user has been removed" }
  */
 
-router.delete("/:id", (req, res) => {
-  Users.remove(req.params.id)
+router.delete("/", (req, res) => {
+  const user = req.user;
+  Users.remove(user.user_id)
     .then(count => {
       if (count > 0) {
         res.status(200).json({ message: "The user has been removed" });

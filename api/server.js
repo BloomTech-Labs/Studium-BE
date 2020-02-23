@@ -12,9 +12,10 @@ const logRoute = require("../routes/utils/logRoute");
 const registerRouter = require("../routes/auth/registerRouter.js");
 const usersRouter = require("../routes/users/users-router.js");
 const decksRouter = require("../routes/decks/decks-router.js");
-const cardsRouter = require("../routes/utils/findUIDMiddleware.js");
+const cardsRouter = require("../routes/cards/cards-router.js");
 
 const findUIDMiddleWare = require("../routes/utils/findUIDMiddleware.js");
+const findDeckIDMiddleware = require("../routes/utils/findDeckIDMiddleware");
 
 const server = express();
 const apiDocsPath = path.join(__dirname, "../apidoc");
