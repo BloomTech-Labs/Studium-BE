@@ -254,6 +254,26 @@ define({ "api": [
     "version": "1.0.0",
     "name": "GetAllUsers",
     "group": "Users",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "auth",
+            "description": "<p>Users google uid.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header Example:",
+          "content": "\n{\n \"auth\": \"321sdf516156s\"\n}",
+          "type": "json"
+        }
+      ]
+    },
     "examples": [
       {
         "title": "Request example:",
