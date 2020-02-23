@@ -10,13 +10,17 @@ const logger = require( "../routes/utils/debugLogger" );
 const logRoute = require( "../routes/utils/logRoute" );
 const { cloudinaryConfig } = require( "../config/cloudinaryConfig" );
 
-const authRouter = require( "../routes/auth/auth-router.js" );
+const photoRouter = require( "../routes/photo/phto-router" );
+const registerRouter = require( "../routes/auth/registerRouter.js" );
 const usersRouter = require( "../routes/users/users-router.js" );
 const decksRouter = require( "../routes/decks/decks-router.js" );
-const photoRouter = require( "../routes/photo/phto-router" );
+const cardsRouter = require( "../routes/cards/cards-router.js" );
+
+const findUIDMiddleWare = require( "../routes/utils/findUIDMiddleware.js" );
+const findDeckIDMiddleware = require( "../routes/utils/findDeckIDMiddleware" );
 
 const server = express();
-const apiDocsPath = path.join( __dirname, process.env.DOCS_PATH );
+const apiDocsPath = path.join( __basedir, process.env.DOCS_PATH );
 
 server.use( helmet() );
 server.use( cors() );
@@ -26,9 +30,10 @@ server.use( logger );
 server.use( logRoute );
 server.use( cloudinaryConfig );
 
-server.use( "/api/auth", authRouter );
-server.use( "/api/users", usersRouter );
-server.use( "/api/decks", decksRouter );
+server.use( "/api/register", registerRouter );
+server.use( "/api/users", findUIDMiddleWare, usersRouter );
+server.use( "/api/decks", findUIDMiddleWare, decksRouter );
+server.use( "/api/cards", cardsRouter );
 server.use( "/api/photo", photoRouter );
 server.use( "/api", ( req, res ) => {
   console.log( "inside of server up message" );
