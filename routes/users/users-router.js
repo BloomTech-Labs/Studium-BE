@@ -157,7 +157,7 @@ router.put("/", (req, res) => {
 });
 
 /**
- * @api {delete} /api/users/:id     Delete an existing user.
+ * @api {delete} /api/users     Delete an existing user.
  * @apiVersion 1.0.0
  * @apiName DeleteUser
  * @apiGroup Users
@@ -175,7 +175,7 @@ router.put("/", (req, res) => {
  *     baseURL: 'http://localhost:5000/',
  *       timeout: 1000,
  * });
- * request.delete('/api/users/:id');
+ * request.delete('/api/users');
  *
  * @apiUse Error
  *

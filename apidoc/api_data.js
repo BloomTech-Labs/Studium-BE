@@ -72,7 +72,7 @@ define({ "api": [
   },
   {
     "type": "delete",
-    "url": "/api/users/:id",
+    "url": "/api/users",
     "title": "Delete an existing user.",
     "version": "1.0.0",
     "name": "DeleteUser",
@@ -100,7 +100,7 @@ define({ "api": [
     "examples": [
       {
         "title": "Request example:",
-        "content": "const request = axios.create({\n    baseURL: 'http://localhost:5000/',\n      timeout: 1000,\n});\nrequest.delete('/api/users/:id');",
+        "content": "const request = axios.create({\n    baseURL: 'http://localhost:5000/',\n      timeout: 1000,\n});\nrequest.delete('/api/users');",
         "type": "json"
       }
     ],
@@ -117,7 +117,7 @@ define({ "api": [
     "groupTitle": "Users",
     "sampleRequest": [
       {
-        "url": "http://localhost:5000/api/users/:id"
+        "url": "http://localhost:5000/api/users"
       }
     ],
     "error": {
