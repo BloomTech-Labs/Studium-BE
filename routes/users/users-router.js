@@ -101,16 +101,21 @@ router.get("/all", (req, res) => {
 });
 
 /**
- * @api  {put} /api/users/:id   Edits an existing user
+ * @api  {put} /api/users   Edits an existing user
  * @apiVersion  1.0.0
  * @apiName EditExistingUser
  * @apiGroup  Users
  *
- * @apiParam  {Number}      user_id       Users unique id number
- * @apiParam  {String}      uid           Users google number
- * @apiParam  {String}      username       Users display name
- * @apiParam  {String}      [created_at]  timestamp for first time created
- * @apiParam  {String}      [updated_at]  timestamp for last time updated
+ * @apiHeader {String} auth  Users google uid.
+ *
+ * @apiHeaderExample  {json}  Header Example:
+ *
+ * {
+ *  "auth": "321sdf516156s"
+ * }
+ *
+ *
+ * @apiParam  {String}      username        Users display name
  *
  * @apiExample  Request example:
  *
@@ -119,7 +124,7 @@ router.get("/all", (req, res) => {
  * timeout: 1000
  * });
  *
- * request.put('api/users/1', {
+ * request.put('api/users', {
  * "username": "newUserName"
  * })
  *
@@ -139,6 +144,8 @@ router.get("/all", (req, res) => {
 router.put("/", (req, res) => {
   const user = req.user;
   const changes = req.body;
+  console.log("changes from PUT", changes);
+  console.log("user from PUT", changes);
   Users.update(user.user_id, changes)
     .then(user => {
       if (user) {
@@ -157,20 +164,25 @@ router.put("/", (req, res) => {
 });
 
 /**
- * @api {delete} /api/users/:id     Delete an existing user.
+ * @api {delete} /api/users     Delete an existing user.
  * @apiVersion 1.0.0
  * @apiName DeleteUser
  * @apiGroup Users
+
+ * @apiHeader {String} auth  Users google uid.
  *
- * @apiParam {String} id         Users unique id number
- * @apiParam {String} username    Users username.
+ * @apiHeaderExample  {json}  Header Example:
+ *
+ * {
+ *  "auth": "321sdf516156s"
+ * }
  *
  * @apiExample Request example:
  * const request = axios.create({
  *     baseURL: 'http://localhost:5000/',
  *       timeout: 1000,
  * });
- * request.delete('/api/users/:id');
+ * request.delete('/api/users');
  *
  * @apiUse Error
  *

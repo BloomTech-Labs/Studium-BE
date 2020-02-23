@@ -72,35 +72,35 @@
   },
   {
     "type": "delete",
-    "url": "/api/users/:id",
+    "url": "/api/users",
     "title": "Delete an existing user.",
     "version": "1.0.0",
     "name": "DeleteUser",
     "group": "Users",
-    "parameter": {
+    "header": {
       "fields": {
-        "Parameter": [
+        "Header": [
           {
-            "group": "Parameter",
+            "group": "Header",
             "type": "String",
             "optional": false,
-            "field": "id",
-            "description": "<p>Users unique id number</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "username",
-            "description": "<p>Users username.</p>"
+            "field": "auth",
+            "description": "<p>Users google uid.</p>"
           }
         ]
-      }
+      },
+      "examples": [
+        {
+          "title": "Header Example:",
+          "content": "\n{\n \"auth\": \"321sdf516156s\"\n}",
+          "type": "json"
+        }
+      ]
     },
     "examples": [
       {
         "title": "Request example:",
-        "content": "const request = axios.create({\n    baseURL: 'http://localhost:5000/',\n      timeout: 1000,\n});\nrequest.delete('/api/users/:id');",
+        "content": "const request = axios.create({\n    baseURL: 'http://localhost:5000/',\n      timeout: 1000,\n});\nrequest.delete('/api/users');",
         "type": "json"
       }
     ],
@@ -117,7 +117,7 @@
     "groupTitle": "Users",
     "sampleRequest": [
       {
-        "url": "http://localhost:5000/api/users/:id"
+        "url": "http://localhost:5000/api/users"
       }
     ],
     "error": {
@@ -150,48 +150,40 @@
   },
   {
     "type": "put",
-    "url": "/api/users/:id",
+    "url": "/api/users",
     "title": "Edits an existing user",
     "version": "1.0.0",
     "name": "EditExistingUser",
     "group": "Users",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "auth",
+            "description": "<p>Users google uid.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header Example:",
+          "content": "\n{\n \"auth\": \"321sdf516156s\"\n}",
+          "type": "json"
+        }
+      ]
+    },
     "parameter": {
       "fields": {
         "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "Number",
-            "optional": false,
-            "field": "user_id",
-            "description": "<p>Users unique id number</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "uid",
-            "description": "<p>Users google number</p>"
-          },
           {
             "group": "Parameter",
             "type": "String",
             "optional": false,
             "field": "username",
             "description": "<p>Users display name</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": true,
-            "field": "created_at",
-            "description": "<p>timestamp for first time created</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": true,
-            "field": "updated_at",
-            "description": "<p>timestamp for last time updated</p>"
           }
         ]
       }
@@ -199,7 +191,7 @@
     "examples": [
       {
         "title": "Request example:",
-        "content": "\nconst request = axios.create({\nbaseURL: 'https://localhost:5000',\ntimeout: 1000\n});\n\nrequest.put('api/users/1', {\n\"username\": \"newUserName\"\n})",
+        "content": "\nconst request = axios.create({\nbaseURL: 'https://localhost:5000',\ntimeout: 1000\n});\n\nrequest.put('api/users', {\n\"username\": \"newUserName\"\n})",
         "type": "json"
       }
     ],
@@ -216,7 +208,7 @@
     "groupTitle": "Users",
     "sampleRequest": [
       {
-        "url": "http://localhost:5000/api/users/:id"
+        "url": "http://localhost:5000/api/users"
       }
     ],
     "error": {
