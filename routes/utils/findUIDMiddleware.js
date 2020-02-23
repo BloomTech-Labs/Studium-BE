@@ -1,17 +1,35 @@
-const UserDb = require( "../users/users-model.js" );
+const UserDb = require("../users/users-model.js");
+const DEBUG_NAME = "UID Middle Wear";
+const createError = require("./createError");
 
-module.exports = ( req, res, next ) => {
-  console.log( "inside of uid middle wear" );
-  const { uid } = req.body;
-  
-  UserDb.findBy( { uid } )
-    .then( user => {
-      req.user = user[ 0 ];
-      next();
-    } )
-    .catch( err => {
-      console.log( "Error in uid middle wear." );
-      res.status( 404 )
-        .json( { message: "uid not found", error: err.message } );
-    } );
+module.exports = (req, res, next) => {
+  const uid = req.headers["Auth"];
+  if (uid === "" || uid === undefined) {
+    const error = createError(500, DEBUG_NAME, "You must send in a uid");
+    next(error);
+    return;
+  }
+
+  UserDb.findBy({ uid })
+    .then(user => {
+      if (user.length > 0) {
+        res.logger.success(DEBUG_NAME, "Found user for uid: " + uid);
+        req.user = user[0];
+        next();
+      } else {
+        next(
+          createError(500, DEBUG_NAME, "Could not find a user with that uid. ")
+        );
+      }
+    })
+    .catch(err => {
+      next(
+        createError(
+          err.status || 500,
+          DEBUG_NAME,
+          "Server error, Check server logs.",
+          err
+        )
+      );
+    });
 };
