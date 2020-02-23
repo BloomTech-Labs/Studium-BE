@@ -52,6 +52,14 @@ router.get("/me", (req, res) => {
  * @apiName GetAllUsers
  * @apiGroup Users
  *
+ * @apiHeader {String} auth  Users google uid.
+ * 
+ * @apiHeaderExample  {json}  Header Example:
+ * 
+ * {
+ *  "auth": "321sdf516156s"
+ * }
+ * 
  * @apiExample Request example:
  * const request = axios.create({
  *     baseURL: 'http://localhost:5000/',
