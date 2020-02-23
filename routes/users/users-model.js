@@ -1,41 +1,50 @@
-const db = require( "../../data/dbConfig.js" );
+const db = require("../../data/dbConfig.js");
 
 module.exports = {
-  add, find, findBy, findById, getAll, update, remove
+  add,
+  find,
+  findBy,
+  findById,
+  getAll,
+  update,
+  remove
 };
 
-function find(){
-  return db( "users" ).select( "id", "username" );
+function find() {
+  return db("users").select("id", "username");
 }
 
-function findBy( filter ){
-  return db( "users" ).where( filter );
+function findBy(filter) {
+  console.log("filter from users findyb", filter);
+  return db("users").where(filter);
 }
 
-async function add( user ){
-  const [ newUser ] = await db( "users" ).insert( user ).returning( "*" );
-  
+async function add(user) {
+  const [newUser] = await db("users")
+    .insert(user)
+    .returning("*");
+
   return newUser;
 }
 
-function findById( user_id ){
-  return db( "users" )
-    .where( { user_id } )
+function findById(user_id) {
+  return db("users")
+    .where({ user_id })
     .first();
 }
 
-function getAll(){
-  return db( "users" );
+function getAll() {
+  return db("users");
 }
 
-function update( newUser ){
-  return db( "users" )
-    .where( { user_id: newUser.user_id } )
-    .update( newUser, "*" );
+function update(newUser) {
+  return db("users")
+    .where({ user_id: newUser.user_id })
+    .update(newUser, "*");
 }
 
-function remove( id ){
-  return db( "users" )
-    .where( { id } )
+function remove(id) {
+  return db("users")
+    .where({ id })
     .del();
 }

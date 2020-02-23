@@ -3,7 +3,9 @@ const DEBUG_NAME = "UID Middle Wear";
 const createError = require("./createError");
 
 module.exports = (req, res, next) => {
-  const uid = req.headers["Auth"];
+  const uid = req.headers["auth"];
+  console.log("uid here:", uid);
+  console.log("headers here:", req.headers);
   if (uid === "" || uid === undefined) {
     const error = createError(500, DEBUG_NAME, "You must send in a uid");
     next(error);
@@ -12,6 +14,7 @@ module.exports = (req, res, next) => {
 
   UserDb.findBy({ uid })
     .then(user => {
+      console.log(user);
       if (user.length > 0) {
         res.logger.success(DEBUG_NAME, "Found user for uid: " + uid);
         req.user = user[0];

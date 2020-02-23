@@ -306,7 +306,7 @@ define({ "api": [
     }
   },
   {
-    "type": "post",
+    "type": "get",
     "url": "/api/users/me",
     "title": "Gets current user",
     "version": "1.0.0",
@@ -319,7 +319,7 @@ define({ "api": [
             "group": "Header",
             "type": "String",
             "optional": false,
-            "field": "Auth",
+            "field": "auth",
             "description": "<p>Users google uid.</p>"
           }
         ]
@@ -327,7 +327,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Header Example:",
-          "content": "\n{\n \"Auth\": \"321sdf516156s\"\n}",
+          "content": "\n{\n \"auth\": \"321sdf516156s\"\n}",
           "type": "json"
         }
       ]
