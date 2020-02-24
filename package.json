@@ -9,8 +9,8 @@
     "test": "cross-env DB_ENV=testing jest --coverage --watch",
     "start": "node index.js",
     "api-docs": "apidoc -f .js -i ./routes -o apidoc/",
-    "api-docs-staging": "apidoc -c doc-staging -f .js -i ./routes -o doc-staging/",
-    "api-docs-prod": "apidoc -c doc-prod -f .js -i ./routes -o doc-prod/",
+    "api-docs-staging": "apidoc -c staging -f .js -i ./routes -o doc-staging/",
+    "api-docs-prod": "apidoc -c production -f .js -i ./routes -o doc-prod/",
     "heroku-postbuild": "npm-run-all api-docs-staging api-docs-prod",
     "coverage": "jest --coverage --detectOpenHandles --forceExit --passWithNoTests || true"
   },
@@ -25,6 +25,7 @@
   },
   "homepage": "https://production-lambda-synaps-be.herokuapp.com/",
   "dependencies": {
+    "apidoc": "^0.20.0",
     "body-parser": "^1.19.0",
     "chalk": "^3.0.0",
     "cloudinary": "^1.19.0",
