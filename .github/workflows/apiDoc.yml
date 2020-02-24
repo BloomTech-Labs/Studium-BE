@@ -18,4 +18,4 @@ jobs:
       # Run the NPM install command before proceeding
       - run: npm install
 
-      - run: npm run heroku-postbuild
+      - run: apidoc -c staging -f .js -i ./routes -o doc-staging/
