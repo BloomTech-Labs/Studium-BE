@@ -19,7 +19,7 @@ const cardsRouter = require( "../routes/cards/cards-router.js" );
 const findUIDMiddleWare = require( "../routes/utils/findUIDMiddleware.js" );
 
 const server = express();
-const apiDocsPath = path.join( __dirname + "../", process.env.DOCS_PATH );
+const apiDocsPath = path.join( __dirname, "../", process.env.DOCS_PATH );
 
 server.use( helmet() );
 server.use( cors() );
