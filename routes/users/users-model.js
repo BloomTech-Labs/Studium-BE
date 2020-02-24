@@ -37,14 +37,14 @@ function getAll() {
   return db("users");
 }
 
-function update(newUser) {
+function update(user_id, changes) {
   return db("users")
-    .where({ user_id: newUser.user_id })
-    .update(newUser, "*");
+    .where({ user_id })
+    .update(changes, "*");
 }
 
-function remove(id) {
+function remove(user_id) {
   return db("users")
-    .where({ id })
+    .where({ user_id })
     .del();
 }
