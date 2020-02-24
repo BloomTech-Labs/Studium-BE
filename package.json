@@ -6,11 +6,13 @@
   "scripts": {
     "migrate": "knex migrate:latest --env production",
     "server": "nodemon index.js",
-    "test": "cross-env DB_ENV=testing jest --watch",
+    "test": "cross-env DB_ENV=testing jest --coverage --watch",
     "start": "node index.js",
     "api-docs": "apidoc -f .js -i ./routes -o apidoc/",
-    "api-docs-staging": "apidoc -c doc-staging -f .js -i ./routes -o doc-staging/",
-    "api-docs-prod": "apidoc -c doc-prod -f .js -i ./routes -o doc-prod/"
+    "api-docs-staging": "apidoc -c staging -f .js -i ./routes -o doc-staging/",
+    "api-docs-prod": "apidoc -c production -f .js -i ./routes -o doc-prod/",
+    "build": "npm-run-all api-docs-staging api-docs-prod",
+    "coverage": "jest --coverage --detectOpenHandles --forceExit --passWithNoTests || true"
   },
   "repository": {
     "type": "git",
@@ -23,6 +25,7 @@
   },
   "homepage": "https://production-lambda-synaps-be.herokuapp.com/",
   "dependencies": {
+    "apidoc": "^0.20.0",
     "body-parser": "^1.19.0",
     "chalk": "^3.0.0",
     "cloudinary": "^1.19.0",
@@ -37,7 +40,6 @@
     "multer": "^1.4.2",
     "npm-run-all": "^4.1.5",
     "pg": "^7.17.0",
-    "run-all": "^1.0.1",
     "sqlite3": "^4.1.1"
   },
   "devDependencies": {
@@ -47,6 +49,15 @@
     "supertest": "^4.0.2"
   },
   "jest": {
-    "testingEnvironment": "node"
+    "testingEnvironment": "node",
+    "verbose": true,
+    "collectCoverageFrom": [
+      "**/*.{js,jsx}",
+      "!**/node_modules/**",
+      "!**/vendor/**",
+      "!**/api-docs/**",
+      "!**/doc-staging/**",
+      "!**/doc-prod/**"
+    ]
   }
 }
