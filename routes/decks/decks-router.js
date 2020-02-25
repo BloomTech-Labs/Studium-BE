@@ -3,21 +3,51 @@ const DEBUG_NAME = "Decks";
 
 const Decks = require("./decks-model.js");
 const findUIDMiddleWare = require("../utils/findUIDMiddleware.js");
+const createError = require("../utils/createError");
+
+/**
+ * @api {post} /api/decks   Creates a new deck
+ * @apiVersion 1.0.0
+ * @apiName Create New Deck
+ * @apiGroup Decks
+ *
+ * @apiHeader {String} auth  Users google uid.
+ *
+ * @apiHeaderExample  {json}  Header Example:
+ *
+ * {
+ *  "auth": "321sdf516156s"
+ * }
+ *
+ * @apiExample Request example:
+ * const request = axios.create({
+ *     baseURL: 'http://localhost:5000/',
+        timeout: 1000,
+ * });
+ *
+ *
+ * @apiUse  Error
+ * 
+ * @apiSuccessExample Deck Data
+ * 
+ * {
+ *    "deck_id": 1,
+ *    "user_id": 2,
+ *    "created_at": "2020-02-18 14:10:08.566262-07",
+ *    "updated_at": "2020-02-18 14:10:08.566262-07",
+ *    "category": "bones",
+ *    "tags": "limbs,skull,hands",
+ *    "public": false,
+ *    "deck_image": 
+ * }
+ *
+ *
+ */
 
 router.post("/", (req, res) => {
-  const createError = require("../utils/createError");
-
-  router.post("/", (req, res) => {
-    let user = req.user;
-    let newDeck = req.body;
-    newDeck.user_id = user.user_id;
-
-    Decks.add(newDeck)
-      .then(deck => res.status(201).json(deck))
-      .catch(err =>
-        res.status(501).json({ message: "error adding the deck", error: err })
-      );
-  });
+  let user = req.user;
+  let newDeck = req.body;
+  newDeck.user_id = user.user_id;
 
   Decks.add(newDeck)
     .then(deck => res.status(201).json(deck))
