@@ -8,7 +8,7 @@ const createError = require("../utils/createError");
 /**
  * @api {post} /api/decks   Creates a new deck
  * @apiVersion 1.0.0
- * @apiName Create New Deck
+ * @apiName CreateNewDeck
  * @apiGroup Decks
  *
  * @apiHeader {String} auth  Users google uid.
@@ -64,6 +64,56 @@ router.post("/", (req, res) => {
       res.status(501).json({ message: "error adding the deck", error: err });
     });
 });
+
+/**
+ * @api {get} /api/decks   Retrieves all public decks
+ * @apiVersion 1.0.0
+ * @apiName GetAllDecks
+ * @apiGroup Decks
+ *
+ * @apiHeader {String} auth  Users google uid.
+ *
+ * @apiHeaderExample  {json}  Header Example:
+ *
+ * {
+ *  "auth": "321sdf516156s"
+ * }
+ *
+ * @apiExample Request example:
+ * const request = axios.create({
+ *     baseURL: 'http://localhost:5000/',
+        timeout: 1000,
+ * });
+ *
+ *
+ * @apiUse  Error
+ * 
+ * @apiSuccessExample Deck Data
+ * 
+ * [
+ *  {
+ *    "deck_name": "Skeleton"
+ *    "deck_id": 1,
+ *    "user_id": 2,
+ *    "created_at": "2020-02-18 14:10:08.566262-07",
+ *    "updated_at": "2020-02-18 14:10:08.566262-07",
+ *    "category": "bones",
+ *    "tags": "limbs,skull,hands",
+ *    "public": false
+ *  },
+ *  {
+ *    "deck_name": "random"
+ *    "deck_id": 5,
+ *    "user_id": 4,
+ *    "created_at": "2020-02-20 14:10:08.566262-07",
+ *    "updated_at": "2020-02-20 14:10:08.566262-07",
+ *    "category": "something",
+ *    "tags": "random,text,here",
+ *    "public": true
+ *  },
+ *  ...
+ * ]
+ */
 
 router.get("/", (req, res) => {
   Decks.getAll()

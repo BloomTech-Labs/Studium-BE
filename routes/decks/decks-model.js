@@ -35,7 +35,7 @@ function findById(deck_id) {
 }
 
 function getAll() {
-  return db("decks");
+  return db("decks").where({ public: true });
 }
 
 function update(id, changes) {
