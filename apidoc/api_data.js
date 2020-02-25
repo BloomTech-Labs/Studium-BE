@@ -1,6 +1,118 @@
 define({ "api": [
   {
     "type": "post",
+    "url": "/api/decks",
+    "title": "Creates a new deck",
+    "version": "1.0.0",
+    "name": "Create_New_Deck",
+    "group": "Decks",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "auth",
+            "description": "<p>Users google uid.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header Example:",
+          "content": "\n{\n \"auth\": \"321sdf516156s\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "deck_name",
+            "description": "<p>name of new deck</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "category",
+            "description": "<p>deck's category</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "tags",
+            "description": "<p>List of tags separated by &quot;,&quot;</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Boolean",
+            "optional": false,
+            "field": "public",
+            "description": "<p>Does user want this to be seen/visible to others?</p>"
+          }
+        ]
+      }
+    },
+    "examples": [
+      {
+        "title": "Request example:",
+        "content": "const request = axios.create({\n    baseURL: 'http://localhost:5000/',\n        timeout: 1000,\n});",
+        "type": "json"
+      }
+    ],
+    "success": {
+      "examples": [
+        {
+          "title": "Deck Data",
+          "content": "\n{\n   \"deck_name\": \"Skeleton\"\n   \"deck_id\": 1,\n   \"user_id\": 2,\n   \"created_at\": \"2020-02-18 14:10:08.566262-07\",\n   \"updated_at\": \"2020-02-18 14:10:08.566262-07\",\n   \"category\": \"bones\",\n   \"tags\": \"limbs,skull,hands\",\n   \"public\": false\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "routes/decks/decks-router.js",
+    "groupTitle": "Decks",
+    "sampleRequest": [
+      {
+        "url": "http://localhost:5000/api/decks"
+      }
+    ],
+    "error": {
+      "fields": {
+        "Error XXX": [
+          {
+            "group": "Error XXX",
+            "type": "Number",
+            "optional": false,
+            "field": "status",
+            "description": "<p>The status code response.</p>"
+          },
+          {
+            "group": "Error XXX",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>Error message</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error Example:",
+          "content": "ERROR XXX\n{\n    \"status\": xxx,\n    \"message\": \"Some Error Message\"\n}",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
+    "type": "post",
     "url": "/api/decks/user",
     "title": "Gets all the users decks.",
     "version": "1.0.0",

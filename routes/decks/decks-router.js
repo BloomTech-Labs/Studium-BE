@@ -19,6 +19,14 @@ const createError = require("../utils/createError");
  *  "auth": "321sdf516156s"
  * }
  *
+ * @apiParam  {String}    deck_name name of new deck
+ * 
+ * @apiParam  {String}    category  deck's category
+ * 
+ * @apiParam  {String}      tags      List of tags separated by ","  
+ * 
+ * @apiParam  {Boolean}     public    Does user want this to be seen/visible to others?
+ * 
  * @apiExample Request example:
  * const request = axios.create({
  *     baseURL: 'http://localhost:5000/',
@@ -31,14 +39,14 @@ const createError = require("../utils/createError");
  * @apiSuccessExample Deck Data
  * 
  * {
+ *    "deck_name": "Skeleton"
  *    "deck_id": 1,
  *    "user_id": 2,
  *    "created_at": "2020-02-18 14:10:08.566262-07",
  *    "updated_at": "2020-02-18 14:10:08.566262-07",
  *    "category": "bones",
  *    "tags": "limbs,skull,hands",
- *    "public": false,
- *    "deck_image": 
+ *    "public": false
  * }
  *
  *
@@ -51,9 +59,10 @@ router.post("/", (req, res) => {
 
   Decks.add(newDeck)
     .then(deck => res.status(201).json(deck))
-    .catch(err =>
-      res.status(501).json({ message: "error adding the deck", error: err })
-    );
+    .catch(err => {
+      console.log("Newdeck from err", newDeck);
+      res.status(501).json({ message: "error adding the deck", error: err });
+    });
 });
 
 router.get("/", (req, res) => {

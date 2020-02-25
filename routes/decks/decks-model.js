@@ -21,14 +21,16 @@ function findBy(filter) {
 }
 
 async function add(deck) {
-  const [id] = await db("decks").insert(deck);
+  const [newDeck] = await db("decks")
+    .insert(deck)
+    .returning("*");
 
-  return findById(id);
+  return newDeck;
 }
 
-function findById(id) {
+function findById(deck_id) {
   return db("decks")
-    .where({ id })
+    .where({ deck_id })
     .first();
 }
 
