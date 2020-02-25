@@ -17,6 +17,7 @@ function find() {
 }
 
 function findBy(filter) {
+  console.log("filter from findBy", filter);
   return db("decks").where(filter);
 }
 

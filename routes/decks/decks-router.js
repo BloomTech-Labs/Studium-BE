@@ -126,6 +126,72 @@ router.get("/", (req, res) => {
 });
 
 /**
+ * @api {get} /api/decks/user   Retrieves all current User's decks
+ * @apiVersion 1.0.0
+ * @apiName GetAllCurrentUserDecks
+ * @apiGroup Decks
+ *
+ * @apiHeader {String} auth  Users google uid.
+ *
+ * @apiHeaderExample  {json}  Header Example:
+ *
+ * {
+ *  "auth": "321sdf516156s"
+ * }
+ *
+ * @apiExample Request example:
+ * const request = axios.create({
+ *     baseURL: 'http://localhost:5000/',
+        timeout: 1000,
+ * });
+ *
+ *
+ * @apiUse  Error
+ * 
+ * @apiSuccessExample Deck Data
+ * 
+ * [
+ *  {
+ *    "deck_name": "Skeleton"
+ *    "deck_id": 1,
+ *    "user_id": 2,
+ *    "created_at": "2020-02-18 14:10:08.566262-07",
+ *    "updated_at": "2020-02-18 14:10:08.566262-07",
+ *    "category": "bones",
+ *    "tags": "limbs,skull,hands",
+ *    "public": false
+ *  },
+ *  {
+ *    "deck_name": "random"
+ *    "deck_id": 5,
+ *    "user_id": 2,
+ *    "created_at": "2020-02-20 14:10:08.566262-07",
+ *    "updated_at": "2020-02-20 14:10:08.566262-07",
+ *    "category": "something",
+ *    "tags": "random,text,here",
+ *    "public": true
+ *  },
+ *  ...
+ * ]
+ */
+
+router.get("/user", (req, res) => {
+  let { user_id } = req.user;
+  console.log("user_id from decks/user", user_id);
+  Decks.findBy({ user_id })
+    .then(decks => {
+      if (decks.length > 0) {
+        res.status(200).json(decks);
+      } else {
+        res.status(400).json({ message: "Couldn't find decks for this user" });
+      }
+    })
+    .catch(err => {
+      res.status(500).json({ message: "error retrieving decks", err });
+    });
+});
+
+/**
  * @api {get} /api/decks/:id   Retrieves single deck
  * @apiVersion 1.0.0
  * @apiName FindDeckById
@@ -182,65 +248,6 @@ router.get("/:id", (req, res) => {
       res.status(500).json({
         message: "Error retrieving the deck"
       });
-    });
-});
-
-router.get("/user", (req, res) => {
-  let { user_id } = req.user;
-
-  Decks.findBy({ user_id }).then(decks => {
-    if (decks) {
-      res.status(200).json(decks);
-    } else {
-      res.status(400).json({ message: "Couldn't find decks for this user" });
-    }
-  });
-});
-/**
- * @api {post} /api/decks/user   Gets all the users decks.
- * @apiVersion 1.0.0
- * @apiName GetUsersDecks
- * @apiGroup Decks
- *
- * @apiParam {String} uid  Users google uid.
- *
- * @apiExample Request example:
- * const request = axios.create({
- *     baseURL: 'https://staging-lambda-synaps-be.herokuapp.com/',
-        timeout: 1000,
- * });
- * request.post('/api/users/me', {
- *   uid: "123456080978"
- * });
- *
- * @apiUse Error
- *
- * @apiSuccessExample User Data
- *
- {
-    "user_id": 1,
-    "first_name": "Jeremiah",
-    "last_name": "Tenbrink",
-    "uid": "12345",
-    "username": "Jeremiah Tenbrink",
-    "created_at": "2020-02-18 14:10:08.566262-07",
-    "updated_at": "2020-02-18 14:10:08.566262-07"
-}
- *
- */
-router.post("/user", findUIDMiddleWare, (req, res, next) => {
-  let { user_id } = req.user;
-
-  Decks.findBy(user_id)
-    .then(decks => {
-      if (decks) {
-        res.status(200).json(decks);
-      } else {
-        res.status(400).json({ message: "Couldn't find decks for this user" });
-      }
-    })
-    .catch(err => {
-      next(createError(err, "GetUsersDecks", "Failed the sql request."));
     });
 });
 
