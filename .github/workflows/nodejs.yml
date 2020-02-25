@@ -7,8 +7,10 @@ on: [push, pull_request]
 
 # The jobs that will be run, usually in parallel
 jobs:
+
   # A job to generate and publish code coverage
   coverage:
+
     # A more descriptive name of the job
     name: Test and publish test coverage
 
