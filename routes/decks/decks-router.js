@@ -252,7 +252,7 @@ router.get("/:id", (req, res) => {
 });
 
 /**
- * @api {put} /api/decks/:id   Edits single deck
+ * @api {put} /api/decks/:deck_id   Edits single deck
  * @apiVersion 1.0.0
  * @apiName EditDeck
  * @apiGroup Decks
@@ -303,7 +303,6 @@ router.put("/:deck_id", (req, res) => {
   let deck_id = req.params.deck_id;
   changes.deck_id = deck_id;
 
-  console.log("changes from put id", changes);
   Decks.findBy({ deck_id }).then(deck => {
     if (deck.length > 0) {
       if (deck[0].user_id !== user_id) {
@@ -329,22 +328,62 @@ router.put("/:deck_id", (req, res) => {
   });
 });
 
-router.delete("/:id", (req, res) => {
-  Decks.remove(req.params.id)
-    .then(count => {
-      if (count > 0) {
-        res.status(200).json({ message: "The deck has been removed" });
+/**
+ * @api {delete} /api/decks/:id   Deletes a single deck
+ * @apiVersion 1.0.0
+ * @apiName DeleteDeck
+ * @apiGroup Decks
+ *
+ * @apiHeader {String} auth  Users google uid.
+ *
+ * @apiHeaderExample  {json}  Header Example:
+ *
+ * {
+ *  "auth": "321sdf516156s"
+ * }
+ *
+ * @apiExample Request example:
+ * const request = axios.create({
+ *     baseURL: 'http://localhost:5000/',
+        timeout: 1000,
+ * });
+ *
+ *
+ * @apiUse  Error
+ * 
+ * @apiSuccessExample Deck Data
+ * 
+ * { message: "Deck successfully deleted!" }
+ *
+ */
+
+router.delete("/:deck_id", (req, res) => {
+  let { user_id } = req.user;
+  let deck_id = req.params.deck_id;
+
+  Decks.findBy({ deck_id }).then(deck => {
+    if (deck.length > 0) {
+      if (deck[0].user_id !== user_id) {
+        res
+          .status(400)
+          .json({ message: "You aren't authorized to edit/delete this deck" });
       } else {
-        res.status(404).json({ message: "The deck could not be found" });
+        Decks.remove(deck_id)
+          .then(() => {
+            res.status(203).json({ message: "Deck successfully deleted!" });
+          })
+          .catch(error => {
+            // log error to database
+            console.log(error);
+            res.status(500).json({
+              message: "Error deleting the deck."
+            });
+          });
       }
-    })
-    .catch(error => {
-      // log error to database
-      console.log(error);
-      res.status(500).json({
-        message: "Error removing the deck"
-      });
-    });
+    } else {
+      res.status(404).json({ message: "The deck could not be found" });
+    }
+  });
 });
 
 module.exports = router;

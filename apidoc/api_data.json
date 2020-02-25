@@ -112,8 +112,86 @@
     }
   },
   {
-    "type": "put",
+    "type": "delete",
     "url": "/api/decks/:id",
+    "title": "Deletes a single deck",
+    "version": "1.0.0",
+    "name": "DeleteDeck",
+    "group": "Decks",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "auth",
+            "description": "<p>Users google uid.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header Example:",
+          "content": "\n{\n \"auth\": \"321sdf516156s\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "examples": [
+      {
+        "title": "Request example:",
+        "content": "const request = axios.create({\n    baseURL: 'http://localhost:5000/',\n        timeout: 1000,\n});",
+        "type": "json"
+      }
+    ],
+    "success": {
+      "examples": [
+        {
+          "title": "Deck Data",
+          "content": "\n{ message: \"Deck successfully deleted!\" }",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "routes/decks/decks-router.js",
+    "groupTitle": "Decks",
+    "sampleRequest": [
+      {
+        "url": "http://localhost:5000/api/decks/:id"
+      }
+    ],
+    "error": {
+      "fields": {
+        "Error XXX": [
+          {
+            "group": "Error XXX",
+            "type": "Number",
+            "optional": false,
+            "field": "status",
+            "description": "<p>The status code response.</p>"
+          },
+          {
+            "group": "Error XXX",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>Error message</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error Example:",
+          "content": "ERROR XXX\n{\n    \"status\": xxx,\n    \"message\": \"Some Error Message\"\n}",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
+    "type": "put",
+    "url": "/api/decks/:deck_id",
     "title": "Edits single deck",
     "version": "1.0.0",
     "name": "EditDeck",
@@ -192,7 +270,7 @@
     "groupTitle": "Decks",
     "sampleRequest": [
       {
-        "url": "http://localhost:5000/api/decks/:id"
+        "url": "http://localhost:5000/api/decks/:deck_id"
       }
     ],
     "error": {

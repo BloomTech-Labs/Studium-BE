@@ -46,9 +46,9 @@ function update(deck_id, changes) {
     .update(changes, "*");
 }
 
-function remove(id) {
+function remove(deck_id) {
   return db("decks")
-    .where({ id })
+    .where({ deck_id })
     .del();
 }
 
