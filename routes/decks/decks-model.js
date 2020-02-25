@@ -40,9 +40,9 @@ function getAll() {
   return db("decks").where({ public: true });
 }
 
-function update(id, changes) {
+function update(deck_id, changes) {
   return db("decks")
-    .where({ id })
+    .where({ deck_id })
     .update(changes, "*");
 }
 

@@ -251,23 +251,82 @@ router.get("/:id", (req, res) => {
     });
 });
 
-router.put("/:id", (req, res) => {
-  const changes = req.body;
-  Decks.update(req.params.id, changes)
-    .then(deck => {
-      if (deck) {
-        res.status(200).json(deck);
+/**
+ * @api {put} /api/decks/:id   Edits single deck
+ * @apiVersion 1.0.0
+ * @apiName EditDeck
+ * @apiGroup Decks
+ *
+ * @apiHeader {String} auth  Users google uid.
+ *
+ * @apiHeaderExample  {json}  Header Example:
+ *
+ * {
+ *  "auth": "321sdf516156s"
+ * }
+ *
+ * @apiParam  {String}    deck_name name of deck
+ * 
+ * @apiParam  {String}    category  deck's category
+ * 
+ * @apiParam  {String}      tags      List of tags separated by ","  
+ * 
+ * @apiParam  {Boolean}     public    Does user want this to be seen/visible to others?
+ * 
+ * @apiExample Request example:
+ * const request = axios.create({
+ *     baseURL: 'http://localhost:5000/',
+        timeout: 1000,
+ * });
+ *
+ *
+ * @apiUse  Error
+ * 
+ * @apiSuccessExample Deck Data
+ * 
+ * {
+ *    "deck_name": "Skeleton"
+ *    "deck_id": 1,
+ *    "user_id": 2,
+ *    "created_at": "2020-02-18 14:10:08.566262-07",
+ *    "updated_at": "2020-02-18 14:10:08.566262-07",
+ *    "category": "bones",
+ *    "tags": "limbs,skull,hands",
+ *    "public": true
+ * }
+ *
+ */
+
+router.put("/:deck_id", (req, res) => {
+  let { user_id } = req.user;
+  let changes = req.body;
+  let deck_id = req.params.deck_id;
+  changes.deck_id = deck_id;
+
+  console.log("changes from put id", changes);
+  Decks.findBy({ deck_id }).then(deck => {
+    if (deck.length > 0) {
+      if (deck[0].user_id !== user_id) {
+        res
+          .status(400)
+          .json({ message: "You aren't authorized to edit/delete this deck" });
       } else {
-        res.status(404).json({ message: "The deck could not be found" });
+        Decks.update(deck_id, changes)
+          .then(deck => {
+            res.status(200).json(deck);
+          })
+          .catch(error => {
+            // log error to database
+            console.log(error);
+            res.status(500).json({
+              message: "Error updating the deck."
+            });
+          });
       }
-    })
-    .catch(error => {
-      // log error to database
-      console.log(error);
-      res.status(500).json({
-        message: "Error updating the deck."
-      });
-    });
+    } else {
+      res.status(404).json({ message: "The deck could not be found" });
+    }
+  });
 });
 
 router.delete("/:id", (req, res) => {
