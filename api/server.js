@@ -33,7 +33,7 @@ server.use( "/api/register", registerRouter );
 server.use( "/api/users", findUIDMiddleWare, usersRouter );
 server.use( "/api/decks", findUIDMiddleWare, decksRouter );
 server.use( "/api/cards", cardsRouter );
-server.use( "/api/photo", photoRouter );
+server.use( "/api/photo", findUIDMiddleWare, photoRouter );
 server.use( "/api", ( req, res ) => {
   console.log( "inside of server up message" );
   return res.status( 200 ).json( { message: "Server up and running" } );

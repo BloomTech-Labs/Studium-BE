@@ -13,7 +13,7 @@
     "api-docs-prod": "apidoc -c production -f .js -i ./routes -o doc-prod/",
     "build": "npm-run-all api-docs-staging api-docs-prod",
     "coverage": "jest --coverage --detectOpenHandles --forceExit --passWithNoTests || true",
-    "pretest": "cross-env NODE_ENV=test knex migrate:latest "
+    "pretest": "cross-env NODE_ENV=test knex migrate:latest"
   },
   "repository": {
     "type": "git",

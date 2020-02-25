@@ -1,3 +1,4 @@
+require( "dotenv" );
 const chalk = require( "chalk" );
 const env = process.env.LOG_LEVEL;
 
