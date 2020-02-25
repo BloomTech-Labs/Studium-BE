@@ -28,9 +28,10 @@ async function add(deck) {
   return newDeck;
 }
 
-function findById(deck_id) {
+function findById(deck_id, user_id) {
   return db("decks")
-    .where({ deck_id })
+    .where({ deck_id: deck_id, user_id: user_id })
+    .orWhere({ deck_id: deck_id, public: true })
     .first();
 }
 

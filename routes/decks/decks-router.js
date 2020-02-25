@@ -125,8 +125,50 @@ router.get("/", (req, res) => {
     });
 });
 
+/**
+ * @api {get} /api/decks/:id   Retrieves single deck
+ * @apiVersion 1.0.0
+ * @apiName FindDeckById
+ * @apiGroup Decks
+ *
+ * @apiHeader {String} auth  Users google uid.
+ *
+ * @apiHeaderExample  {json}  Header Example:
+ *
+ * {
+ *  "auth": "321sdf516156s"
+ * }
+ *
+ * @apiParam  {Number}    deck_id deck's unique id
+
+ * @apiExample Request example:
+ * const request = axios.create({
+ *     baseURL: 'http://localhost:5000/',
+        timeout: 1000,
+ * });
+ *
+ *
+ * @apiUse  Error
+ * 
+ * @apiSuccessExample Deck Data
+ * 
+ * {
+ *    "deck_name": "Skeleton"
+ *    "deck_id": 1,
+ *    "user_id": 2,
+ *    "created_at": "2020-02-18 14:10:08.566262-07",
+ *    "updated_at": "2020-02-18 14:10:08.566262-07",
+ *    "category": "bones",
+ *    "tags": "limbs,skull,hands",
+ *    "public": false
+ * }
+ *
+ *
+ */
+
 router.get("/:id", (req, res) => {
-  Decks.findById(req.params.id)
+  let { user_id } = req.user;
+  Decks.findById(req.params.id, user_id)
     .then(deck => {
       if (deck) {
         res.status(200).json(deck);
