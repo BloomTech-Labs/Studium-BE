@@ -2,7 +2,7 @@ const router = require("express").Router();
 
 const cards = require("./cards-model.js");
 const deckIdMiddleWare = require("../utils/findDeckIDMiddleware");
-const uidMiddleWear = require("../utils/findUIDMiddleware.js");
+const findUIDMiddleware = require("../utils/findUIDMiddleware.js");
 
 /**
  * @api  {post} /api/cards   Creates a new card for an existing deck
@@ -55,7 +55,7 @@ const uidMiddleWear = require("../utils/findUIDMiddleware.js");
  *
  * @apiUse Error
  *
- * @apiSuccessExample User Data
+ * @apiSuccessExample Card Data
  *
  * {
  * "card_id": 4,
@@ -107,7 +107,7 @@ router.post("/", deckIdMiddleWare, (req, res) => {
  *
  * @apiUse Error
  *
- * @apiSuccessExample User Data
+ * @apiSuccessExample Card Data
  *
  * {
  * "card_id": 4,
@@ -141,36 +141,69 @@ router.get("/:card_id", (req, res) => {
     });
 });
 
-router.get("/:id", deckIdMiddleWare, (req, res) => {
-  let { deck_id } = req.deck;
-  cards
-    .findById(deck_id)
-    .then(card => {
-      if (card.length > 0) {
-        res.status(200).json(card);
-      } else {
-        res.status(404).json({ message: "card not found" });
-      }
-    })
-    .catch(error => {
-      // log error to database
-      console.log(error);
-      res.status(500).json({
-        message: "Error retrieving the card"
-      });
-    });
-});
+/**
+ * @api  {get} /api/cards/from/deck/:id   Retrieves all cards for a deck
+ * @apiVersion  1.0.0
+ * @apiName GetCardsFromDeck
+ * @apiGroup  Cards
+ *
+ * @apiHeader {String} auth  Users google uid.
+ *
+ * @apiHeaderExample  {json}  Header Example:
+ *
+ * {
+ *  "auth": "321sdf516156s"
+ * }
+ *
+ *
+ * @apiExample  Request example:
+ *
+ * const request = axios.create({
+ * baseURL: 'https://localhost:5000',
+ * timeout: 1000
+ * });
+ *
+ * request.get('api/cards/from/deck/:id')
+ *
+ * @apiUse Error
+ *
+ * @apiSuccessExample Card Data
+ *
+ * [
+ * {
+ *  "card_id": 4,
+ *  "deck_id": 1,
+ *  "question": "How many moons does Earth have",
+ *  "answer": "1",
+ *  "tags", "space,earth,moon,astrology",
+ *  "background": "008080"
+ *  "text": "optional text"
+ *  "image_front": "321s3d56f1061d6.png",
+ *  "image_back": "ssdf6516s510f6.png"
+ * },
+ * {
+ *  "card_id": 1,
+ *  "deck_id": 2,
+ *  "question": "What's my favorite number",
+ *  "answer": "99",
+ *  "tags", "truth,almost,100,not,quite,though",
+ *  "background": "123456"
+ *  "text": "optional text"
+ *  "image_front": "6ikl46j5k1h61.png",
+ *  "image_back": "984afsd61fasfd3.png"
+ * }, ....
+ * ]
+ */
 
-router.get("/user", uidMiddleWear, (req, res) => {
-  let { user_id } = req.user;
-
+router.get("/from/deck/:deck_id", (req, res) => {
+  let { deck_id } = req.params;
   cards
-    .findBy({ user_id })
+    .findBy({ deck_id })
     .then(cards => {
       if (cards.length > 0) {
         res.status(200).json(cards);
       } else {
-        res.status(400).json({ message: "Couldn't find cards for this user" });
+        res.status(400).json({ message: "Couldn't find cards for this deck" });
       }
     })
     .catch(err => {
