@@ -140,6 +140,84 @@ define({ "api": [
     }
   },
   {
+    "type": "get",
+    "url": "/api/cards/:card_id",
+    "title": "Retrieves a single card",
+    "version": "1.0.0",
+    "name": "GetCard",
+    "group": "Cards",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "auth",
+            "description": "<p>Users google uid.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header Example:",
+          "content": "\n{\n \"auth\": \"321sdf516156s\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "examples": [
+      {
+        "title": "Request example:",
+        "content": "\nconst request = axios.create({\nbaseURL: 'https://localhost:5000',\ntimeout: 1000\n});\n\nrequest.get('api/cards/1')",
+        "type": "json"
+      }
+    ],
+    "success": {
+      "examples": [
+        {
+          "title": "User Data",
+          "content": "\n{\n\"card_id\": 4,\n\"deck_id\": 1,\n\"question\": \"How many moons does Earth have\",\n\"answer\": \"1\",\n\"tags\", \"space,earth,moon,astrology\",\n\"background\": \"008080\"\n\"text\": \"optional text\"\n\"image_front\": \"321s3d56f1061d6.png\",\n\"image_back\": \"ssdf6516s510f6.png\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "routes/cards/cards-router.js",
+    "groupTitle": "Cards",
+    "sampleRequest": [
+      {
+        "url": "http://localhost:5000/api/cards/:card_id"
+      }
+    ],
+    "error": {
+      "fields": {
+        "Error XXX": [
+          {
+            "group": "Error XXX",
+            "type": "Number",
+            "optional": false,
+            "field": "status",
+            "description": "<p>The status code response.</p>"
+          },
+          {
+            "group": "Error XXX",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>Error message</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error Example:",
+          "content": "ERROR XXX\n{\n    \"status\": xxx,\n    \"message\": \"Some Error Message\"\n}",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
     "type": "post",
     "url": "/api/decks",
     "title": "Creates a new deck",

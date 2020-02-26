@@ -81,16 +81,63 @@ router.post("/", deckIdMiddleWare, (req, res) => {
     });
 });
 
-router.get("/:id", deckIdMiddleWare, (req, res) => {
-  let { deck_id } = req.deck;
+/**
+ * @api  {get} /api/cards/:card_id   Retrieves a single card
+ * @apiVersion  1.0.0
+ * @apiName GetCard
+ * @apiGroup  Cards
+ *
+ * @apiHeader {String} auth  Users google uid.
+ *
+ * @apiHeaderExample  {json}  Header Example:
+ *
+ * {
+ *  "auth": "321sdf516156s"
+ * }
+ *
+ *
+ * @apiExample  Request example:
+ *
+ * const request = axios.create({
+ * baseURL: 'https://localhost:5000',
+ * timeout: 1000
+ * });
+ *
+ * request.get('api/cards/1')
+ *
+ * @apiUse Error
+ *
+ * @apiSuccessExample User Data
+ *
+ * {
+ * "card_id": 4,
+ * "deck_id": 1,
+ * "question": "How many moons does Earth have",
+ * "answer": "1",
+ * "tags", "space,earth,moon,astrology",
+ * "background": "008080"
+ * "text": "optional text"
+ * "image_front": "321s3d56f1061d6.png",
+ * "image_back": "ssdf6516s510f6.png"
+ * }
+ */
+
+router.get("/:card_id", (req, res) => {
+  let { card_id } = req.params;
 
   cards
-    .findBy({ deck_id })
+    .findBy({ card_id })
     .then(cards => {
-      res.json(cards);
+      if (cards.length > 0) {
+        res.status(200).json(cards);
+      } else {
+        res.status(404).json({ message: `Card_id #${card_id} not found` });
+      }
     })
     .catch(error => {
-      res.status(500).json({ message: "There was an error getting cards." });
+      res
+        .status(500)
+        .json({ message: "There was an error getting cards.", error });
     });
 });
 
