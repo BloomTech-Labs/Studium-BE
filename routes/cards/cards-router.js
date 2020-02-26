@@ -4,10 +4,49 @@ const cards = require("./cards-model.js");
 const deckIdMiddleWare = require("../utils/findDeckIDMiddleware");
 const uidMiddleWear = require("../utils/findUIDMiddleware.js");
 
-router.post("/:id", deckIdMiddleWare, (req, res) => {
-  let deck = req.deck;
+/**
+ * @api  {post} /api/cards   Creates a new existing card
+ * @apiVersion  1.0.0
+ * @apiName CreateNewCard
+ * @apiGroup  Cards
+ *
+ * @apiHeader {String} auth  Users google uid.
+ *
+ * @apiHeaderExample  {json}  Header Example:
+ *
+ * {
+ *  "auth": "321sdf516156s"
+ * }
+ *
+ *
+ * @apiParam  {String}      username        Users display name
+ *
+ * @apiExample  Request example:
+ *
+ * const request = axios.create({
+ * baseURL: 'https://localhost:5000',
+ * timeout: 1000
+ * });
+ *
+ * request.post('api/cards', {
+ * "username": "newUserName"
+ * })
+ *
+ * @apiUse Error
+ *
+ * @apiSuccessExample User Data
+ *
+ * {
+ *  "user_id": 1,
+ *  "username": "newUserName",
+ * "uid": "1859027",
+ * "created_at": "2020-02-18 14:10:08.566262-07",
+ * "updated_at": "2020-02-20 20:26:08.566262-07"
+ * }
+ */
+
+router.post("/", deckIdMiddleWare, (req, res) => {
   let newCard = req.body;
-  newCard.deck_id = deck.deck_id;
 
   cards
     .add(newCard)
