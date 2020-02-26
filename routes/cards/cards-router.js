@@ -5,7 +5,7 @@ const deckIdMiddleWare = require("../utils/findDeckIDMiddleware");
 const uidMiddleWear = require("../utils/findUIDMiddleware.js");
 
 /**
- * @api  {post} /api/cards   Creates a new existing card
+ * @api  {post} /api/cards   Creates a new card for an existing deck
  * @apiVersion  1.0.0
  * @apiName CreateNewCard
  * @apiGroup  Cards
@@ -19,7 +19,21 @@ const uidMiddleWear = require("../utils/findUIDMiddleware.js");
  * }
  *
  *
- * @apiParam  {String}      username        Users display name
+ * @apiParam  {Number}      deck_id        Unique id of deck that card belongs to
+ *
+ * @apiParam  {String}      question       Question for front of card
+ *
+ * @apiParam  {String}      answer         Answer for back of card
+ *
+ * @apiParam  {String}      [tags]         Tags that relate to card
+ *
+ * @apiParam  {String}      [background]   Background hex color code for card customization
+ *
+ * @apiParam  {String}      [text]         Optional text, usage TBD
+ *
+ * @apiParam  {String}      [image_front]  Public (id number + file type) from data cloudinary
+ *
+ * @apiParam  {String}      [image_back]  Public (id number + file type) from data cloudinary
  *
  * @apiExample  Request example:
  *
@@ -29,7 +43,14 @@ const uidMiddleWear = require("../utils/findUIDMiddleware.js");
  * });
  *
  * request.post('api/cards', {
- * "username": "newUserName"
+ * "deck_id": 1,
+ * "question": "How many moons does Earth have",
+ * "answer": "1",
+ * "tags", "space,earth,moon,astrology",
+ * "background": "008080"
+ * "text": "optional text"
+ * "image_front": "321s3d56f1061d6.png",
+ * "image_back": "ssdf6516s510f6.png"
  * })
  *
  * @apiUse Error
@@ -37,23 +58,27 @@ const uidMiddleWear = require("../utils/findUIDMiddleware.js");
  * @apiSuccessExample User Data
  *
  * {
- *  "user_id": 1,
- *  "username": "newUserName",
- * "uid": "1859027",
- * "created_at": "2020-02-18 14:10:08.566262-07",
- * "updated_at": "2020-02-20 20:26:08.566262-07"
+ * "card_id": 4,
+ * "deck_id": 1,
+ * "question": "How many moons does Earth have",
+ * "answer": "1",
+ * "tags", "space,earth,moon,astrology",
+ * "background": "008080"
+ * "text": "optional text"
+ * "image_front": "321s3d56f1061d6.png",
+ * "image_back": "ssdf6516s510f6.png"
  * }
  */
 
 router.post("/", deckIdMiddleWare, (req, res) => {
   let newCard = req.body;
-
+  console.log("newCard from post", newCard);
   cards
     .add(newCard)
     .then(card => res.status(201).json(card))
-    .catch(err =>
-      res.status(501).json({ message: "error adding the card", error: err })
-    );
+    .catch(err => {
+      res.status(501).json({ message: "error adding the card", error: err });
+    });
 });
 
 router.get("/:id", deckIdMiddleWare, (req, res) => {

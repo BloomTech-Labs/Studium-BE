@@ -1,6 +1,146 @@
 define({ "api": [
   {
     "type": "post",
+    "url": "/api/cards",
+    "title": "Creates a new card for an existing deck",
+    "version": "1.0.0",
+    "name": "CreateNewCard",
+    "group": "Cards",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "auth",
+            "description": "<p>Users google uid.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header Example:",
+          "content": "\n{\n \"auth\": \"321sdf516156s\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "deck_id",
+            "description": "<p>Unique id of deck that card belongs to</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "question",
+            "description": "<p>Question for front of card</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "answer",
+            "description": "<p>Answer for back of card</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "tags",
+            "description": "<p>Tags that relate to card</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "background",
+            "description": "<p>Background hex color code for card customization</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "text",
+            "description": "<p>Optional text, usage TBD</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "image_front",
+            "description": "<p>Public (id number + file type) from data cloudinary</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "image_back",
+            "description": "<p>Public (id number + file type) from data cloudinary</p>"
+          }
+        ]
+      }
+    },
+    "examples": [
+      {
+        "title": "Request example:",
+        "content": "\nconst request = axios.create({\nbaseURL: 'https://localhost:5000',\ntimeout: 1000\n});\n\nrequest.post('api/cards', {\n\"deck_id\": 1,\n\"question\": \"How many moons does Earth have\",\n\"answer\": \"1\",\n\"tags\", \"space,earth,moon,astrology\",\n\"background\": \"008080\"\n\"text\": \"optional text\"\n\"image_front\": \"321s3d56f1061d6.png\",\n\"image_back\": \"ssdf6516s510f6.png\"\n})",
+        "type": "json"
+      }
+    ],
+    "success": {
+      "examples": [
+        {
+          "title": "User Data",
+          "content": "\n{\n\"card_id\": 4,\n\"deck_id\": 1,\n\"question\": \"How many moons does Earth have\",\n\"answer\": \"1\",\n\"tags\", \"space,earth,moon,astrology\",\n\"background\": \"008080\"\n\"text\": \"optional text\"\n\"image_front\": \"321s3d56f1061d6.png\",\n\"image_back\": \"ssdf6516s510f6.png\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "routes/cards/cards-router.js",
+    "groupTitle": "Cards",
+    "sampleRequest": [
+      {
+        "url": "http://localhost:5000/api/cards"
+      }
+    ],
+    "error": {
+      "fields": {
+        "Error XXX": [
+          {
+            "group": "Error XXX",
+            "type": "Number",
+            "optional": false,
+            "field": "status",
+            "description": "<p>The status code response.</p>"
+          },
+          {
+            "group": "Error XXX",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>Error message</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error Example:",
+          "content": "ERROR XXX\n{\n    \"status\": xxx,\n    \"message\": \"Some Error Message\"\n}",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
+    "type": "post",
     "url": "/api/decks",
     "title": "Creates a new deck",
     "version": "1.0.0",

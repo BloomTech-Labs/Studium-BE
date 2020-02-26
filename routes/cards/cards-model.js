@@ -19,9 +19,12 @@ function findBy(filter) {
 }
 
 async function add(card) {
-  const [id] = await db("cards").insert(card);
+  console.log("card from add", card);
+  const [newCard] = await db("cards")
+    .insert(card)
+    .returning("*");
 
-  return findById(id);
+  return newCard;
 }
 
 function findById(id) {
