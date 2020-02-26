@@ -27,9 +27,9 @@ async function add(card) {
   return newCard;
 }
 
-function findById(id) {
+function findById(card_id) {
   return db("cards")
-    .where({ id })
+    .where({ card_id })
     .first();
 }
 
@@ -37,14 +37,14 @@ function getAll() {
   return db("cards");
 }
 
-function update(id, changes) {
+function update(card_id, changes) {
   return db("cards")
-    .where({ id })
+    .where({ card_id })
     .update(changes, "*");
 }
 
-function remove(id) {
+function remove(card_id) {
   return db("cards")
-    .where({ id })
+    .where({ card_id })
     .del();
 }

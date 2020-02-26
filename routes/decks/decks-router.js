@@ -307,17 +307,17 @@ router.put("/:deck_id", (req, res) => {
     if (deck.length > 0) {
       if (deck[0].user_id !== user_id) {
         res
-          .status(400)
+          .status(402)
           .json({ message: "You aren't authorized to edit/delete this deck" });
       } else {
         Decks.update(deck_id, changes)
           .then(deck => {
-            res.status(200).json(deck);
+            res.status(202).json(deck);
           })
           .catch(error => {
             // log error to database
             console.log(error);
-            res.status(500).json({
+            res.status(502).json({
               message: "Error updating the deck."
             });
           });
