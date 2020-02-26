@@ -1,0 +1,12 @@
+{
+  "name": "Synaps",
+  "version": "1.0.0",
+  "description": "Api for Synaps. A web application for flash cards.",
+  "title": "Synaps Api",
+  "url": " https://staging-lambda-synaps-be.herokuapp.com",
+  "sampleUrl": " https://staging-lambda-synaps-be.herokuapp.com",
+  "template": {
+    "withGenerator": true,
+    "withCompare": true
+  }
+}
