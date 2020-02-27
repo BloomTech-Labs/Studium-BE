@@ -50,6 +50,7 @@
     "supertest": "^4.0.2"
   },
   "jest": {
+    "testEnvironment": "node",
     "verbose": true,
     "collectCoverageFrom": [
       "**/*.{js,jsx}",
