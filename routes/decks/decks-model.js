@@ -17,34 +17,38 @@ function find() {
 }
 
 function findBy(filter) {
+  console.log("filter from findBy", filter);
   return db("decks").where(filter);
 }
 
 async function add(deck) {
-  const [id] = await db("decks").insert(deck);
+  const [newDeck] = await db("decks")
+    .insert(deck)
+    .returning("*");
 
-  return findById(id);
+  return newDeck;
 }
 
-function findById(id) {
+function findById(deck_id, user_id) {
   return db("decks")
-    .where({ id })
+    .where({ deck_id: deck_id, user_id: user_id })
+    .orWhere({ deck_id: deck_id, public: true })
     .first();
 }
 
 function getAll() {
-  return db("decks");
+  return db("decks").where({ public: true });
 }
 
-function update(id, changes) {
+function update(deck_id, changes) {
   return db("decks")
-    .where({ id })
+    .where({ deck_id })
     .update(changes, "*");
 }
 
-function remove(id) {
+function remove(deck_id) {
   return db("decks")
-    .where({ id })
+    .where({ deck_id })
     .del();
 }
 
