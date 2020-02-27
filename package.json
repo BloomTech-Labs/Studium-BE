@@ -53,13 +53,14 @@
     "collectCoverageFrom": [
       "**/*.{js,jsx}",
       "!**/node_modules/**",
-      "!**/vendor/**"
+      "!**/vendor/**",
+      "!**/apidoc/**"
     ],
     "coveragePathIgnorePatterns": [
       "/node_modules/",
-      "/api-docs/",
       "/.github/",
-      "/coverage/"
+      "/coverage/",
+      "*_apidoc*"
     ]
   }
 }
