@@ -49,6 +49,7 @@
     "codeclimate-test-reporter": "^0.5.1"
   },
   "jest": {
+    "rootDir": "./src",
     "verbose": true,
     "collectCoverageFrom": [
       "**/*.{js,jsx}",
