@@ -59,8 +59,7 @@
     "coveragePathIgnorePatterns": [
       "/node_modules/",
       "/.github/",
-      "/coverage/",
-      "*_apidoc*"
+      "/coverage/"
     ]
   }
 }
