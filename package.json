@@ -7,12 +7,13 @@
     "migrate": "knex migrate:latest --env production",
     "server": "nodemon index.js",
     "test": "jest --coverage --watch",
+    "clear:chache": "jest --clearCache",
     "start": "node index.js",
     "api-docs": "apidoc -f .js -i ./routes -o apidoc/",
     "api-docs-staging": "apidoc -c staging -f .js -i ./routes -o doc-staging/",
     "api-docs-prod": "apidoc -c production -f .js -i ./routes -o doc-prod/",
     "build": "npm-run-all api-docs-staging api-docs-prod migrate",
-    "coverage": "jest --coverage --detectOpenHandles --forceExit || true"
+    "coverage": "jest --coverage --detectOpenHandles --forceExit --passWithNoTests || true"
   },
   "repository": {
     "type": "git",
@@ -49,13 +50,10 @@
     "codeclimate-test-reporter": "^0.5.1"
   },
   "jest": {
-    "rootDir": "./src",
     "verbose": true,
     "collectCoverageFrom": [
       "**/*.{js,jsx}",
-      "!**/node_modules/**",
-      "!**/apidoc/**",
-      "!**/*.{spec, test}.{js, jsx}"
+      "!/apidoc/**"
     ]
   }
 }
