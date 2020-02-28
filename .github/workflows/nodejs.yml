@@ -3,7 +3,7 @@ name: Code Climate Coverage
 
 # What conditions trigger the workflow
 #  In this case, all pushes and pull requests
-on: [push, pull_request]
+on: [push]
 
 # The jobs that will be run, usually in parallel
 jobs:
