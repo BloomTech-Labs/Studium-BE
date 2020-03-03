@@ -11,6 +11,7 @@ module.exports = (req, res, next) => {
     return;
   }
 
+  console.log("uid from middleware", uid);
   UserDb.findBy({ uid })
     .then(user => {
       if (user.length > 0) {
@@ -19,7 +20,7 @@ module.exports = (req, res, next) => {
         next();
       } else {
         next(
-          createError(500, DEBUG_NAME, "Could not find a user with that uid. ")
+          createError(404, DEBUG_NAME, "Could not find a user with that uid. ")
         );
       }
     })

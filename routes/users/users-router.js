@@ -148,11 +148,7 @@ router.put("/", (req, res) => {
   console.log("user from PUT", changes);
   Users.update(user.user_id, changes)
     .then(user => {
-      if (user) {
-        res.status(200).json(user);
-      } else {
-        res.status(404).json({ message: "The user could not be found" });
-      }
+      res.status(201).json(user);
     })
     .catch(error => {
       // log error to database
