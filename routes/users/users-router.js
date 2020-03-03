@@ -153,7 +153,7 @@ router.put("/", (req, res) => {
     .catch(error => {
       // log error to database
       console.log(error);
-      res.status(500).json({
+      res.status(501).json({
         message: "Error updating the user."
       });
     });
@@ -191,16 +191,12 @@ router.delete("/", (req, res) => {
   const user = req.user;
   Users.remove(user.user_id)
     .then(count => {
-      if (count > 0) {
-        res.status(200).json({ message: "The user has been removed" });
-      } else {
-        res.status(404).json({ message: "The user could not be found" });
-      }
+      res.status(203).json({ message: "The user has been removed" });
     })
     .catch(error => {
       // log error to database
       console.log(error);
-      res.status(500).json({
+      res.status(503).json({
         message: "Error removing the user"
       });
     });

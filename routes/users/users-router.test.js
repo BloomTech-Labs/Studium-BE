@@ -83,6 +83,18 @@ describe("User Endpoints", () => {
       });
   });
 
+  it("should delete current user", done => {
+    request
+      .delete("/api/users")
+      .set({ auth: "uid1" })
+      .expect(203)
+      .then(res => {
+        const body = res.body;
+        expect(body.message).toEqual("The user has been removed");
+        done();
+      });
+  });
+
   afterAll(() => {
     cleaner.clean(knex);
   });
