@@ -4,11 +4,11 @@
 require("dotenv").config();
 console.log(
   ("POSTGRES_DB:",
-  process.env.POSTGRES_DB,
+  process.env.db,
   "POSTGRES_USER:",
-  process.env.POSTGRES_USER,
+  process.env.user,
   "POSTGRES_PASSWORD:",
-  process.env.POSTGRES_PASSWORD)
+  process.env.password)
 );
 module.exports = {
   development: {
@@ -36,9 +36,9 @@ module.exports = {
       // database: process.env.TEST_DATABASE,
       // user: process.env.USER,
       // password: process.env.PASSWORD,
-      database: process.env.db,
-      user: process.env.user,
-      password: process.env.password
+      database: "databasename-test", //process.env.db,
+      user: "dev", //process.env.user,
+      password: "dev" //process.env.password
       // port: process.env.DATABASE_PORT
     },
     migrations: {
