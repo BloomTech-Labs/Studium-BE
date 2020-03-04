@@ -93,7 +93,7 @@ router.get("/me", (req, res) => {
 router.get("/all", (req, res) => {
   Users.getAll()
     .then(users => {
-      res.json(users);
+      res.status(200).json(users);
     })
     .catch(err => {
       res.status(500).json({ message: "There was an error getting users." });
@@ -148,12 +148,12 @@ router.put("/", (req, res) => {
   console.log("user from PUT", changes);
   Users.update(user.user_id, changes)
     .then(user => {
-      res.status(201).json(user);
+      res.status(202).json(user);
     })
     .catch(error => {
       // log error to database
       console.log(error);
-      res.status(501).json({
+      res.status(502).json({
         message: "Error updating the user."
       });
     });
