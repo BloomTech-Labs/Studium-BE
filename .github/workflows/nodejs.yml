@@ -14,6 +14,8 @@ jobs:
 
     # The OS on which the job will run
     runs-on: ubuntu-latest
+    env:
+      NODE_ENV: test
 
     # The steps for the job, executed in sequence
     steps:
@@ -28,6 +30,7 @@ jobs:
       # Run the NPM install command before proceeding
       - run: npm install
 
+      - name: Setup PostgreSQL
       - uses: harmon758/postgresql-action@v1
         with:
           postgresql version: "11"
@@ -35,7 +38,7 @@ jobs:
           postgresql user: dev
           postgresql password: dev
 
-      - run: npm run migrate-test
+      - run: knex migrate:latest
 
       # A GitHub action for running tests and publishing coverage
       - uses: paambaati/codeclimate-action@v2.4.0
