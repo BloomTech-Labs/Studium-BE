@@ -35,7 +35,7 @@ jobs:
           postgresql user: dev
           postgresql password: dev
 
-      - run: knex migrate:latest
+      - run: npm run migrate-test
 
       # A GitHub action for running tests and publishing coverage
       - uses: paambaati/codeclimate-action@v2.4.0

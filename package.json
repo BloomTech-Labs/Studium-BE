@@ -12,7 +12,8 @@
     "api-docs-staging": "apidoc -c staging -f .js -i ./routes -o doc-staging/",
     "api-docs-prod": "apidoc -c production -f .js -i ./routes -o doc-prod/",
     "build": "npm-run-all api-docs-staging api-docs-prod",
-    "coverage": "CI=true DOCS_PATH=/apidoc jest --coverage --detectOpenHandles --forceExit --passWithNoTests || true"
+    "coverage": "CI=true DOCS_PATH=/apidoc jest --coverage --detectOpenHandles --forceExit --passWithNoTests || true",
+    "migrate-test": "knex migrate:latest --env test"
   },
   "repository": {
     "type": "git",
