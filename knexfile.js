@@ -1,5 +1,5 @@
 //DON'T FORGET TO ADD SCRIPTS BELOW!
-
+// const path = require("path");
 // Update with your config settings.
 require("dotenv").config();
 module.exports = {
@@ -34,7 +34,7 @@ module.exports = {
       // port: process.env.DATABASE_PORT
     },
     migrations: {
-      directory: "./data/tset/migrations"
+      directory: "./data/migrations"
     },
     seeds: {
       directory: "./data/tset/seeds"
