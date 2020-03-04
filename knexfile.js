@@ -36,7 +36,7 @@ module.exports = {
       // database: process.env.TEST_DATABASE,
       // user: process.env.USER,
       // password: process.env.PASSWORD,
-      host: "test",
+      host: "http://localhost",
       database: "databasename-test", //process.env.db,
       user: "dev", //process.env.user,
       password: "dev",
