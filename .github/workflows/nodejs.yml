@@ -37,14 +37,14 @@ jobs:
           postgresql user: dev
           postgresql password: dev
 
-      - run: knex migrate:latest
+      # - run: knex migrate:latest
       - run: npm run migrate-test
 
   # A job to generate and publish code coverage
 
   coverage:
     # A more descriptive name of the job
-    name: Test and publish test coverage
+    name: Set up coverage for code climate
 
     # The OS on which the job will run
     runs-on: ubuntu-latest
