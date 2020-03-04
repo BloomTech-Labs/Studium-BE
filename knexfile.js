@@ -25,10 +25,13 @@ module.exports = {
   test: {
     client: "postgresql",
     connection: {
-      database: process.env.TEST_DATABASE,
-      user: process.env.USER,
-      password: process.env.PASSWORD,
-      port: process.env.DATABASE_PORT
+      // database: process.env.TEST_DATABASE,
+      // user: process.env.USER,
+      // password: process.env.PASSWORD,
+      POSTGRES_DB: process.env.POSTGRES_DB,
+      POSTGRES_USER: process.env.POSTGRES_USER,
+      POSTGRES_PASSWORD: process.env.POSTGRES_PASSWORD
+      // port: process.env.DATABASE_PORT
     },
     migrations: {
       directory: "./data/tset/migrations"
