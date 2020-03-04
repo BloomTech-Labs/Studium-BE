@@ -25,9 +25,16 @@ jobs:
       - uses: actions/setup-node@master
         with:
           node-version: "12"
-
+      
       # Run the NPM install command before proceeding
       - run: npm install
+
+      - uses: harmon758/postgresql-action@v1
+          with:
+            postgresql version: '11'
+      
+      - run: npm run postgres-start 
+
 
       # A GitHub action for running tests and publishing coverage
       - uses: paambaati/codeclimate-action@v2.4.0
