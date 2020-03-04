@@ -36,6 +36,7 @@ jobs:
           postgresql db: databasename-test
           postgresql user: dev
           postgresql password: dev
+          debug: true
 
       # - run: knex migrate:latest
       - run: npm run migrate-test
