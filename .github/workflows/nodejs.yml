@@ -7,40 +7,6 @@ on: [push, pull_request]
 
 # The jobs that will be run, usually in parallel
 jobs:
-  test:
-    # A more descriptive name of the job
-    name: Test and publish test coverage
-
-    # The OS on which the job will run
-    runs-on: ubuntu-latest
-    env:
-      NODE_ENV: test
-
-    # The steps for the job, executed in sequence
-    steps:
-      # A GitHub action for checking out the current branch
-      - uses: actions/checkout@v1
-
-      # A GitHub action to setup Node.js
-      - uses: actions/setup-node@v1.1.0
-        with:
-          node-version: "10.x"
-
-      # Run the NPM install command before proceeding
-      - run: npm install
-
-      - name: Setup PostgreSQL
-        uses: harmon758/postgresql-action@v1.0.0
-        with:
-          postgresql version: 11
-          postgresql db: databasename-test
-          postgresql user: dev
-          postgresql password: dev
-          debug: true
-
-      # - run: knex migrate:latest
-      - run: npm run migrate-test
-
   # A job to generate and publish code coverage
 
   coverage:

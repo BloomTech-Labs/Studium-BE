@@ -1,15 +1,7 @@
 //DON'T FORGET TO ADD SCRIPTS BELOW!
-// const path = require("path");
+
 // Update with your config settings.
 require("dotenv").config();
-console.log(
-  ("POSTGRES_DB:",
-  process.env.db,
-  "POSTGRES_USER:",
-  process.env.user,
-  "POSTGRES_PASSWORD:",
-  process.env.password)
-);
 module.exports = {
   development: {
     client: "postgresql",
@@ -33,18 +25,13 @@ module.exports = {
   test: {
     client: "postgresql",
     connection: {
-      // database: process.env.TEST_DATABASE,
-      // user: process.env.USER,
-      // password: process.env.PASSWORD,
-      host: "localhost",
-      database: "databasename-test", //process.env.db,
-      user: "dev", //process.env.user,
-      password: "dev",
-      port: 5432 //process.env.password
-      // port: process.env.DATABASE_PORT
+      database: process.env.TEST_DATABASE,
+      user: process.env.USER,
+      password: process.env.PASSWORD,
+      port: process.env.DATABASE_PORT
     },
     migrations: {
-      directory: "./data/migrations"
+      directory: "./data/tset/migrations"
     },
     seeds: {
       directory: "./data/tset/seeds"
