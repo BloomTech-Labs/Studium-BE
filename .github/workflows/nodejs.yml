@@ -31,8 +31,11 @@ jobs:
       - uses: harmon758/postgresql-action@v1
         with:
           postgresql version: "11"
+          postgresql db: databasename-test
+          postgresql user: dev
+          postgresql password: dev
 
-      - run: npm run postgres-start
+      - run: knex migrate:latest
 
       # A GitHub action for running tests and publishing coverage
       - uses: paambaati/codeclimate-action@v2.4.0

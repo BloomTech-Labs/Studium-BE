@@ -36,9 +36,9 @@ module.exports = {
       // database: process.env.TEST_DATABASE,
       // user: process.env.USER,
       // password: process.env.PASSWORD,
-      POSTGRES_DB: process.env.POSTGRES_DB,
-      POSTGRES_USER: process.env.POSTGRES_USER,
-      POSTGRES_PASSWORD: process.env.POSTGRES_PASSWORD
+      database: process.env.db,
+      user: process.env.user,
+      password: process.env.password
       // port: process.env.DATABASE_PORT
     },
     migrations: {
