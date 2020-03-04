@@ -19,20 +19,20 @@ jobs:
     # The steps for the job, executed in sequence
     steps:
       # A GitHub action for checking out the current branch
-      - uses: actions/checkout@master
+      - uses: actions/checkout@v1
 
       # A GitHub action to setup Node.js
-      - uses: actions/setup-node@master
+      - uses: actions/setup-node@v1.1.0
         with:
-          node-version: "12"
+          node-version: "10.x"
 
       # Run the NPM install command before proceeding
       - run: npm install
 
       - name: Setup PostgreSQL
-        uses: harmon758/postgresql-action@v1
+        uses: harmon758/postgresql-action@v1.0.0
         with:
-          postgresql version: "11"
+          postgresql version: 11
           postgresql db: databasename-test
           postgresql user: dev
           postgresql password: dev
