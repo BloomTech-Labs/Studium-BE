@@ -37,7 +37,7 @@ jobs:
         env:
           NODE_ENV: "test"  
           
-      - run: knex migrate:latest
+      - run: npm knex migrate:latest
 
       # A GitHub action for running tests and publishing coverage
       - uses: paambaati/codeclimate-action@v2.4.0
