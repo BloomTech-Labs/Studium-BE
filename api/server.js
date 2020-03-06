@@ -19,7 +19,7 @@ const cardsRouter = require( "../routes/cards/cards-router.js" );
 const findUIDMiddleWare = require( "../routes/utils/findUIDMiddleware.js" );
 
 const server = express();
-const daocsPath = process.env.DOCS_PATH || "/apidoc";
+const daocsPath = process.env.DOCS_PATH || "apidoc";
 const apiDocsPath = path.join( __dirname, "../", daocsPath );
 
 server.use( helmet() );
