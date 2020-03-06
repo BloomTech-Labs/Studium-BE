@@ -17,13 +17,13 @@ jobs:
 
     # The steps for the job, executed in sequence
     steps:
-    - uses: harmon758/postgresql-action@v1
-      env:
-        NODE_ENV: "test"
-      with:
-        postgresql db: "synaps-test"
-        postgresql user: "postgres"
-        postgresql password: "password"
+      - uses: harmon758/postgresql-action@v1
+        env:
+          NODE_ENV: "test"
+        with:
+          postgresql db: "synaps-test"
+          postgresql user: "postgres"
+          postgresql password: "password"
 
 
       # A GitHub action for checking out the current branch
