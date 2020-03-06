@@ -17,6 +17,13 @@ jobs:
 
     # The steps for the job, executed in sequence
     steps:
+    - uses: harmon758/postgresql-action@v1
+        with:
+          postgresql db: "synaps-test"
+          postgresql user: "postgres"
+          postgresql password: "password"
+        env:
+          NODE_ENV: "test"
 
       # A GitHub action for checking out the current branch
       - uses: actions/checkout@master
@@ -28,16 +35,8 @@ jobs:
 
       # Run the NPM install command before proceeding
       - run: npm install
-        
-      - uses: harmon758/postgresql-action@v1
-        with:
-          postgresql db: "synaps-test"
-          postgresql user: "postgres"
-          postgresql password: "password"
-        env:
-          NODE_ENV: "test"  
           
-      - run: npm knex migrate:latest
+        - run: knex migrate:latest
 
       # A GitHub action for running tests and publishing coverage
       - uses: paambaati/codeclimate-action@v2.4.0
