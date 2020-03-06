@@ -18,8 +18,6 @@ jobs:
     # The steps for the job, executed in sequence
     steps:
       - uses: harmon758/postgresql-action@v1
-        env:
-          NODE_ENV: "test"
         with:
           postgresql db: "synaps-test"
           postgresql user: "postgres"
@@ -31,6 +29,8 @@ jobs:
 
       # A GitHub action to setup Node.js
       - uses: actions/setup-node@master
+        env:
+          NODE_ENV: "test"
         with:
           node-version: "12"
 
