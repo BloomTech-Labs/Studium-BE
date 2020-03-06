@@ -19,7 +19,8 @@ const cardsRouter = require( "../routes/cards/cards-router.js" );
 const findUIDMiddleWare = require( "../routes/utils/findUIDMiddleware.js" );
 
 const server = express();
-const apiDocsPath = path.join( __dirname, "../", process.env.DOCS_PATH );
+const daocsPath = process.env.DOCS_PATH || "apidoc";
+const apiDocsPath = path.join( __dirname, "../", daocsPath );
 
 server.use( helmet() );
 server.use( cors() );
@@ -29,17 +30,15 @@ server.use( logger );
 server.use( logRoute );
 server.use( cloudinaryConfig );
 
-
-server.use("/api/register", registerRouter);
-server.use("/api/users", findUIDMiddleWare, usersRouter);
-server.use("/api/decks", findUIDMiddleWare, decksRouter);
-server.use("/api/cards", findUIDMiddleWare, cardsRouter);
-server.use("/api/photo", findUIDMiddleWare, photoRouter);
-server.use("/api", (req, res) => {
-  console.log("inside of server up message");
-  return res.status(200).json({ message: "Server up and running" });
-});
-
+server.use( "/api/register", registerRouter );
+server.use( "/api/users", findUIDMiddleWare, usersRouter );
+server.use( "/api/decks", findUIDMiddleWare, decksRouter );
+server.use( "/api/cards", findUIDMiddleWare, cardsRouter );
+server.use( "/api/photo", findUIDMiddleWare, photoRouter );
+server.use( "/api", ( req, res ) => {
+    console.log( "inside of server up message" );
+    return res.status( 200 ).json( { message: "Server up and running" } );
+} );
 
 server.use( "/", express.static( apiDocsPath ) );
 server.use( logErrors, clientErrorHandler, errorHandler );

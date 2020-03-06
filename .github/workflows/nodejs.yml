@@ -1,9 +1,9 @@
 # The name of the workflow
-name: Code Climate Coverage
+name: Coverage Test
 
 # What conditions trigger the workflow
 #  In this case, all pushes and pull requests
-on: [push]
+on: [push, pull_request]
 
 # The jobs that will be run, usually in parallel
 jobs:
@@ -17,6 +17,14 @@ jobs:
 
     # The steps for the job, executed in sequence
     steps:
+      # Github action to create a postgres db in a docker.
+      - uses: harmon758/postgresql-action@v1
+        with:
+          postgresql db: "synaps-test"
+          postgresql user: "postgres"
+          postgresql password: "password"
+
+
       # A GitHub action for checking out the current branch
       - uses: actions/checkout@master
 
@@ -27,13 +35,15 @@ jobs:
 
       # Run the NPM install command before proceeding
       - run: npm install
+          
+      - run: npx knex migrate:latest --env "test"
 
       # A GitHub action for running tests and publishing coverage
       - uses: paambaati/codeclimate-action@v2.4.0
         env:
+
           # An environment variable, the value is a GitHub repo secret
           CC_TEST_REPORTER_ID: ${{ secrets.CodeClimateReporterId }}
         with:
           # Run our `coverage` command from our `package.json`
           coverageCommand: npm run coverage
-          debug: true
