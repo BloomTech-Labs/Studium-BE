@@ -1,5 +1,5 @@
 # The name of the workflow
-name: build
+name: Coverage Test
 
 # What conditions trigger the workflow
 #  In this case, all pushes and pull requests
@@ -17,6 +17,7 @@ jobs:
 
     # The steps for the job, executed in sequence
     steps:
+      # Github action to create a postgres db in a docker.
       - uses: harmon758/postgresql-action@v1
         with:
           postgresql db: "synaps-test"
@@ -42,7 +43,7 @@ jobs:
         env:
 
           # An environment variable, the value is a GitHub repo secret
-          CC_TEST_REPORTER_ID: afedaf9c890dbbc449abf12c0ca985b21d2d820316157fcb345f2e2919123016
+          CC_TEST_REPORTER_ID: ${{ secrets.CodeClimateReporterId }}
         with:
           # Run our `coverage` command from our `package.json`
           coverageCommand: npm run coverage
