@@ -12,6 +12,9 @@ yarn-error.log*
 lerna-debug.log*
 /coverage
 
+#logs
+/apidoc
+
 # Diagnostic reports (https://nodejs.org/api/report.html)
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 
@@ -108,5 +111,3 @@ dist/
 # Temporary folders
 tmp/
 temp/
-
-# End of https://www.gitignore.io/api/node
