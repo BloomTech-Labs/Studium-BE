@@ -29,15 +29,13 @@ jobs:
 
       # A GitHub action to setup Node.js
       - uses: actions/setup-node@master
-        env:
-          NODE_ENV: "test"
         with:
           node-version: "12"
 
       # Run the NPM install command before proceeding
       - run: npm install
           
-      - run: npx knex migrate:latest
+      - run: npx knex migrate:latest --env "test"
 
       # A GitHub action for running tests and publishing coverage
       - uses: paambaati/codeclimate-action@v2.4.0
