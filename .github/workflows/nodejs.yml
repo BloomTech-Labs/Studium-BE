@@ -1,5 +1,5 @@
 # The name of the workflow
-name: build
+name: Coverage Test
 
 # What conditions trigger the workflow
 #  In this case, all pushes and pull requests
