@@ -6,14 +6,13 @@
   "scripts": {
     "migrate": "knex migrate:latest --env production",
     "server": "nodemon index.js",
-    "test": "jest --coverage --watch",
+    "test": "cross-env NODE_ENV=test jest --testTimeout=10000 --coverage --watch",
     "start": "node index.js",
     "api-docs": "apidoc -f .js -i ./routes -o apidoc/",
     "api-docs-staging": "apidoc -c staging -f .js -i ./routes -o doc-staging/",
     "api-docs-prod": "apidoc -c production -f .js -i ./routes -o doc-prod/",
     "build": "npm-run-all api-docs-staging api-docs-prod",
-    "coverage": "jest --coverage --detectOpenHandles --forceExit --passWithNoTests || true",
-    "pretest": "cross-env NODE_ENV=test knex migrate:latest "
+    "coverage": "jest --coverage --detectOpenHandles --forceExit --passWithNoTests || true"
   },
   "repository": {
     "type": "git",
@@ -52,6 +51,7 @@
     "supertest": "^4.0.2"
   },
   "jest": {
+    "testEnvironment": "node",
     "verbose": true,
     "collectCoverageFrom": [
       "**/*.{js,jsx}",
