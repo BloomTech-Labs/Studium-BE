@@ -25,16 +25,16 @@ module.exports = {
   test: {
     client: "postgresql",
     connection: {
-      database: process.env.TEST_DATABASE,
-      user: process.env.USER,
-      password: process.env.PASSWORD,
-      port: process.env.DATABASE_PORT
+      database: "synaps-test",
+      user: "postgres",
+      password: "password",
+      port: 5432
     },
     migrations: {
-      directory: "./data/tset/migrations"
+      directory: "./data/migrations"
     },
     seeds: {
-      directory: "./data/tset/seeds"
+      directory: "./data/seeds"
     },
     pool: {
       min: 2,
@@ -45,10 +45,10 @@ module.exports = {
   staging: {
     client: "postgresql",
     connection: {
-      database: process.env.TEST_DATABASE,
-      user: process.env.USER,
-      password: process.env.PASSWORD,
-      port: process.env.DATABASE_PORT
+      database: "synaps",
+      user: "postgres",
+      password: "incoh3r3nt&",
+      port: "5500"
     },
     migrations: {
       directory: "./data/migrations"
