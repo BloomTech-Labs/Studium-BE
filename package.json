@@ -12,7 +12,7 @@
     "api-docs": "apidoc -f .js -i ./routes -o apidoc/",
     "api-docs-staging": "apidoc -c staging -f .js -i ./routes -o doc-staging/",
     "api-docs-prod": "apidoc -c production -f .js -i ./routes -o doc-prod/",
-    "build": "npm-run-all api-docs-staging api-docs-prod",
+    "build": "npm-run-all api-docs-staging api-docs-prod migrate",
     "coverage": "jest --coverage --detectOpenHandles --forceExit --passWithNoTests || true"
   },
   "repository": {
