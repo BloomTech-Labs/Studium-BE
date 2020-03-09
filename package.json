@@ -6,7 +6,8 @@
   "scripts": {
     "migrate": "knex migrate:latest --env production",
     "server": "nodemon index.js",
-    "test": "cross-env NODE_ENV=test jest --testTimeout=10000 --coverage --watch",
+    "watch": "cross-env NODE_ENV=test jest --testTimeout=10000 --coverage --watch",
+    "test": "cross-env NODE_ENV=test jest --testTimeout=10000 --coverage",
     "start": "node index.js",
     "api-docs": "apidoc -f .js -i ./routes -o apidoc/",
     "api-docs-staging": "apidoc -c staging -f .js -i ./routes -o doc-staging/",
