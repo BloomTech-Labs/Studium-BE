@@ -2,8 +2,6 @@ const router = require( "express" ).Router();
 const DEBUG_NAME = "Decks";
 
 const Decks = require( "./decks-model.js" );
-const findUIDMiddleWare = require( "../utils/findUIDMiddleware.js" );
-const createError = require( "../utils/createError" );
 
 /**
  * @api {post} /api/decks   Creates a new deck
@@ -43,7 +41,6 @@ const createError = require( "../utils/createError" );
  *    "user_id": 2,
  *    "created_at": "2020-02-18 14:10:08.566262-07",
  *    "updated_at": "2020-02-18 14:10:08.566262-07",
- *    "category": "bones",
  *    "tags": "limbs,skull,hands",
  *    "public": false
  * }
@@ -52,17 +49,17 @@ const createError = require( "../utils/createError" );
  */
 
 router.post( "/", ( req, res ) => {
-    let user = req.user;
-    let newDeck = req.body;
-    newDeck.user_id = user.user_id;
-    
-    Decks.add( newDeck )
-        .then( deck => res.status( 201 ).json( deck ) )
-        .catch( err => {
-            console.log( "Newdeck from err", newDeck );
-            res.status( 501 )
-                .json( { message: "error adding the deck", error: err } );
-        } );
+  let user = req.user;
+  let newDeck = req.body;
+  newDeck.user_id = user.user_id;
+  
+  Decks.add( newDeck )
+    .then( deck => res.status( 201 ).json( deck ) )
+    .catch( err => {
+      console.log( "Newdeck from err", newDeck );
+      res.status( 501 )
+        .json( { message: "error adding the deck", error: err } );
+    } );
 } );
 
 /**
@@ -97,7 +94,6 @@ router.post( "/", ( req, res ) => {
  *    "user_id": 2,
  *    "created_at": "2020-02-18 14:10:08.566262-07",
  *    "updated_at": "2020-02-18 14:10:08.566262-07",
- *    "category": "bones",
  *    "tags": "limbs,skull,hands",
  *    "public": false
  *  },
@@ -107,7 +103,6 @@ router.post( "/", ( req, res ) => {
  *    "user_id": 4,
  *    "created_at": "2020-02-20 14:10:08.566262-07",
  *    "updated_at": "2020-02-20 14:10:08.566262-07",
- *    "category": "something",
  *    "tags": "random,text,here",
  *    "public": true
  *  },
@@ -116,14 +111,14 @@ router.post( "/", ( req, res ) => {
  */
 
 router.get( "/", ( req, res ) => {
-    Decks.getAll()
-        .then( Decks => {
-            res.json( Decks );
-        } )
-        .catch( error => {
-            res.status( 500 )
-                .json( { message: "There was an error getting Decks." } );
-        } );
+  Decks.getAll()
+    .then( Decks => {
+      res.json( Decks );
+    } )
+    .catch( error => {
+      res.status( 500 )
+        .json( { message: "There was an error getting Decks." } );
+    } );
 } );
 
 /**
@@ -152,46 +147,44 @@ router.get( "/", ( req, res ) => {
  * @apiSuccessExample Deck Data
  *
  * [
- *  {
- *    "deck_name": "Skeleton"
- *    "deck_id": 1,
- *    "user_id": 2,
- *    "created_at": "2020-02-18 14:10:08.566262-07",
- *    "updated_at": "2020-02-18 14:10:08.566262-07",
- *    "category": "bones",
- *    "tags": "limbs,skull,hands",
- *    "public": false
- *  },
- *  {
- *    "deck_name": "random"
- *    "deck_id": 5,
- *    "user_id": 2,
- *    "created_at": "2020-02-20 14:10:08.566262-07",
- *    "updated_at": "2020-02-20 14:10:08.566262-07",
- *    "category": "something",
- *    "tags": "random,text,here",
- *    "public": true
- *  },
- *  ...
- * ]
+ {
+        "deck_id": 2,
+        "user_id": 1,
+        "created_at": "2020-03-09 14:32:23.288908-06",
+        "updated_at": "2020-03-09 14:32:23.288908-06",
+        "deck_name": "Some Deck",
+        "tags": null,
+        "public": null
+    },
+ {
+        "deck_id": 3,
+        "user_id": 1,
+        "created_at": "2020-03-09 14:32:34.776917-06",
+        "updated_at": "2020-03-09 14:32:34.776917-06",
+        "deck_name": "Another Deck",
+        "tags": null,
+        "public": null
+    }
+ ]
  */
 
 router.get( "/user", ( req, res ) => {
-    let { user_id } = req.user;
-    console.log( "user_id from decks/user", user_id );
-    Decks.findBy( { user_id } )
-        .then( decks => {
-            if( decks.length > 0 ){
-                res.status( 200 ).json( decks );
-            }else{
-                res.status( 400 )
-                    .json( { message: "Couldn't find decks for this user" } );
-            }
-        } )
-        .catch( err => {
-            res.status( 500 )
-                .json( { message: "error retrieving decks", err } );
-        } );
+  
+  let { user_id } = req.user;
+  console.log( "user_id from decks/user", user_id );
+  Decks.findBy( { user_id } )
+    .then( decks => {
+      if( decks.length > 0 ){
+        res.status( 200 ).json( decks );
+      }else{
+        res.status( 400 )
+          .json( { message: "Couldn't find decks for this user" } );
+      }
+    } )
+    .catch( err => {
+      res.status( 500 )
+        .json( { message: "error retrieving decks", err } );
+    } );
 } );
 
 /**
@@ -227,7 +220,6 @@ router.get( "/user", ( req, res ) => {
  *    "user_id": 2,
  *    "created_at": "2020-02-18 14:10:08.566262-07",
  *    "updated_at": "2020-02-18 14:10:08.566262-07",
- *    "category": "bones",
  *    "tags": "limbs,skull,hands",
  *    "public": false
  * }
@@ -236,22 +228,23 @@ router.get( "/user", ( req, res ) => {
  */
 
 router.get( "/:id", ( req, res ) => {
-    let { user_id } = req.user;
-    Decks.findById( req.params.id, user_id )
-        .then( deck => {
-            if( deck ){
-                res.status( 200 ).json( deck );
-            }else{
-                res.status( 404 ).json( { message: "deck not found" } );
-            }
-        } )
-        .catch( error => {
-            // log error to database
-            console.log( error );
-            res.status( 500 ).json( {
-                message: "Error retrieving the deck",
-            } );
-        } );
+  
+  let { user_id } = req.user;
+  Decks.findById( req.params.id, user_id )
+    .then( deck => {
+      if( deck ){
+        res.status( 200 ).json( deck );
+      }else{
+        res.status( 404 ).json( { message: "deck not found" } );
+      }
+    } )
+    .catch( error => {
+      // log error to database
+      console.log( error );
+      res.status( 500 ).json( {
+        message: "Error retrieving the deck",
+      } );
+    } );
 } );
 
 /**
@@ -269,8 +262,6 @@ router.get( "/:id", ( req, res ) => {
  * }
  *
  * @apiParam  {String}    deck_name name of deck
- *
- * @apiParam  {String}    category  deck's category
  *
  * @apiParam  {String}      tags      List of tags separated by ","
  *
@@ -294,7 +285,6 @@ router.get( "/:id", ( req, res ) => {
  *    "user_id": 2,
  *    "created_at": "2020-02-18 14:10:08.566262-07",
  *    "updated_at": "2020-02-18 14:10:08.566262-07",
- *    "category": "bones",
  *    "tags": "limbs,skull,hands",
  *    "public": true
  * }
@@ -302,35 +292,35 @@ router.get( "/:id", ( req, res ) => {
  */
 
 router.put( "/:deck_id", ( req, res ) => {
-    let { user_id } = req.user;
-    let changes = req.body;
-    let deck_id = req.params.deck_id;
-    changes.deck_id = deck_id;
-    
-    Decks.findBy( { deck_id } ).then( deck => {
-        if( deck.length > 0 ){
-            if( deck[ 0 ].user_id !== user_id ){
-                res
-                    .status( 402 )
-                    .json( { message: "You aren't authorized to edit/delete this deck" } );
-            }else{
-                Decks.update( deck_id, changes )
-                    .then( deck => {
-                        res.status( 202 ).json( deck );
-                    } )
-                    .catch( error => {
-                        // log error to database
-                        console.log( error );
-                        res.status( 502 ).json( {
-                            message: "Error updating the deck.",
-                        } );
-                    } );
-            }
-        }else{
-            res.status( 404 )
-                .json( { message: "The deck could not be found" } );
-        }
-    } );
+  let { user_id } = req.user;
+  let changes = req.body;
+  let deck_id = req.params.deck_id;
+  changes.deck_id = deck_id;
+  
+  Decks.findBy( { deck_id } ).then( deck => {
+    if( deck.length > 0 ){
+      if( deck[ 0 ].user_id !== user_id ){
+        res
+          .status( 402 )
+          .json( { message: "You aren't authorized to edit/delete this deck" } );
+      }else{
+        Decks.update( deck_id, changes )
+          .then( deck => {
+            res.status( 202 ).json( deck );
+          } )
+          .catch( error => {
+            // log error to database
+            console.log( error );
+            res.status( 502 ).json( {
+              message: "Error updating the deck.",
+            } );
+          } );
+      }
+    }else{
+      res.status( 404 )
+        .json( { message: "The deck could not be found" } );
+    }
+  } );
 } );
 
 /**
@@ -363,34 +353,34 @@ router.put( "/:deck_id", ( req, res ) => {
  */
 
 router.delete( "/:deck_id", ( req, res ) => {
-    let { user_id } = req.user;
-    let deck_id = req.params.deck_id;
-    
-    Decks.findBy( { deck_id } ).then( deck => {
-        if( deck.length > 0 ){
-            if( deck[ 0 ].user_id !== user_id ){
-                res
-                    .status( 400 )
-                    .json( { message: "You aren't authorized to edit/delete this deck" } );
-            }else{
-                Decks.remove( deck_id )
-                    .then( () => {
-                        res.status( 203 )
-                            .json( { message: "Deck successfully deleted!" } );
-                    } )
-                    .catch( error => {
-                        // log error to database
-                        console.log( error );
-                        res.status( 500 ).json( {
-                            message: "Error deleting the deck.",
-                        } );
-                    } );
-            }
-        }else{
-            res.status( 404 )
-                .json( { message: "The deck could not be found" } );
-        }
-    } );
+  let { user_id } = req.user;
+  let deck_id = req.params.deck_id;
+  
+  Decks.findBy( { deck_id } ).then( deck => {
+    if( deck.length > 0 ){
+      if( deck[ 0 ].user_id !== user_id ){
+        res
+          .status( 400 )
+          .json( { message: "You aren't authorized to edit/delete this deck" } );
+      }else{
+        Decks.remove( deck_id )
+          .then( () => {
+            res.status( 203 )
+              .json( { message: "Deck successfully deleted!" } );
+          } )
+          .catch( error => {
+            // log error to database
+            console.log( error );
+            res.status( 500 ).json( {
+              message: "Error deleting the deck.",
+            } );
+          } );
+      }
+    }else{
+      res.status( 404 )
+        .json( { message: "The deck could not be found" } );
+    }
+  } );
 } );
 
 module.exports = router;
