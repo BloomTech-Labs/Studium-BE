@@ -15,7 +15,7 @@ module.exports = (req, res, next) => {
   UserDb.findBy({ uid })
     .then(user => {
       if (user.length > 0) {
-        res.logger.success(DEBUG_NAME, "Found user for uid: " + uid);
+        // res.logger.success(DEBUG_NAME, "Found user for uid: " + uid);
         req.user = user[0];
         next();
       } else {
