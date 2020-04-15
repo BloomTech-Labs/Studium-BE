@@ -1,10 +1,4 @@
 
-🚫 Note: All lines that start with 🚫 are instructions and should be deleted before this is posted to your portfolio. This is intended to be a guideline. Feel free to add your own flare to it.
-
-🚫 The numbers 1️⃣ through 3️⃣ next to each item represent the week that part of the docs needs to be comepleted by. Make sure to delete the numbers by the end of Labs.
-
-🚫 Each student has a required minimum number of meaningful PRs each week per the rubric. Contributing to docs does NOT count as a PR to meet your weekly requirements.
-
 ## Contributors
 
 [<img src="https://avatars3.githubusercontent.com/u/17443353?v=4" width = "100" />](https://github.com/jeremiahtenbrink)
@@ -25,50 +19,36 @@
 
 # API Documentation
 
-#### 1️⃣ Backend delpoyed at [🚫name service here](🚫add URL here) <br>
+####  Backend delpoyed at [Heroku](🚫add URL here) <br>
 
-## 1️⃣ Getting started
+## Getting started
 
 To get the server running locally:
 
 🚫 adjust these scripts to match your project
 
 - Clone this repo
-- **yarn install** to install all required dependencies
-- **yarn server** to start the local server
-- **yarn test** to start server using testing environment
+- **npm install** to install all required dependencies
+- **npm run start** to start the local server
+- **npm test** to start server using testing environment
 
 ### Backend framework goes here
 
-🚫 Why did you choose this framework?
+Node:  Express, Postgres
 
-- Point One
-- Point Two
-- Point Three
-- Point Four
+- Node.js - We chose this to improve the efficiency and overall developer productivity. This is also excellent use for code sharing and reusability. Even greater benefits are the speed and the performance thanks to Node. With this we use the Express.js to allow us to build the app in the most efficient way.
+
 
 ## 2️⃣ Endpoints
 
-🚫This is a placeholder, replace the endpoints, access controll, and descriptioin to match your project
+Refer to the link below:
 
-#### Organization Routes
-
-| Method | Endpoint                | Access Control | Description                                  |
-| ------ | ----------------------- | -------------- | -------------------------------------------- |
-| GET    | `/organizations/:orgId` | all users      | Returns the information for an organization. |
-| PUT    | `/organizatoins/:orgId` | owners         | Modify an existing organization.             |
-| DELETE | `/organizations/:orgId` | owners         | Delete an organization.                      |
-
+https://staging-lambda-synaps-be.herokuapp.com/#api-Cards-DeleteCard  
 #### User Routes
 
-| Method | Endpoint                | Access Control      | Description                                        |
-| ------ | ----------------------- | ------------------- | -------------------------------------------------- |
-| GET    | `/users/current`        | all users           | Returns info for the logged in user.               |
-| GET    | `/users/org/:userId`    | owners, supervisors | Returns all users for an organization.             |
-| GET    | `/users/:userId`        | owners, supervisors | Returns info for a single user.                    |
-| POST   | `/users/register/owner` | none                | Creates a new user as owner of a new organization. |
-| PUT    | `/users/:userId`        | owners, supervisors |                                                    |
-| DELETE | `/users/:userId`        | owners, supervisors |                                                    |
+Refer to the link below:
+
+https://staging-lambda-synaps-be.herokuapp.com/#api-Cards-DeleteCard                                                    |
 
 # Data Model
 
@@ -77,17 +57,7 @@ To get the server running locally:
 #### 2️⃣ ORGANIZATIONS
 
 ---
-
-```
-{
-  id: UUID
-  name: STRING
-  industry: STRING
-  paid: BOOLEAN
-  customer_id: STRING
-  subscription_id: STRING
-}
-```
+https://www.notion.so/Architecture-Details-4676c4c78e384f249de3622eb18b3eb5#60ad2a85e90548cba14df59f4eb55090
 
 #### USERS
 
