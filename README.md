@@ -14,7 +14,7 @@
 ![node](https://img.shields.io/node/v/11)
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 ![Coverage Test](https://github.com/Lambda-School-Labs/pt-synaps-be/workflows/Coverage%20Test/badge.svg)
-![Code Climate maintainability](https://img.shields.io/codeclimate/maintainability-percentage/Lambda-School-Labs/pt-synaps-be)
+[![Code Climate maintainability](https://api.codeclimate.com/v1/badges/9ca9673d076f0a3275bb/maintainability)](https://img.shields.io/codeclimate/maintainability-percentage/Lambda-School-Labs/pt-synaps-be)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/9ca9673d076f0a3275bb/test_coverage)](https://codeclimate.com/github/Lambda-School-Labs/pt-synaps-be/test_coverage)
 
 # API Documentation
