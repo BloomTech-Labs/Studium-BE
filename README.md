@@ -71,9 +71,9 @@ In order for the app to function correctly, the user must set up their own envir
 
 create a .env file that includes the following:
 
-DATABASE=" name of development database "
-DATABASE_PORT=" database development port "
-DOCS_PATH=" folder where docs are generated to " (default=apidoc)
+DATABASE=" your name of development database "
+DATABASE_PORT=" Choice of database development port "
+DOCS_PATH=" The folder where docs are generated to " (default=apidoc)
 CLOUDINARY_CLOUD_NAME= " cloudinary cloud_name from their api"
 CLOUDINARY_API_KEY= " cloudinary cloud_name from their api"
 CLOUDINARY_API_SECRET= "cloudinary api key"
