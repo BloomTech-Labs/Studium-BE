@@ -41,41 +41,28 @@ Node:  Express, Postgres
 
 Refer to the link below:
 
-https://staging-lambda-synaps-be.herokuapp.com/#api-Cards-DeleteCard  
+https://staging-lambda-synaps-be.herokuapp.com  
 #### User Routes
 
 Refer to the link below:
 
-https://staging-lambda-synaps-be.herokuapp.com/#api-Cards-DeleteCard                                                    |
+https://staging-lambda-synaps-be.herokuapp.com                                                   |
 
 # Data Model
 
-🚫This is just an example. Replace this with your data model
+[<img src="https://github.com/Lambda-School-Labs/pt-synaps-be/blob/read-me/images/Untitled.png?raw=true" width = "500" />]()
 
 #### 2️⃣ ORGANIZATIONS
 
 ---
-https://www.notion.so/Architecture-Details-4676c4c78e384f249de3622eb18b3eb5#60ad2a85e90548cba14df59f4eb55090
+https://www.notion.so/PT-Synaps-26b2ed3daf324476b32334ccd4c0d847
 
 #### USERS
 
----
+Please refer to this link below
 
-```
-{
-  id: UUID
-  organization_id: UUID foreign key in ORGANIZATIONS table
-  first_name: STRING
-  last_name: STRING
-  role: STRING [ 'owner', 'supervisor', 'employee' ]
-  email: STRING
-  phone: STRING
-  cal_visit: BOOLEAN
-  emp_visit: BOOLEAN
-  emailpref: BOOLEAN
-  phonepref: BOOLEAN
-}
-```
+https://staging-lambda-synaps-be.herokuapp.com/
+
 
 ## 2️⃣ Actions
 
@@ -155,5 +142,4 @@ These contribution guidelines have been adapted from [this good-Contributing.md-
 
 ## Documentation
 
-See [Frontend Documentation](🚫link to your frontend readme here) for details on the fronend of our project.
-🚫 Add DS iOS and/or Andriod links here if applicable.
+See [Frontend Documentation](🚫link to your frontend readme here) for details on the frontend of our project.
