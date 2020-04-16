@@ -19,13 +19,11 @@
 
 # API Documentation
 
-####  Backend delpoyed at [Heroku](🚫add URL here) <br>
+####  Backend deployed at [Heroku](production: https://production-lambda-synaps-be.herokuapp.com/) <br>
 
 ## Getting started
 
 To get the server running locally:
-
-🚫 adjust these scripts to match your project
 
 - Clone this repo
 - **npm install** to install all required dependencies
