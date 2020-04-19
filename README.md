@@ -1,20 +1,39 @@
+<h1 align="center">
+    <a href="https://production-lambda-synaps-be.herokuapp.com/">Synaps Backend
+    </a>
+</h1>
+<h3 align="center">Up you testing game with the best flash card app.</h3>
+<h3 align="center">Average testing score increase 20%.</h3>
 
-🚫 Note: All lines that start with 🚫 are instructions and should be deleted before this is posted to your portfolio. This is intended to be a guideline. Feel free to add your own flare to it.
 
-🚫 The numbers 1️⃣ through 3️⃣ next to each item represent the week that part of the docs needs to be comepleted by. Make sure to delete the numbers by the end of Labs.
 
-🚫 Each student has a required minimum number of meaningful PRs each week per the rubric. Contributing to docs does NOT count as a PR to meet your weekly requirements.
+<br/>
+<br/>
+<h1>
+    Project Overview
+</h1>
+
+To create the best Life Science flashcard application, that has excellent UI, which has minimal distractions to make the learning process more efficient. To be the best user friendly flashcard application for life sciences students.
+
 
 ## Contributors
 
+   <h1 align="center">UI/UX</h1> 
+   <div width="100%">
+        <img src="https://avatars0.githubusercontent.com/u/48630065?s=460&v=4" width = "100" text-align="center" /> 
+        <img src="https://avatars3.githubusercontent.com/u/49910197?v=4" width = "100" text-align="center" />
+   </div>
+
+(https://github.com/nataliepeterson)
+(https://github.com/DKFerebee)
+
+## Web Developers
 [<img src="https://avatars3.githubusercontent.com/u/17443353?v=4" width = "100" />](https://github.com/jeremiahtenbrink)
 [<img src="https://avatars1.githubusercontent.com/u/19153270?v=4" width = "100" />](https://github.com/ccurry20)
 [<img src="https://avatars2.githubusercontent.com/u/20153709?v=4" width = "100" />](https://github.com/gmgower)
 [<img src="https://avatars3.githubusercontent.com/u/47146701?v=4" width = "100" />](https://github.com/austinbro5)
 [<img src="https://avatars0.githubusercontent.com/u/48000565?v=4" width = "100" />](https://github.com/Brimes7)
-[<img src="https://avatars3.githubusercontent.com/u/49910197?v=4" width = "100" />](https://github.com/DKFerebee)
 [<img src="https://avatars3.githubusercontent.com/u/49927848?v=4" width = "100" />](https://github.com/christopherc1331)
-
 
 ![MIT](https://img.shields.io/packagist/l/doctrine/orm.svg)
 ![node](https://img.shields.io/node/v/11)
@@ -23,20 +42,20 @@
 ![Code Climate maintainability](https://img.shields.io/codeclimate/maintainability-percentage/Lambda-School-Labs/pt-synaps-be)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/9ca9673d076f0a3275bb/test_coverage)](https://codeclimate.com/github/Lambda-School-Labs/pt-synaps-be/test_coverage)
 
-# API Documentation
+<h1 align="center">
+    <a href="https://production-lambda-synaps-be.herokuapp.com/">Api
+     Documentation.
+    </a>
+</h1>
 
-#### 1️⃣ Backend delpoyed at [🚫name service here](🚫add URL here) <br>
+#### Backend delpoyed at [Heroku](https://production-lambda-synaps-be.herokuapp.com) <br>
 
-## 1️⃣ Getting started
-
-To get the server running locally:
-
-🚫 adjust these scripts to match your project
+## Getting started
 
 - Clone this repo
-- **yarn install** to install all required dependencies
-- **yarn server** to start the local server
-- **yarn test** to start server using testing environment
+- **npm install** to install all required dependencies
+- **npm server** to start the local server
+- **npm test** to start server using testing environment
 
 ### Backend framework goes here
 
@@ -47,95 +66,24 @@ To get the server running locally:
 - Point Three
 - Point Four
 
-## 2️⃣ Endpoints
+## Environment Variables
 
-🚫This is a placeholder, replace the endpoints, access controll, and descriptioin to match your project
+|VAR        | Description        |
+|:------------- |:-------------|
+| DB_ENV    | production, staging, development, test -> Sets the Db env from the kenexfile. |
+| DATABASE    | Database name for local development |
+| USER      | Local DB user      |
+| PASSWORD      | Local DB user password     |
+| DATABASE_PORT      | Local DB port   |
+| LOG_LEVEL | Set to debug to have logs print debug info.     |
+| DOCS_PATH | Path to document folder for env.   |
+| CLOUDINARY_CLOUD_NAME | Image upload storage bucket cloud name   |
+| CLOUDINARY_API_KEY | Image storage bucket api key    |
+| CLOUDINARY_API_SECRET | Image storage bucket api secret.   |
+| Github-Secret CodeClimateReporterId | Code Climate Reporters id for code coverage.   |
+| REACT_APP_BASE_URL | Base url for    |
 
-#### Organization Routes
 
-| Method | Endpoint                | Access Control | Description                                  |
-| ------ | ----------------------- | -------------- | -------------------------------------------- |
-| GET    | `/organizations/:orgId` | all users      | Returns the information for an organization. |
-| PUT    | `/organizatoins/:orgId` | owners         | Modify an existing organization.             |
-| DELETE | `/organizations/:orgId` | owners         | Delete an organization.                      |
-
-#### User Routes
-
-| Method | Endpoint                | Access Control      | Description                                        |
-| ------ | ----------------------- | ------------------- | -------------------------------------------------- |
-| GET    | `/users/current`        | all users           | Returns info for the logged in user.               |
-| GET    | `/users/org/:userId`    | owners, supervisors | Returns all users for an organization.             |
-| GET    | `/users/:userId`        | owners, supervisors | Returns info for a single user.                    |
-| POST   | `/users/register/owner` | none                | Creates a new user as owner of a new organization. |
-| PUT    | `/users/:userId`        | owners, supervisors |                                                    |
-| DELETE | `/users/:userId`        | owners, supervisors |                                                    |
-
-# Data Model
-
-🚫This is just an example. Replace this with your data model
-
-#### 2️⃣ ORGANIZATIONS
-
----
-
-```
-{
-  id: UUID
-  name: STRING
-  industry: STRING
-  paid: BOOLEAN
-  customer_id: STRING
-  subscription_id: STRING
-}
-```
-
-#### USERS
-
----
-
-```
-{
-  id: UUID
-  organization_id: UUID foreign key in ORGANIZATIONS table
-  first_name: STRING
-  last_name: STRING
-  role: STRING [ 'owner', 'supervisor', 'employee' ]
-  email: STRING
-  phone: STRING
-  cal_visit: BOOLEAN
-  emp_visit: BOOLEAN
-  emailpref: BOOLEAN
-  phonepref: BOOLEAN
-}
-```
-
-## 2️⃣ Actions
-
-🚫 This is an example, replace this with the actions that pertain to your backend
-
-`getOrgs()` -> Returns all organizations
-
-`getOrg(orgId)` -> Returns a single organization by ID
-
-`addOrg(org)` -> Returns the created org
-
-`updateOrg(orgId)` -> Update an organization by ID
-
-`deleteOrg(orgId)` -> Delete an organization by ID
-<br>
-<br>
-<br>
-`getUsers(orgId)` -> if no param all users
-
-`getUser(userId)` -> Returns a single user by user ID
-
-`addUser(user object)` --> Creates a new user and returns that user. Also creates 7 availabilities defaulted to hours of operation for their organization.
-
-`updateUser(userId, changes object)` -> Updates a single user by ID.
-
-`deleteUser(userId)` -> deletes everything dependent on the user
-
-## 3️⃣ Environment Variables
 
 In order for the app to function correctly, the user must set up their own environment variables.
 
