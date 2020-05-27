@@ -15,9 +15,9 @@ server.use(express.json())
 server.use(cors())
 
 server.use('/api/users', usersRouter) // --> missing auth middleware
-server.use('/api/decks', decksRouter) // --> missing auth middleware
-server.use('/api/cards', cardsRouter) // --> missing auth middleware
-server.use('/api/sessions', sessionsRouter) // --> missing auth middleware
+// server.use('/api/decks', decksRouter) // --> missing auth middleware
+// server.use('/api/cards', cardsRouter) // --> missing auth middleware
+// server.use('/api/sessions', sessionsRouter) // --> missing auth middleware
 
 server.get('/', (req, res) => {
    res.send('The api is up.')
