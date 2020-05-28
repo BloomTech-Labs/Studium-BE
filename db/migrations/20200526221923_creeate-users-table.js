@@ -26,7 +26,6 @@ exports.up = function (knex) {
         tbl.timestamp("created_at", { useTz: false }); // CREATED AT TIMESTAMP 
         tbl.string("user_img"); // USER AVATAR/IMG 
     })
-
 };
 
 exports.down = function (knex) {
