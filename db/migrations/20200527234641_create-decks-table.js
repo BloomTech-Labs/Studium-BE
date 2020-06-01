@@ -10,7 +10,7 @@ exports.up = function (knex) {
         tbl.string('deck_name')
             .notNullable();
         tbl.string('category')
-        tbl.description('description')
+        tbl.string('description')
         tbl.boolean('public')
             .defaultTo(false)
         tbl.string('deck_img')
