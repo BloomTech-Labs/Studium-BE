@@ -10,21 +10,23 @@ router.get('/', (req, res) => {
          res.json(deck)
       })
       .catch(err => {
-         res.status(500).json({ message: 'Failed to retrieve decks'})
+         res.status(500).json({ message: 'Failed to retrieve decks' })
       })
 })
 
-router.get('/:id', (req, res) => {
-   const { id } = req.params
-
-   Users.findById(id)
+router.get("/:id", (req, res) => {
+   Decks.findDeckById(req.params.id)
       .then(deck => {
-         deck
-            ? res.json(deck)
-            : res.status(404).json({ message: 'Could not find a deck with that id'})
+         deck.forEach(deck => {
+            Decks.getDeckTags(req.params.id).then(tags => {
+               deck.tags = tags;
+               res.status(201).json(deck)
+            })
+         })
+
       })
       .catch(err => {
-         res.status(500).json({ message: 'Failed to get deck' });
+         res.status(500).json({ errorMessage: "There was an error retrieving the deck!" })
       })
 })
 

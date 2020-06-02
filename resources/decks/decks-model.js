@@ -4,10 +4,15 @@ const find = () => {
    return db('decks')
 }
 
-const findById = (id) => {
-   return db('decks')
+const findDeckById = (id) => {
+   return db("deck as d")
       .where({ id })
       .first()
+}
+
+function getDeckTags(id) {
+   return db("tags as t")
+      .where({ id: id })
 }
 
 const findBy = (filter) => {
@@ -34,7 +39,8 @@ const remove = (id) => {
 
 module.exports = {
    find,
-   findById,
+   findDeckById,
+   getDeckTags,
    findBy,
    add,
    update,
