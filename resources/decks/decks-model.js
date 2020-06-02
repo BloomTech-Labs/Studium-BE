@@ -5,7 +5,7 @@ const find = () => {
 }
 
 const findDeckById = (id) => {
-   return db("deck as d")
+   return db("decks as d")
       .where({ id })
       .first()
 }
