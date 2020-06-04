@@ -4,6 +4,7 @@ const Decks = require('./decks-model.js')
 
 const router = express.Router()
 
+// GET ALL DECKS
 router.get('/', (req, res) => {
    Decks.find()
       .then(decks => {
@@ -14,6 +15,7 @@ router.get('/', (req, res) => {
       })
 })
 
+// GET SPECIFIC DECK
 router.get("/:id", (req, res) => {
    const id = req.params.id;
 
@@ -21,7 +23,7 @@ router.get("/:id", (req, res) => {
       .then(deck => {
          if (deck.length) {
             deck.forEach(deck => {
-               Decks.getDeckTags(req.params.id).then(tags => {
+               Decks.getDeckTags(req.params.id).then(tags => { // SHOWS TAGS 
                   deck.tags = tags;
                   res.status(201).json(deck)
                })
@@ -35,6 +37,24 @@ router.get("/:id", (req, res) => {
       })
 })
 
+// SEE CARDS WITHIN AN EXISTING DECK
+router.get("/:id/cards", (req, res) => {
+   const { id } = req.params;
+
+   Decks.getDeckCards(id)
+      .then(cards => {
+         if (cards.length) {
+            res.status(200).json(cards)
+         } else {
+            res.status(404).json({ errorMessage: "No cards exist within this deck." })
+         }
+      })
+      .catch(err => {
+         res.status(500).json({ errorMessage: "There was an error retrieving the cards in this deck!" })
+      })
+})
+
+// ADD NEW DECK (POST)
 router.post('/', (req, res) => {
    const deckData = req.body;
    const deck_name = req.body;
@@ -52,6 +72,7 @@ router.post('/', (req, res) => {
    }
 })
 
+// UPDATE EXISTING DECK (PUT)
 router.put('/:id', (req, res) => {
    const { id } = req.params;
    const changes = req.body;
@@ -72,6 +93,7 @@ router.put('/:id', (req, res) => {
       });
 })
 
+// DELETE EXISTING DECK 
 router.delete('/:id', (req, res) => {
    const { id } = req.params;
 
