@@ -10,6 +10,13 @@ const findDeckById = (id) => {
       .first()
 }
 
+function getDeckCards(id) {
+   return db("cards as c")
+      .join("decks as d", "d.id", "c.deck_id")
+      .select("d.deck_name", "d.category", "d.description", "d.public", "c.card_front")
+      .where("cards.id", id)
+}
+
 function getDeckTags(id) {
    return db("tags as t")
       .where({ id: id })
