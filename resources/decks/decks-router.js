@@ -37,8 +37,9 @@ router.get("/:id", (req, res) => {
 
 router.post('/', (req, res) => {
    const deckData = req.body;
+   const deck_name = req.body;
 
-   if (!deckData.deck_name) {
+   if (!deck_name) {
       res.status(401).json({ errorMessage: "Please include at least a deck name!" })
    } else {
       Decks.add(deckData)
@@ -52,11 +53,39 @@ router.post('/', (req, res) => {
 })
 
 router.put('/:id', (req, res) => {
+   const { id } = req.params;
+   const changes = req.body;
 
+   Decks.findDeckById(id)
+      .then(deck => {
+         if (deck.length) {
+            Decks.update(changes, id)
+               .then(updatedDeck => {
+                  res.json(updatedDeck);
+               });
+         } else {
+            res.status(404).json({ errorMessage: "No such deck with that ID exists." });
+         }
+      })
+      .catch(err => {
+         res.status(500).json({ errorMessage: "There was an error updating the deck." });
+      });
 })
 
 router.delete('/:id', (req, res) => {
+   const { id } = req.params;
 
+   Decks.remove(id)
+      .then(deleted => {
+         if (deleted.length) {
+            res.json({ removed: deleted });
+         } else {
+            res.status(404).json({ errorMessage: "No such deck with that ID exists." });
+         }
+      })
+      .catch(err => {
+         res.status(500).json({ errorMessage: "There was an error deleting the deck." });
+      });
 })
 
-module.exports = router
+module.exports = router;
