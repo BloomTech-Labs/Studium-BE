@@ -12,15 +12,13 @@ Deployed at: https://studium-be.herokuapp.com/
 
 ---
 
----
-
 ## Badges
 
 ![MIT](https://img.shields.io/packagist/l/doctrine/orm.svg)
 ![node](https://img.shields.io/node/v/11)
 ![Coverage Test](https://github.com/Lambda-School-Labs/Studium-BE/workflows/Coverage%20Test/badge.svg)
-[![Maintanability](https://api.codeclimate.com/v1/badges/9ca9673d076f0a3275bb/maintainability)](https://img.shields.io/codeclimate/maintainability-percentage/Lambda-School-Labs/Studium-BE)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/9ca9673d076f0a3275bb/test_coverage)](https://codeclimate.com/github/Lambda-School-Labs/Studium-BE/test_coverage)
+[![Maintainability](https://api.codeclimate.com/v1/badges/84916601dc72e75bc4d2/maintainability)](https://codeclimate.com/github/Lambda-School-Labs/Studium-BE/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/84916601dc72e75bc4d2/test_coverage)](https://codeclimate.com/github/Lambda-School-Labs/Studium-BE/test_coverage)
 
 ---
 
