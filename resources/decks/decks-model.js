@@ -27,9 +27,9 @@ const findBy = (filter) => {
       .where(filter)
 }
 
-const add = (user) => {
+const add = (deck) => {
    return db('decks')
-      .insert(user, 'id')
+      .insert(deck, 'id')
 }
 
 const update = (changes, id) => {
