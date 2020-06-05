@@ -57,16 +57,10 @@ router.get("/:id/cards", (req, res) => {
 // ADD NEW DECK (POST)
 router.post('/', (req, res) => {
    const deckData = req.body;
-   const deckName = req.body.deck_name;
-
 
    Decks.add(deckData)
       .then(deck => {
-         if (!deckName) {
-            res.status(401).json({ errorMessage: "Please include at least a deck name!" })
-         } else {
-            res.status(201).json(deck)
-         }
+         res.status(201).json(deck)
       })
       .catch(err => {
          res.status(500).json({ errorMessage: "There was an error adding the deck." })
