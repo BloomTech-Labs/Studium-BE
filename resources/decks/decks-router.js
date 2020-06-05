@@ -60,7 +60,11 @@ router.post('/', (req, res) => {
 
    Decks.add(deckData)
       .then(deck => {
-         res.status(201).json(deck)
+         if (!req.body.user_id || !req.body.deck_name) {
+            res.status(401).json({ errorMessage: "Please include both a user ID and a deck name!" })
+         } else {
+            res.status(201).json(deck)
+         }
       })
       .catch(err => {
          res.status(500).json({ errorMessage: "There was an error adding the deck." })
