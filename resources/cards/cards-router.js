@@ -73,4 +73,21 @@ router.put('/:id', (req, res) => {
         })
 })
 
+// DELETE EXISTING CARD
+router.delete('/:id', (req, res) => {
+    const { id } = req.params;
+
+    db.remove(id)
+        .then(deleted => {
+            if (deleted.length) {
+                res.status(200).json({ removed: deleted })
+            } else {
+                res.status(404).json({ errorMessage: "No such card with that ID exists." })
+            }
+        })
+        .catch(err => {
+            res.status(500).json({ errorMessage: "There was an error deleting the card." })
+        })
+})
+
 module.exports = router;
