@@ -18,17 +18,10 @@ router.get('/', (req, res) => {
 router.get("/:id", (req, res) => {
     db.getCardbyId(req.params.id)
         .then(card => {
-            if (card) {
-                card.forEach(card => {
-                    db.getCardTags(req.params.id).then(tags => {
-                        card.tags = tags;
-                        res.status(201).json(card)
-                    })
-                })
-            } else {
-                res.status(404).json({ errorMessage: "No such card with that ID exists." })
-            }
-
+            db.getCardTags(req.params.id).then(tags => {
+                card.tags = tags;
+                res.status(201).json(card)
+            })
         })
         .catch(err => {
             res.status(500).json({ errorMessage: "There was an error retrieving the card!" })

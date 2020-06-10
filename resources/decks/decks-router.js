@@ -21,16 +21,10 @@ router.get("/:id", (req, res) => {
 
    Decks.findDeckById(id)
       .then(deck => {
-         if (deck) {
-            deck.forEach(deck => {
-               Decks.getDeckTags(req.params.id).then(tags => { // SHOWS TAGS 
-                  deck.tags = tags;
-                  res.status(201).json(deck)
-               })
-            })
-         } else {
-            res.status(404).json({ errorMessage: "No such deck with that ID exists." })
-         }
+         Decks.getDeckTags(req.params.id).then(tags => { // SHOWS TAGS 
+            deck.tags = tags;
+            res.status(201).json(deck)
+         })
       })
       .catch(err => {
          res.status(500).json({ errorMessage: "There was an error retrieving the deck!" })
