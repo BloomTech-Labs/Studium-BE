@@ -16,9 +16,11 @@ router.get('/', (req, res) => {
 
 // GET SPECIFIC CARD 
 router.get("/:id", (req, res) => {
-    db.getCardbyId(req.params.id)
+    const id = req.params.id;
+
+    db.findCardbyId(id)
         .then(card => {
-            db.getCardTags(req.params.id).then(tags => {
+            db.getCardTags(req.params.id).then(tags => { // SHOWS TAGS 
                 card.tags = tags;
                 res.status(201).json(card)
             })
