@@ -1,7 +1,7 @@
 const db = require('../../db/db-config.js')
 
 const find = () => {
-    return db('decks')
+    return db('tags')
 }
 
 const findTagById = (id) => {
@@ -11,23 +11,23 @@ const findTagById = (id) => {
 }
 
 const findBy = (filter) => {
-    return db('decks')
+    return db('tags')
         .where(filter)
 }
 
-const add = (deck) => {
-    return db('decks')
-        .insert(deck, 'id')
+const add = (tag) => {
+    return db('tags')
+        .insert(tag, 'id')
 }
 
 const update = (changes, id) => {
-    return db('decks')
+    return db('tags')
         .where({ id })
         .update(changes)
 }
 
 const remove = (id) => {
-    return db('decks')
+    return db('tags')
         .where({ id })
         .del()
 }
