@@ -31,3 +31,20 @@ router.get('/:id', (req, res) => {
             res.status(500).json({ errorMessage: "There was an error retrieving the tag!" })
         })
 })
+
+// ADD NEW TAG (POST) 
+router.post('/', (req, res) => {
+    const tagData = req.body;
+
+    db.add(tagData)
+        .then(tag => {
+            if (!req.body.tag_name) {
+                res.status(401).json({ errorMessage: "Please include the tag name." })
+            } else {
+                res.status(201).json(tag)
+            }
+        })
+        .catch(err => {
+            res.status(500).json({ errorMessage: "There was an error adding the tag." })
+        })
+})

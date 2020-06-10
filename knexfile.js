@@ -8,13 +8,13 @@ module.exports = {
       directory: './db/migrations'
     },
     seeds: {
-      directory: './db/seeds/dev'
+      directory: './db/seeds/production'
     },
     useNullAsDefault: true
   },
 
   test: {
-    client: 'pg',
+    client: 'sqlite3',
     connection: { filename: './database/studium_test.db3' },
     migrations: {
       directory: './db/migrations'
