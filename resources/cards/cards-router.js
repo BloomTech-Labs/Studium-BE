@@ -18,7 +18,7 @@ router.get('/', (req, res) => {
 router.get("/:id", (req, res) => {
     db.getCardbyId(req.params.id)
         .then(card => {
-            if (card.length > 0) {
+            if (card) {
                 card.forEach(card => {
                     db.getCardTags(req.params.id).then(tags => {
                         card.tags = tags;
@@ -59,7 +59,7 @@ router.put('/:id', (req, res) => {
 
     db.findCardbyId(id)
         .then(card => {
-            if (card.length > 0) {
+            if (card) {
                 db.update(changes, id)
                     .then(updatedCard => {
                         res.status(200).json(updatedCard)
@@ -79,7 +79,7 @@ router.delete('/:id', (req, res) => {
 
     db.remove(id)
         .then(deleted => {
-            if (deleted.length > 0) {
+            if (deleted) {
                 res.status(200).json({ removed: deleted })
             } else {
                 res.status(404).json({ errorMessage: "No such card with that ID exists." })

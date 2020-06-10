@@ -21,7 +21,7 @@ router.get("/:id", (req, res) => {
 
    Decks.findDeckById(id)
       .then(deck => {
-         if (deck.length > 0) {
+         if (deck) {
             deck.forEach(deck => {
                Decks.getDeckTags(req.params.id).then(tags => { // SHOWS TAGS 
                   deck.tags = tags;
@@ -43,7 +43,7 @@ router.get("/:id/cards", (req, res) => {
 
    Decks.getDeckCards(id)
       .then(cards => {
-         if (cards.length > 0) {
+         if (cards) {
             res.status(200).json(cards)
          } else {
             res.status(404).json({ errorMessage: "No cards exist within this deck." })
@@ -78,7 +78,7 @@ router.put('/:id', (req, res) => {
 
    Decks.findDeckById(id)
       .then(deck => {
-         if (deck.length > 0) {
+         if (deck) {
             Decks.update(changes, id)
                .then(updatedDeck => {
                   res.json(updatedDeck);
@@ -98,7 +98,7 @@ router.delete('/:id', (req, res) => {
 
    Decks.remove(id)
       .then(deleted => {
-         if (deleted.length > 0) {
+         if (deleted) {
             res.json({ removed: deleted });
          } else {
             res.status(404).json({ errorMessage: "No such deck with that ID exists." });
