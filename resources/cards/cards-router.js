@@ -51,3 +51,26 @@ router.post('/', (req, res) => {
             res.status(500).json({ errorMessage: "There was an error adding the card." })
         })
 })
+
+// UPDATE EXISTING CARD (PUT)
+router.put('/:id', (req, res) => {
+    const { id } = req.params;
+    const changes = req.body;
+
+    db.findCardbyId(id)
+        .then(card => {
+            if (card.length) {
+                db.update(changes, id)
+                    .then(updatedCard => {
+                        res.status(200).json(updatedCard)
+                    })
+            } else {
+                res.status(404).json({ errorMessage: "No such card with that ID exists." })
+            }
+        })
+        .catch(err => {
+            res.status(500).json({ errorMessage: "There was an error updating the card." })
+        })
+})
+
+module.exports = router;
