@@ -25,4 +25,4 @@ server.get('/', (req, res) => {
    res.send('The api is up.')
 })
 
-module.exports = server
+module.exports = server;
