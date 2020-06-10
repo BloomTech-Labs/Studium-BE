@@ -48,3 +48,24 @@ router.post('/', (req, res) => {
             res.status(500).json({ errorMessage: "There was an error adding the tag." })
         })
 })
+
+// UPDATE EXISTING TAG (PUT)
+router.put('/:id', (req, res) => {
+    const { id } = req.params;
+    const changes = req.body;
+
+    db.findTagById(id)
+        .then(tag => {
+            if (tag.length) {
+                db.update(changes, id)
+                    .then(updatedTag => {
+                        res.status(200).json(updatedTag)
+                    })
+            } else {
+                res.status(404).json({ errorMessage: "No such tag with that ID exists." })
+            }
+        })
+        .catch(err => {
+            res.status(500).json({ errorMessage: "There was an error updating the tag." })
+        })
+})
