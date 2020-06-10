@@ -21,7 +21,7 @@ router.get('/:id', (req, res) => {
 
     db.findTagById(id)
         .then(tag => {
-            if (tag.length) {
+            if (tag.length > 0) {
                 res.status(200).json(tag)
             } else {
                 res.status(404).json({ errorMessage: "No such tag with that ID exists." })
@@ -56,7 +56,7 @@ router.put('/:id', (req, res) => {
 
     db.findTagById(id)
         .then(tag => {
-            if (tag.length) {
+            if (tag.length > 0) {
                 db.update(changes, id)
                     .then(updatedTag => {
                         res.status(200).json(updatedTag)
@@ -76,7 +76,7 @@ router.delete('/:id', (req, res) => {
 
     db.remove(id)
         .then(deleted => {
-            if (deleted.length) {
+            if (deleted.length > 0) {
                 res.status(200).json({ removed: deleted })
             } else {
                 res.status(404).json({ errorMessage: "No such tag with that ID exists." })
