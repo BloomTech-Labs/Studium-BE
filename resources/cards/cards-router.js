@@ -21,12 +21,12 @@ router.get("/:id", (req, res) => {
     db.findCardbyId(id)
         .then(card => {
             db.getCardTags(req.params.id).then(tags => { // SHOWS TAGS 
-                deck.tags = tags;
+                card.tags = tags;
                 res.status(201).json(card)
             })
         })
         .catch(err => {
-            res.status(500).json({ errorMessage: "There was an error retrieving the deck!" })
+            res.status(500).json({ errorMessage: "There was an error retrieving the card!" })
         })
 })
 
