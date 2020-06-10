@@ -34,3 +34,20 @@ router.get("/:id", (req, res) => {
             res.status(500).json({ errorMessage: "There was an error retrieving the card!" })
         })
 })
+
+// ADD NEW CARD (POST)
+router.post('/', (req, res) => {
+    const cardData = req.body;
+
+    db.add(cardData)
+        .then(card => {
+            if (!req.body.deck_id || !req.body.card_front || !req.body.card_back) {
+                res.status(401).json({ errorMessage: "Please include a deck ID, card front, and card back!" })
+            } else {
+                res.status(201).json(card)
+            }
+        })
+        .catch(err => {
+            res.status(500).json({ errorMessage: "There was an error adding the card." })
+        })
+})

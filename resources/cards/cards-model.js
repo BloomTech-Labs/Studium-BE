@@ -5,7 +5,7 @@ const find = () => {
 }
 
 const findCardbyId = (id) => {
-    return db("decks as d")
+    return db("cards as c")
         .where({ id })
         .first()
 }
