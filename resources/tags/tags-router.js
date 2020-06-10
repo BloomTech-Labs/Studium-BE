@@ -86,3 +86,5 @@ router.delete('/:id', (req, res) => {
             res.status(500).json({ errorMessage: "There was an error deleting the tag." })
         })
 })
+
+module.exports = router;
