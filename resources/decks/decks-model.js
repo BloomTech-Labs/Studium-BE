@@ -7,7 +7,6 @@ const find = () => {
 const findDeckById = (id) => {
    return db("decks as d")
       .where({ id })
-      .first()
 }
 
 function getDeckCards(id) {
