@@ -7,7 +7,6 @@ const find = () => {
 const findCardbyId = (id) => {
     return db("cards as c")
         .where({ id })
-        .first()
 }
 
 function getCardTags(id) {

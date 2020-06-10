@@ -7,7 +7,6 @@ const find = () => {
 const findTagById = (id) => {
     return db("tags as t")
         .where({ id })
-        .first()
 }
 
 const findBy = (filter) => {

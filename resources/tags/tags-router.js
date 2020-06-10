@@ -21,11 +21,7 @@ router.get('/:id', (req, res) => {
 
     db.findTagById(id)
         .then(tag => {
-            if (tag) {
-                res.status(200).json(tag)
-            } else {
-                res.status(404).json({ errorMessage: "No such tag with that ID exists." })
-            }
+            res.status(200).json(tag)
         })
         .catch(err => {
             res.status(500).json({ errorMessage: "There was an error retrieving the tag!" })
