@@ -1,17 +1,17 @@
-const app = require("../../api/server");
 // const knex = require("../../knexfile");
 const db = require('../../db/db-config');
-const request = supertest(app);
+const request = require('supertest');
+const server = require('../../api/server.js')
 
 describe("User Endpoints", () => {
-  beforeAll(() => {
+  beforeEach(async () => {
     // return knex.seed.run();
     await db('users').truncate();
   });
 
   it("should retrieve the current user", done => {
     request
-      .get("/api/users/")
+      .get("/api/users")
       .set({ auth: "username" })
       .expect(200)
       .then(res => {

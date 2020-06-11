@@ -22,7 +22,7 @@ server.use('/api/sessions', sessionsRouter) // --> missing auth middleware
 server.use('/api/tags', tagsRouter) // --> missing auth middleware
 
 server.get('/', (req, res) => {
-   res.send('The api is up.')
+   res.status(200).json({ message: "The api is up." })
 })
 
 module.exports = server;
