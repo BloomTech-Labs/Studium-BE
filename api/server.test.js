@@ -6,7 +6,7 @@ describe("GET /", () => {
     it("if 200 returns ok ", async () => {
         const res = await request(server)
             .get("/")
-            expect(res.status).toBe(200) 
-            expect(res.body.message).toBe("Server is running!")  
+        expect(res.status).toBe(200)
+        expect(res.body.message).toBe('The api is up.')
     })
 })
