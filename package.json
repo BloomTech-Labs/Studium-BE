@@ -1,12 +1,12 @@
 {
   "name": "Studium-BE",
   "version": "1.0.0",
-  "description": "",
+  "description": "---",
   "main": "index.js",
   "scripts": {
     "server": "nodemon index.js",
     "start": "node index.js",
-    "test": "cross-env DB_ENV=development jest --watchAll"
+    "test": "jest --watchAll --verbose"
   },
   "repository": {
     "type": "git",
