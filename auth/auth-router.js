@@ -13,24 +13,23 @@ const jwt = require("jsonwebtoken")
 //     default: Date.now,
 //     expires: 43200
 // }, {timestamps: true}
-router.post('/api/register', (req, res) => {
+router.post('/register', (req, res) => {
   //registration 
   const user = req.body
-  user.password = bcrypt.hashSync(user.password, 10)
+  const hash = bcrypt.hashSync(user.password, 10)
+  user.password = hash
+
   User.insertUser(user)
-  .then(newUser =>{
-    user.id=newUser[0]
-    delete user.password
-    const token = generateToken(user)
-    res.status(201).json(user, token)
-  })
-  .catch(err =>{
-    res.status(500).json({message: "Error with adding user", err})
-  })
+    .then(newUser =>{
+      res.status(201).json(newUser)
+    })
+    .catch(err =>{
+      res.status(500).json({message: "Error with adding user", err})
+    })
   
 });
 
-router.post('/api/login', (req, res) => {
+router.post('/login', (req, res) => {
   //login
   const {username, password} = req.body
 
@@ -39,7 +38,10 @@ router.post('/api/login', (req, res) => {
       .then(user => {
           if (user && bcrypt.compareSync(password, user.password)) {
              const token = generateToken(user) 
-             res.status(200).json({ username, token })
+             res.status(200).json({ 
+              message: `Welcome ${user.username}`, 
+              token 
+            })
           } else {
               res.status(401).json({ message: "Invalid credentials, try again" })
           }
@@ -50,15 +52,14 @@ router.post('/api/login', (req, res) => {
 });
 function generateToken(user) {
   const payload = { 
-      userId: user.id,
+      subject: user.id,
       username: user.username
   }
   const options = {
       expiresIn: "2d"
   }
-  const token = 
-      jwt.sign(payload, secret.jwtSecret, options)
-      return token
   
+  return jwt.sign(payload, secret.jwtSecret, options)
 }
+
 module.exports = router;

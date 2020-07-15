@@ -7,6 +7,7 @@ const decksRouter = require('../resources/decks/decks-router.js')
 const cardsRouter = require('../resources/cards/cards-router.js')
 const sessionsRouter = require('../resources/sessions/sessions-router.js')
 const tagsRouter = require('../resources/tags/tags-router.js')
+const authRouter = require('../auth/auth-router.js')
 // --> insert auth middleware path(s) here
 
 const server = express()
@@ -20,6 +21,7 @@ server.use('/api/decks', decksRouter) // --> missing auth middleware
 server.use('/api/cards', cardsRouter) // --> missing auth middleware
 server.use('/api/sessions', sessionsRouter) // --> missing auth middleware
 server.use('/api/tags', tagsRouter) // --> missing auth middleware
+server.use('/api/auth', authRouter)
 
 server.get('/', (req, res) => {
    res.status(200).json({ message: "The api is up." })
