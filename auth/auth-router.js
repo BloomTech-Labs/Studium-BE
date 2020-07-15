@@ -13,7 +13,7 @@ const jwt = require("jsonwebtoken")
 //     default: Date.now,
 //     expires: 43200
 // }, {timestamps: true}
-router.post('/api/register', (req, res) => {
+router.post('/register', (req, res) => {
   //registration 
   const user = req.body
   user.password = bcrypt.hashSync(user.password, 10)
@@ -30,7 +30,7 @@ router.post('/api/register', (req, res) => {
   
 });
 
-router.post('/api/login', (req, res) => {
+router.post('/login', (req, res) => {
   //login
   const {username, password} = req.body
 
