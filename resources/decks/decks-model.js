@@ -11,9 +11,8 @@ const findDeckById = (id) => {
 
 function getDeckCards(id) {
    return db("decks as d")
-      .join("cards as c", "d.id", "c.deck_id")
+      .join("cards as c", "d.id", "c.id")
       .select("d.deck_name", "d.category", "d.description", "d.public", "c.card_front")
-      .where("cards.id", id)
 }
 
 function getDeckTags(id) {
