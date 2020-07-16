@@ -20,7 +20,6 @@ router.post('/register', (req, res) => {
   user.password = hash
 
   User.add(user)
-  .first()
     .then(newUser =>{
       if (user) {
         const token = generateToken(user) 
