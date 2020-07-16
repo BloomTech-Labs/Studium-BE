@@ -26,7 +26,7 @@ router.post('/register', (req, res) => {
         res.status(200).json({ 
          message: `Welcome ${user.username}`, 
          token, 
-         user
+         newUser
        })
      } else {
          res.status(401).json({ message: "Invalid registration, try again" })
