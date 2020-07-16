@@ -36,11 +36,13 @@ router.post('/login', (req, res) => {
   User.findBy({ username })
       .first()
       .then(user => {
+        console.log(user)
           if (user && bcrypt.compareSync(password, user.password)) {
              const token = generateToken(user) 
              res.status(200).json({ 
               message: `Welcome ${user.username}`, 
-              token 
+              token, 
+              user
             })
           } else {
               res.status(401).json({ message: "Invalid credentials, try again" })
