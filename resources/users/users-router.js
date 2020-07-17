@@ -14,6 +14,13 @@ router.get('/', (req, res) => {
       })
 })
 
+router.get("/me", (req, res) => {
+   Users.findById(req.decodedToken.id).then(user => {
+      delete user.password;
+      res.status(201).json(user)
+   })
+})
+
 router.get('/:id', (req, res) => {
    const { id } = req.params
 
