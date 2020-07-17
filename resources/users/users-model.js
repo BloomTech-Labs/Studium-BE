@@ -15,6 +15,10 @@ const findBy = (filter) => {
       .where(filter)
 }
 
+const findDeckByUserId = (id) => {
+   return db('decks').where({ user_id })
+}
+
 const add = (user) => {
    return db('users')
       .insert(user, 'id')
@@ -35,6 +39,7 @@ const remove = (id) => {
 module.exports = {
    find,
    findById,
+   findDeckByUserId,
    findBy,
    add,
    update,

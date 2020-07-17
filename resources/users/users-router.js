@@ -10,7 +10,7 @@ router.get('/', (req, res) => {
          res.json(users)
       })
       .catch(err => {
-         res.status(500).json({ message: 'Failed to retrieve users'})
+         res.status(500).json({ message: 'Failed to retrieve users' })
       })
 })
 
@@ -21,10 +21,24 @@ router.get('/:id', (req, res) => {
       .then(user => {
          user
             ? res.json(user)
-            : res.status(404).json({ message: 'Could not find a user with the given id'})
+            : res.status(404).json({ message: 'Could not find a user with the given id' })
       })
       .catch(err => {
          res.status(500).json({ message: 'Failed to get user' });
+      })
+})
+
+router.get('/:id/decks', (req, res) => {
+   const { id } = req.params;
+
+   Users.findDeckByUserId(id)
+      .then(data => {
+         data[0] ?
+            res.status(200).json(data) :
+            res.status(404).json({ errMessage: "Cannot find user data." })
+      })
+      .catch(err => {
+         res.status(500).json({ errMessage: "Unable to retrieve decks by User ID." })
       })
 })
 
@@ -35,9 +49,9 @@ router.post('/', (req, res) => {
       .then(user => {
          res.status(201).json(user)
       })
-      .catch (err => {
+      .catch(err => {
          res.status(500).json({ message: 'Failed to create new user' });
-       });
+      });
 })
 
 router.put('/:id', (req, res) => {
@@ -71,7 +85,7 @@ router.delete('/:id', (req, res) => {
       })
       .catch(err => {
          res.status(500).json({ message: 'Failed to delete user' });
-       });
+      });
 })
 
 module.exports = router
