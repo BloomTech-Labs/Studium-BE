@@ -33,7 +33,7 @@ router.get('/:id/decks', (req, res) => {
 
    Users.findDeckByUserId(id)
       .then(data => {
-         data[0] ?
+         data ?
             res.status(200).json(data) :
             res.status(404).json({ errMessage: "Cannot find user data." })
       })
