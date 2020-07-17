@@ -15,7 +15,7 @@ const findBy = (filter) => {
       .where(filter)
 }
 
-const findDeckByUserId = (id) => {
+const findDeckByUserId = (user_id) => {
    return db('decks').where({ user_id })
 }
 
