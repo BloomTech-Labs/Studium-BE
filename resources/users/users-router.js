@@ -17,7 +17,7 @@ router.get('/', (req, res) => {
 })
 
 router.get("/me", restricted, (req, res) => {
-   Users.findById(req.decodedToken.id)
+   Users.findById(decodedToken.id)
       .then(user => {
          delete user.password;
          res.status(201).json(user)
