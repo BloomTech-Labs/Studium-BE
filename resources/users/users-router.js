@@ -4,6 +4,8 @@ const Users = require('./users-model.js')
 
 const router = express.Router()
 
+const restricted = require('../../auth/authenticate-middleware')
+
 router.get('/', (req, res) => {
    Users.find()
       .then(users => {
@@ -14,11 +16,15 @@ router.get('/', (req, res) => {
       })
 })
 
-router.get("/me", (req, res) => {
-   Users.findById(req.decodedToken.id).then(user => {
-      delete user.password;
-      res.status(201).json(user)
-   })
+router.get("/me", restricted, (req, res) => {
+   Users.findById(req.decodedToken.id)
+      .then(user => {
+         delete user.password;
+         res.status(201).json(user)
+      })
+      .catch(err => {
+         res.status(500).json({ errMessage: "Failed to get user by ID" })
+      })
 })
 
 router.get('/:id', (req, res) => {
