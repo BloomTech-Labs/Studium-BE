@@ -32,19 +32,17 @@ router.get("/:id", (req, res) => {
 })
 
 // SEE CARDS WITHIN AN EXISTING DECK
-router.get("/:id/cards", (req, res) => {
+router.get('/:id/cards', (req, res) => {
    const { id } = req.params;
 
-   Decks.getDeckCards(id)
-      .then(cards => {
-         if (cards) {
-            res.status(200).json(cards)
-         } else {
-            res.status(404).json({ errorMessage: "No cards exist within this deck." })
-         }
+   Decks.findCardsByDeckId(id)
+      .then(data => {
+         data ?
+            res.status(200).json(data) :
+            res.status(404).json({ errMessage: "Cannot find deck data." })
       })
       .catch(err => {
-         res.status(500).json({ errorMessage: "There was an error retrieving the cards in this deck!" })
+         res.status(500).json({ errMessage: "Unable to retrieve decks by Deck ID." })
       })
 })
 

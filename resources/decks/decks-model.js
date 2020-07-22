@@ -9,10 +9,8 @@ const findDeckById = (id) => {
       .where({ id })
 }
 
-function getDeckCards(id) {
-   return db("decks as d")
-      .join("cards as c", "d.id", "c.id")
-      .select("d.deck_name", "d.category", "d.description", "d.public", "c.card_front")
+const findCardsByDeckId = (deck_id) => {
+   return db('cards').where({ deck_id })
 }
 
 function getDeckTags(id) {
@@ -46,7 +44,7 @@ module.exports = {
    find,
    findDeckById,
    getDeckTags,
-   getDeckCards,
+   findCardsByDeckId,
    findBy,
    add,
    update,
