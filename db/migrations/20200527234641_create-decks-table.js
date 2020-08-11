@@ -1,7 +1,7 @@
 
 exports.up = function (knex) {
     return knex.schema.createTable('decks', tbl => {
-        tbl.increments(); // ID
+        tbl.uuid('id').notNullable().primary(); // ID
         tbl.integer('user_id') // USER ID FROM USERS TABLE 
             .unsigned()
             .notNullable()
@@ -14,10 +14,10 @@ exports.up = function (knex) {
         tbl.boolean('public') // PUBLIC OR NOT BOOLEAN 
             .defaultTo(false)
         tbl.string('deck_img') // OPTIONAL DECK IMAGE 
-        tbl.timestamp('created_at') // CREATED AT TIMESTAMP 
+        tbl.integer('created_at') // CREATED AT TIMESTAMP 
             .notNullable()
             .defaultTo(knex.fn.now());
-        tbl.timestamp('updated_at') // UPDATED AT TIMESTAMP 
+        tbl.integer('updated_at') // UPDATED AT TIMESTAMP 
             .defaultTo(knex.fn.now());
     })
 };

@@ -1,7 +1,7 @@
 
 exports.up = function (knex) {
     return knex.schema.createTable('cards', tbl => {
-        tbl.increments(); // ID
+        tbl.uuid('id').notNullable().primary(); // ID
         tbl.integer('deck_id') // ID FROM DECKS TABLE
             .unsigned()
             .notNullable()
@@ -18,10 +18,12 @@ exports.up = function (knex) {
         tbl.timestamp('updated_at') // UPDATED AT TIMESTAMP 
             .notNullable()
             .defaultTo(knex.fn.now());
-        tbl.decimal('comfort_level') // COMFORT LEVEL FROM 0 TO 1 
+        tbl.integer('comfort_level') // COMFORT LEVEL FROM 0 TO 1 
             .notNullable()
             .defaultTo(0);
-        tbl.timestamp('next_due') // NEXT DUE TIMESTAMP 
+        tbl.boolean('is_starred') // IS THE CARD STARRED/SAVED?
+            .defaultTo(false);
+        tbl.integer('next_due') // NEXT DUE TIMESTAMP 
             .notNullable()
             .defaultTo(knex.fn.now());
         tbl.string('card_img'); // OPTIONAL CARD IMAGE 
