@@ -15,10 +15,7 @@ exports.up = function (knex) {
             .defaultTo(false)
         tbl.string('deck_img') // OPTIONAL DECK IMAGE 
         tbl.integer('created_at') // CREATED AT TIMESTAMP 
-            .notNullable()
-            .defaultTo(knex.fn.now());
         tbl.integer('updated_at') // UPDATED AT TIMESTAMP 
-            .defaultTo(knex.fn.now());
     })
 };
 

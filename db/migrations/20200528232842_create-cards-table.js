@@ -24,8 +24,6 @@ exports.up = function (knex) {
         tbl.boolean('is_starred') // IS THE CARD STARRED/SAVED?
             .defaultTo(false);
         tbl.integer('next_due') // NEXT DUE TIMESTAMP 
-            .notNullable()
-            .defaultTo(knex.fn.now());
         tbl.string('card_img'); // OPTIONAL CARD IMAGE 
     })
 };
