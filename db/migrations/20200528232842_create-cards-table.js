@@ -2,7 +2,7 @@
 exports.up = function (knex) {
     return knex.schema.createTable('cards', tbl => {
         tbl.uuid('id').notNullable().primary(); // ID
-        tbl.integer('deck_id') // ID FROM DECKS TABLE
+        tbl.uuid('deck_id') // ID FROM DECKS TABLE
             .unsigned()
             .notNullable()
             .references('id')
