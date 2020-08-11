@@ -1,7 +1,7 @@
 
 exports.up = function (knex) {
     return knex.schema.createTable('users', tbl => {
-        tbl.increments(); // ID
+        tbl.uuid('id').notNullable().primary(); // ID
         tbl.string("first_name") // FIRST NAME
             .notNullable();
         tbl.string("last_name") // LAST NAME
@@ -23,7 +23,9 @@ exports.up = function (knex) {
         tbl.integer("user_level") // LEVEL
             .notNullable()
             .defaultTo(1);
-        tbl.timestamp("created_at", { useTz: false }); // CREATED AT TIMESTAMP 
+        tbl.integer("created_at") // CREATED AT TIMESTAMP
+            .notNullable()
+            .defaultTo(knex.fn.now());
         tbl.string("user_img"); // USER AVATAR/IMG 
     })
 };
