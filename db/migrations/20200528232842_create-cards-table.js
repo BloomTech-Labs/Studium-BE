@@ -1,7 +1,9 @@
 
-exports.up = function (knex) {
+exports.up = function async(knex) {
+    await knex.raw('CREATE EXTENSION IF NOT EXISTS "uuid-ossp"');
+
     return knex.schema.createTable('cards', tbl => {
-        tbl.uuid('id').notNullable().primary(); // ID
+        tbl.uuid('id').defaultTo(knex.raw('uuid_generate_v4()')).notNullable().primary(); // ID
         tbl.uuid('deck_id') // ID FROM DECKS TABLE
             .unsigned()
             .notNullable()
@@ -29,5 +31,6 @@ exports.up = function (knex) {
 };
 
 exports.down = function (knex) {
+    knex.raw('drop extension if exists "uuid-ossp"');
     return knex.schema.dropTableIfExists('cards');
 };
