@@ -24,8 +24,6 @@ exports.up = function (knex) {
             .notNullable()
             .defaultTo(1);
         tbl.integer("created_at") // CREATED AT TIMESTAMP
-            .notNullable()
-            .defaultTo(knex.fn.now());
         tbl.string("user_img"); // USER AVATAR/IMG 
     })
 };
