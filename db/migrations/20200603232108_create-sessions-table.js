@@ -17,8 +17,7 @@ exports.up = function (knex) {
       .defaultTo(0);
     tbl.integer('session_start') //session start
       .notNullable();
-    tbl.timestamp('session_end') //session end
-      .integer();
+    tbl.integer('session_end'); //session end
   })
 };
 
