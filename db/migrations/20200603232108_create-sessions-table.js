@@ -2,10 +2,16 @@
 exports.up = function (knex) {
   return knex.schema.createTable('sessions', tbl => {
     tbl.uuid('id').notNullable().primary(); //id
-    tbl.integer('deck_id') //deck id
-      .notNullable();
-    tbl.integer('user_id') //user id
-      .notNullable();
+    tbl.uuid('deck_id') //deck id
+      .unsigned()
+      .notNullable()
+      .references('id')
+      .inTable('decks');
+    tbl.uuid('user_id') //user id
+      .unsigned()
+      .notNullable()
+      .references('id')
+      .inTable('users');
     tbl.integer('total_looked_at') //total looked at
       .notNullable()
       .defaultTo(0);
