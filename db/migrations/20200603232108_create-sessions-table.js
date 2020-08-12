@@ -17,9 +17,9 @@ exports.up = function (knex) {
         tbl.integer('total_looked_at') //total looked at
           .notNullable()
           .defaultTo(0);
-        tbl.integer('session_start') //session start
+        tbl.bigint('session_start') //session start
           .notNullable();
-        tbl.integer('session_end'); //session end
+        tbl.bigint('session_end'); //session end
       })
     })
 
