@@ -6,30 +6,30 @@ const find = () => {
 
 const findById = (id) => {
     return db('sessions')
-    .where({ id })
-    .first()
+        .where({ id })
+        .first()
 }
 
 const findBy = (filter) => {
     return db('sessions')
-    .where(filter)
+        .where(filter)
 }
 
 const add = (sessions) => {
     return db('sessions')
-    .insert(sessions, 'id')
+        .insert(sessions)
 }
 
 const update = (changes, id) => {
     return db('sessions')
-    .where({ id })
-    .update(changes)
+        .where({ id })
+        .update(changes)
 }
 
 const remove = (id) => {
     return db('sessions')
-    .where({ id })
-    .del()
+        .where({ id })
+        .del()
 }
 
 module.exports = {
