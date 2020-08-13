@@ -25,7 +25,7 @@ exports.up = function (knex) {
                 tbl.integer("user_level") // LEVEL
                     .notNullable()
                     .defaultTo(1);
-                tbl.integer("created_at") // CREATED AT TIMESTAMP
+                tbl.bigint("created_at") // CREATED AT TIMESTAMP
                 tbl.string("user_img"); // USER AVATAR/IMG 
             })
         })

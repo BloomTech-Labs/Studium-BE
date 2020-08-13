@@ -16,8 +16,8 @@ exports.up = function (knex) {
                 tbl.boolean('public') // PUBLIC OR NOT BOOLEAN 
                     .defaultTo(false)
                 tbl.string('deck_img') // OPTIONAL DECK IMAGE 
-                tbl.integer('created_at') // CREATED AT TIMESTAMP 
-                tbl.integer('updated_at') // UPDATED AT TIMESTAMP 
+                tbl.bigint('created_at') // CREATED AT TIMESTAMP 
+                tbl.bigint('updated_at') // UPDATED AT TIMESTAMP 
             })
         })
 };
