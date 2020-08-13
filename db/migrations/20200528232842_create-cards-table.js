@@ -14,18 +14,14 @@ exports.up = function (knex) {
                 tbl.string('card_back') // BACK OF CARD 
                     .notNullable();
                 tbl.string('notes'); // OPTIONAL NOTES SECTION
-                tbl.timestamp('created_at') // CREATED AT TIMESTAMP
-                    .notNullable()
-                    .defaultTo(knex.fn.now());
-                tbl.timestamp('updated_at') // UPDATED AT TIMESTAMP 
-                    .notNullable()
-                    .defaultTo(knex.fn.now());
+                tbl.bigint('created_at') // CREATED AT TIMESTAMP
+                tbl.bigint('updated_at') // UPDATED AT TIMESTAMP 
                 tbl.integer('comfort_level') // COMFORT LEVEL FROM 0 TO 1 
                     .notNullable()
                     .defaultTo(0);
                 tbl.boolean('is_starred') // IS THE CARD STARRED/SAVED?
                     .defaultTo(false);
-                tbl.integer('next_due') // NEXT DUE TIMESTAMP 
+                tbl.bigint('next_due') // NEXT DUE TIMESTAMP 
                 tbl.string('card_img'); // OPTIONAL CARD IMAGE 
             })
         })
