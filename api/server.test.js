@@ -1,12 +1,11 @@
-const request = require("supertest")
+const request = require("supertest");
 
-const server = require("./server.js")
+const server = require("./server.js");
 
 describe("GET /", () => {
-    it("if 200 returns ok ", async () => {
-        const res = await request(server)
-            .get("/")
-        expect(res.status).toBe(200)
-        expect(res.body.message).toBe('The api is up.')
-    })
-})
+  it("if 200 returns ok ", async () => {
+    const res = await request(server).get("/");
+    expect(res.status).toBe(200);
+    expect(res.body.message).toBe("The api is up.");
+  });
+});
