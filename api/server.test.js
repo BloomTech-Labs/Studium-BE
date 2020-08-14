@@ -9,3 +9,4 @@ describe("GET /", () => {
     expect(res.body.message).toBe("The api is up.");
   });
 });
+
