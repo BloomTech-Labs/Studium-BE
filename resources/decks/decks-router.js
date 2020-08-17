@@ -46,6 +46,21 @@ router.get('/:id/cards', (req, res) => {
       })
 })
 
+// SEE SESSIONS WITHIN AN EXISTING DECK
+router.get('/:id/sessions', (req, res) => {
+   const { id } = req.params;
+
+   Decks.findSessionsByDeckId(id)
+      .then(data => {
+         data ?
+            res.status(200).json(data) :
+            res.status(404).json({ errMessage: "Cannot find deck data." })
+      })
+      .catch(err => {
+         res.status(500).json({ errorMessage: "Unable to retrieve sessions by deck ID." })
+      })
+})
+
 // ADD NEW DECK (POST)
 router.post('/', (req, res) => {
    const deckData = req.body;
