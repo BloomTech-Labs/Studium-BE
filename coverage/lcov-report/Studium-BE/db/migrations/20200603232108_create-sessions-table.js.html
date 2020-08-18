@@ -25,7 +25,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/10</span>
+                <span class='fraction'>0/12</span>
             </div>
         
             
@@ -39,14 +39,14 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/3</span>
+                <span class='fraction'>0/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/10</span>
+                <span class='fraction'>0/12</span>
             </div>
         
             
@@ -77,54 +77,87 @@
 <a name='L18'></a><a href='#L18'>18</a>
 <a name='L19'></a><a href='#L19'>19</a>
 <a name='L20'></a><a href='#L20'>20</a>
-<a name='L21'></a><a href='#L21'>21</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L21'></a><a href='#L21'>21</a>
+<a name='L22'></a><a href='#L22'>22</a>
+<a name='L23'></a><a href='#L23'>23</a>
+<a name='L24'></a><a href='#L24'>24</a>
+<a name='L25'></a><a href='#L25'>25</a>
+<a name='L26'></a><a href='#L26'>26</a>
+<a name='L27'></a><a href='#L27'>27</a>
+<a name='L28'></a><a href='#L28'>28</a>
+<a name='L29'></a><a href='#L29'>29</a>
+<a name='L30'></a><a href='#L30'>30</a>
+<a name='L31'></a><a href='#L31'>31</a>
+<a name='L32'></a><a href='#L32'>32</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">&nbsp;
-<span class="cstat-no" title="statement not covered" >exports.up = <span class="fstat-no" title="function not covered" >fu</span>nction(knex) {</span>
-<span class="cstat-no" title="statement not covered" >    return knex.schema.createTable('sessions', <span class="fstat-no" title="function not covered" >tb</span>l =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >        tbl.increments(); </span>//id
-<span class="cstat-no" title="statement not covered" >        tbl.integer('deck_id') //deck id</span>
-          .notNullable();
-<span class="cstat-no" title="statement not covered" >        tbl.integer('user_id') //user id</span>
-          .notNullable();
+<span class="cstat-no" title="statement not covered" >exports.up = <span class="fstat-no" title="function not covered" >fu</span>nction (knex) {</span>
+<span class="cstat-no" title="statement not covered" >  knex.raw('CREATE EXTENSION IF NOT EXISTS "uuid-ossp"')</span>
+    .then(<span class="fstat-no" title="function not covered" >()</span> =&gt; {
+<span class="cstat-no" title="statement not covered" >      return knex.schema.createTable('sessions', <span class="fstat-no" title="function not covered" >tb</span>l =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >        tbl.uuid('id').defaultTo(knex.raw('uuid_generate_v4()')).notNullable().primary(); </span>//id
+<span class="cstat-no" title="statement not covered" >        tbl.uuid('deck_id') //deck id</span>
+          .unsigned()
+          .notNullable()
+          .references('id')
+          .inTable('decks');
+<span class="cstat-no" title="statement not covered" >        tbl.uuid('user_id') //user id</span>
+          .unsigned()
+          .notNullable()
+          .references('id')
+          .inTable('users');
 <span class="cstat-no" title="statement not covered" >        tbl.integer('total_looked_at') //total looked at</span>
           .notNullable()
           .defaultTo(0);
-<span class="cstat-no" title="statement not covered" >        tbl.timestamp('session_start') //session start</span>
+<span class="cstat-no" title="statement not covered" >        tbl.bigint('session_start') //session start</span>
           .notNullable();
-<span class="cstat-no" title="statement not covered" >        tbl.timestamp('session_end') //session end</span>
-          .notNullable();
+<span class="cstat-no" title="statement not covered" >        tbl.bigint('session_end'); </span>//session end
+      })
     })
-  };
-  
-<span class="cstat-no" title="statement not covered" >  exports.down = <span class="fstat-no" title="function not covered" >fu</span>nction(knex) {</span>
-<span class="cstat-no" title="statement not covered" >    return knex.schema.dropTableIfExists('sessions');</span>
-  };</pre></td></tr></table></pre>
+&nbsp;
+&nbsp;
+};
+&nbsp;
+<span class="cstat-no" title="statement not covered" >exports.down = <span class="fstat-no" title="function not covered" >fu</span>nction (knex) {</span>
+<span class="cstat-no" title="statement not covered" >  knex.raw('drop extension if exists "uuid-ossp"');</span>
+<span class="cstat-no" title="statement not covered" >  return knex.schema.dropTableIfExists('sessions');</span>
+};</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
             </div><!-- /wrapper -->
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Wed Aug 05 2020 13:56:33 GMT-0500 (Central Daylight Time)
+                at Mon Aug 17 2020 22:20:46 GMT-0400 (Eastern Daylight Time)
             </div>
         </div>
         <script src="../../../prettify.js"></script>

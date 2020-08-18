@@ -15,7 +15,7 @@ const cleaner = require("knex-cleaner");
 //   it("should give the correct code when getting users", async (done) => {
 //     const response = await request.get("/api/users");
 
-//     expect(response.status).toBe(200);
+//     // expect(response.status).toBe(200);
 //     done();
 //   });
 // });
@@ -60,6 +60,7 @@ test("GET /", err => {
 //         expect(res.status).toBe(201);
 //       });
 //   });
+
 
 describe("User Endpoints", () => {
   beforeAll(() => {

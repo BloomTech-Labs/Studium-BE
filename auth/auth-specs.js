@@ -7,6 +7,7 @@ describe("Auth router", () => {
     await db("users").truncate();
   });
 
+  // tests post for  auth  router
   describe("POST /register", () => {
     it("201 means good", () => {
       return request(server)

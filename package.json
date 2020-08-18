@@ -46,7 +46,10 @@
       "**/*.js",
       "!**/node_modules/**",
       "!**/vendor/**",
-      "!**/coverage/**"
+      "!**/coverage/**",
+      "!**/db/**",
+      "!**/knexfile.js",
+      "!**/index.js"
     ]
   }
 }
