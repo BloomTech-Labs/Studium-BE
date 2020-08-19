@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1597718605377" clover="3.2.0">
-  <project timestamp="1597718605377" name="All files">
-    <metrics statements="306" coveredstatements="108" conditionals="47" coveredconditionals="2" methods="129" coveredmethods="1" elements="482" coveredelements="111" complexity="0" loc="306" ncloc="306" packages="7" files="13" classes="13"/>
+<coverage generated="1597803457670" clover="3.2.0">
+  <project timestamp="1597803457671" name="All files">
+    <metrics statements="286" coveredstatements="111" conditionals="47" coveredconditionals="1" methods="117" coveredmethods="4" elements="450" coveredelements="116" complexity="0" loc="286" ncloc="286" packages="7" files="12" classes="12"/>
     <package name="api">
       <metrics statements="20" coveredstatements="20" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
-      <file name="server.js" path="/Users/juniordugue/Documents/Lambda School/WebPT11/Labs_v18/Studium-BE/api/server.js">
+      <file name="server.js" path="/Users/anthonylopez/LambdaSchool/Labs-TL/Studium-BE/api/server.js">
         <metrics statements="20" coveredstatements="20" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
         <line num="1" count="7" type="stmt"/>
         <line num="2" count="7" type="stmt"/>
@@ -29,8 +29,8 @@
       </file>
     </package>
     <package name="auth">
-      <metrics statements="60" coveredstatements="11" conditionals="10" coveredconditionals="0" methods="21" coveredmethods="0"/>
-      <file name="auth-router.js" path="/Users/juniordugue/Documents/Lambda School/WebPT11/Labs_v18/Studium-BE/auth/auth-router.js">
+      <metrics statements="40" coveredstatements="11" conditionals="10" coveredconditionals="0" methods="9" coveredmethods="0"/>
+      <file name="auth-router.js" path="/Users/anthonylopez/LambdaSchool/Labs-TL/Studium-BE/auth/auth-router.js">
         <metrics statements="28" coveredstatements="8" conditionals="6" coveredconditionals="0" methods="7" coveredmethods="0"/>
         <line num="1" count="7" type="stmt"/>
         <line num="2" count="7" type="stmt"/>
@@ -61,30 +61,7 @@
         <line num="73" count="0" type="stmt"/>
         <line num="76" count="7" type="stmt"/>
       </file>
-      <file name="auth-specs.js" path="/Users/juniordugue/Documents/Lambda School/WebPT11/Labs_v18/Studium-BE/auth/auth-specs.js">
-        <metrics statements="20" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="12" coveredmethods="0"/>
-        <line num="1" count="0" type="stmt"/>
-        <line num="2" count="0" type="stmt"/>
-        <line num="3" count="0" type="stmt"/>
-        <line num="5" count="0" type="stmt"/>
-        <line num="6" count="0" type="stmt"/>
-        <line num="7" count="0" type="stmt"/>
-        <line num="10" count="0" type="stmt"/>
-        <line num="11" count="0" type="stmt"/>
-        <line num="12" count="0" type="stmt"/>
-        <line num="16" count="0" type="stmt"/>
-        <line num="20" count="0" type="stmt"/>
-        <line num="21" count="0" type="stmt"/>
-        <line num="25" count="0" type="stmt"/>
-        <line num="30" count="0" type="stmt"/>
-        <line num="31" count="0" type="stmt"/>
-        <line num="32" count="0" type="stmt"/>
-        <line num="36" count="0" type="stmt"/>
-        <line num="40" count="0" type="stmt"/>
-        <line num="41" count="0" type="stmt"/>
-        <line num="45" count="0" type="stmt"/>
-      </file>
-      <file name="authenticate-middleware.js" path="/Users/juniordugue/Documents/Lambda School/WebPT11/Labs_v18/Studium-BE/auth/authenticate-middleware.js">
+      <file name="authenticate-middleware.js" path="/Users/anthonylopez/LambdaSchool/Labs-TL/Studium-BE/auth/authenticate-middleware.js">
         <metrics statements="12" coveredstatements="3" conditionals="4" coveredconditionals="0" methods="2" coveredmethods="0"/>
         <line num="1" count="7" type="stmt"/>
         <line num="2" count="7" type="stmt"/>
@@ -101,15 +78,15 @@
       </file>
     </package>
     <package name="config">
-      <metrics statements="1" coveredstatements="1" conditionals="2" coveredconditionals="2" methods="0" coveredmethods="0"/>
-      <file name="secret.js" path="/Users/juniordugue/Documents/Lambda School/WebPT11/Labs_v18/Studium-BE/config/secret.js">
-        <metrics statements="1" coveredstatements="1" conditionals="2" coveredconditionals="2" methods="0" coveredmethods="0"/>
+      <metrics statements="1" coveredstatements="1" conditionals="2" coveredconditionals="1" methods="0" coveredmethods="0"/>
+      <file name="secret.js" path="/Users/anthonylopez/LambdaSchool/Labs-TL/Studium-BE/config/secret.js">
+        <metrics statements="1" coveredstatements="1" conditionals="2" coveredconditionals="1" methods="0" coveredmethods="0"/>
         <line num="1" count="7" type="stmt"/>
       </file>
     </package>
     <package name="resources.cards">
       <metrics statements="53" coveredstatements="17" conditionals="9" coveredconditionals="0" methods="24" coveredmethods="0"/>
-      <file name="cards-model.js" path="/Users/juniordugue/Documents/Lambda School/WebPT11/Labs_v18/Studium-BE/resources/cards/cards-model.js">
+      <file name="cards-model.js" path="/Users/anthonylopez/LambdaSchool/Labs-TL/Studium-BE/resources/cards/cards-model.js">
         <metrics statements="15" coveredstatements="8" conditionals="0" coveredconditionals="0" methods="7" coveredmethods="0"/>
         <line num="1" count="7" type="stmt"/>
         <line num="3" count="7" type="stmt"/>
@@ -127,7 +104,7 @@
         <line num="34" count="0" type="stmt"/>
         <line num="39" count="7" type="stmt"/>
       </file>
-      <file name="cards-router.js" path="/Users/juniordugue/Documents/Lambda School/WebPT11/Labs_v18/Studium-BE/resources/cards/cards-router.js">
+      <file name="cards-router.js" path="/Users/anthonylopez/LambdaSchool/Labs-TL/Studium-BE/resources/cards/cards-router.js">
         <metrics statements="38" coveredstatements="9" conditionals="9" coveredconditionals="0" methods="17" coveredmethods="0"/>
         <line num="1" count="7" type="stmt"/>
         <line num="2" count="7" type="stmt"/>
@@ -171,7 +148,7 @@
     </package>
     <package name="resources.decks">
       <metrics statements="67" coveredstatements="21" conditionals="12" coveredconditionals="0" methods="32" coveredmethods="0"/>
-      <file name="decks-model.js" path="/Users/juniordugue/Documents/Lambda School/WebPT11/Labs_v18/Studium-BE/resources/decks/decks-model.js">
+      <file name="decks-model.js" path="/Users/anthonylopez/LambdaSchool/Labs-TL/Studium-BE/resources/decks/decks-model.js">
         <metrics statements="19" coveredstatements="10" conditionals="0" coveredconditionals="0" methods="9" coveredmethods="0"/>
         <line num="1" count="7" type="stmt"/>
         <line num="3" count="7" type="stmt"/>
@@ -193,7 +170,7 @@
         <line num="42" count="0" type="stmt"/>
         <line num="47" count="7" type="stmt"/>
       </file>
-      <file name="decks-router.js" path="/Users/juniordugue/Documents/Lambda School/WebPT11/Labs_v18/Studium-BE/resources/decks/decks-router.js">
+      <file name="decks-router.js" path="/Users/anthonylopez/LambdaSchool/Labs-TL/Studium-BE/resources/decks/decks-router.js">
         <metrics statements="48" coveredstatements="11" conditionals="12" coveredconditionals="0" methods="23" coveredmethods="0"/>
         <line num="1" count="7" type="stmt"/>
         <line num="3" count="7" type="stmt"/>
@@ -247,7 +224,7 @@
     </package>
     <package name="resources.sessions">
       <metrics statements="46" coveredstatements="17" conditionals="6" coveredconditionals="0" methods="22" coveredmethods="0"/>
-      <file name="sessions-model.js" path="/Users/juniordugue/Documents/Lambda School/WebPT11/Labs_v18/Studium-BE/resources/sessions/sessions-model.js">
+      <file name="sessions-model.js" path="/Users/anthonylopez/LambdaSchool/Labs-TL/Studium-BE/resources/sessions/sessions-model.js">
         <metrics statements="14" coveredstatements="8" conditionals="0" coveredconditionals="0" methods="6" coveredmethods="0"/>
         <line num="1" count="7" type="stmt"/>
         <line num="3" count="7" type="stmt"/>
@@ -264,7 +241,7 @@
         <line num="30" count="0" type="stmt"/>
         <line num="35" count="7" type="stmt"/>
       </file>
-      <file name="sessions-router.js" path="/Users/juniordugue/Documents/Lambda School/WebPT11/Labs_v18/Studium-BE/resources/sessions/sessions-router.js">
+      <file name="sessions-router.js" path="/Users/anthonylopez/LambdaSchool/Labs-TL/Studium-BE/resources/sessions/sessions-router.js">
         <metrics statements="32" coveredstatements="9" conditionals="6" coveredconditionals="0" methods="16" coveredmethods="0"/>
         <line num="1" count="7" type="stmt"/>
         <line num="2" count="7" type="stmt"/>
@@ -301,12 +278,12 @@
       </file>
     </package>
     <package name="resources.users">
-      <metrics statements="59" coveredstatements="21" conditionals="8" coveredconditionals="0" methods="29" coveredmethods="0"/>
-      <file name="users-model.js" path="/Users/juniordugue/Documents/Lambda School/WebPT11/Labs_v18/Studium-BE/resources/users/users-model.js">
-        <metrics statements="16" coveredstatements="9" conditionals="0" coveredconditionals="0" methods="7" coveredmethods="0"/>
+      <metrics statements="59" coveredstatements="24" conditionals="8" coveredconditionals="0" methods="29" coveredmethods="3"/>
+      <file name="users-model.js" path="/Users/anthonylopez/LambdaSchool/Labs-TL/Studium-BE/resources/users/users-model.js">
+        <metrics statements="16" coveredstatements="10" conditionals="0" coveredconditionals="0" methods="7" coveredmethods="1"/>
         <line num="1" count="7" type="stmt"/>
         <line num="3" count="7" type="stmt"/>
-        <line num="4" count="0" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
         <line num="7" count="7" type="stmt"/>
         <line num="8" count="0" type="stmt"/>
         <line num="13" count="7" type="stmt"/>
@@ -321,16 +298,16 @@
         <line num="34" count="0" type="stmt"/>
         <line num="39" count="7" type="stmt"/>
       </file>
-      <file name="users-router.js" path="/Users/juniordugue/Documents/Lambda School/WebPT11/Labs_v18/Studium-BE/resources/users/users-router.js">
-        <metrics statements="43" coveredstatements="12" conditionals="8" coveredconditionals="0" methods="22" coveredmethods="0"/>
+      <file name="users-router.js" path="/Users/anthonylopez/LambdaSchool/Labs-TL/Studium-BE/resources/users/users-router.js">
+        <metrics statements="43" coveredstatements="14" conditionals="8" coveredconditionals="0" methods="22" coveredmethods="2"/>
         <line num="1" count="7" type="stmt"/>
         <line num="3" count="7" type="stmt"/>
         <line num="5" count="7" type="stmt"/>
         <line num="7" count="7" type="stmt"/>
         <line num="9" count="7" type="stmt"/>
-        <line num="10" count="0" type="stmt"/>
+        <line num="10" count="1" type="stmt"/>
         <line num="12" count="0" type="stmt"/>
-        <line num="15" count="0" type="stmt"/>
+        <line num="15" count="1" type="stmt"/>
         <line num="19" count="7" type="stmt"/>
         <line num="20" count="0" type="stmt"/>
         <line num="22" count="0" type="stmt"/>
