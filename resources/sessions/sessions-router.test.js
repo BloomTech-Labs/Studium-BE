@@ -11,20 +11,38 @@ describe("Users router test", () => {
 });
 
 // test for successful get requests
-test("GET /", err => {
+test("GET /", (err) => {
   supertest(app)
     .get("/")
     .expect(200, JSON.stringify({ message: "The api is up." }))
-    .end(err)
-})
+    .end(err);
+});
+
+// put
+describe("PATCH /:id", () => {
+  test("It should respond with an array of sessions", async () => {
+    const newSession = await request(app).post("/").send({
+      message: "Failed to create a new session",
+    });
+    const updatedSession = await request(app).patch(`/students/${newSession.body.id}`).send({ name: "updated" });
+    expect(updatedSession.body.name).toBe("updated");
+    expect(updatedSession.body).toHaveProperty("changes");
+    expect(updatedSession.body).toHaveProperty("id");
+    expect(updatedSession.statusCode).toBe(200);
+
+    // make sure we have 3 sessions
+    const response = await request(app).get("/");
+    expect(response.body.length).toBe(3);
+  });
+});
 
 // deletes exisitng card tests
-it("should delete cards router", done => {
+it("should delete cards router", (done) => {
   request
     .delete("/:id")
     .set({ errorMessage: "No such card with that ID exists." })
     .expect(404)
-    .then(req => {
+    .then((req) => {
       const id = req.params;
       done();
     });

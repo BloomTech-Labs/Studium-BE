@@ -16,3 +16,24 @@ describe("GET /", () => {
   });
 });
 
+// describe("", () => {
+//   var server;
+
+//   // Called once before any of the tests in this block begin.
+
+//   it("should send back a JSON object with goodCall set to true", () => {
+//     request(server)
+//       .get("/index")
+//       .set("Content-Type", "application/json")
+//       .expect("Content-Type", /json/)
+//       .expect(200,(err, res) => {
+//         if (err) {
+//           return done(err);
+//         }
+//         callStatus = res.body.goodCall;
+//         expect(callStatus).to.equal(true);
+//         // Done
+//         done();
+//       });
+//   });
+// });
