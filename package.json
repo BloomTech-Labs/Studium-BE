@@ -49,7 +49,9 @@
       "!**/coverage/**",
       "!**/db/**",
       "!**/knexfile.js",
-      "!**/index.js"
+      "!**/index.js",
+      "!**/users-router.js",
+      "!**/authenticate-middleware.js"
     ]
   }
 }

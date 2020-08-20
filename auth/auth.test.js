@@ -9,18 +9,22 @@ const knex = require("../db/db-config");
 const cleaner = require("knex-cleaner");
 const server = require("../api/server");
 
-describe("POST /login", () => {
+describe("POST /register", () => {
   test("It should respond with an array of login", async () => {
-    const newUser = await request(app).post("/login").send({
-      name: "New User",
+    const newUser = await request .post("/register").send({
+      username: "Undefined",
+      password:"bobscool2"
     });
-    expect(newUser.body.username).toBe("New User");
-    expect(newUser.body).toHaveProperty("username");
-    expect(newUser.body).toHaveProperty("password");
-    expect(newUser.statusCode).toBe(200);
-
-    // make sure we have 3 login
-    const response = await request(app).get("/login");
-    expect(response.body.length).toBe(3);
+    expect(newUser.body.username).toBe(undefined);
+   
+    expect(newUser.statusCode).toBe(404);
   });
+});
+
+test("POST /register", (err) => {
+  supertest(app)
+    .post("/register")
+    .expect(404)
+    .set({ errormessage: "A user can't register." } )
+    .end(err);
 });
