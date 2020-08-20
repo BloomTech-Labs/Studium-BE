@@ -27,3 +27,14 @@ it("should delete cards router", done => {
       done();
     });
 });
+
+it("Should get dekcs", done => {
+  request
+    .put("/")
+    .set({ errorMessage: "Dekcs do not exist." })
+    .expect(404)
+    .then(req => {
+      const id = req.params;
+      done();
+    });
+});
