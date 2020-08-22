@@ -1,16 +1,6 @@
 # Studium App Backend
 
----
-
 Deployed at: https://studium-be.herokuapp.com/
-
----
-
-## Endpoint Summary Table
-
-[ Table Here Once All Endpoints Are Completed ]
-
----
 
 ## Badges
 
@@ -35,14 +25,6 @@ Deployed at: https://studium-be.herokuapp.com/
 }
 ```
 
-### returns...
-
-```
-{
-    return here
-}
-```
-
 ## POST Login
 ### api/auth/login
 ```
@@ -52,46 +34,22 @@ Deployed at: https://studium-be.herokuapp.com/
 }
 ```
 
-### returns...
-
-```
-{
-    return here
-}
-```
-
 ## GET all decks
 ### api/decks
 
 Returns array of all decks.
 
-```
-[
-    {
-        return here
-    }
-]
-```
-
 ## GET deck by ID
 ### api/decks/:id
 
 Returns the specific deck object with the ID.
-Will list cards within that deck.
-Will list tags on that deck.
-
-```
-{
-    return here
-}
-```
 
 ## POST new deck
 ### api/decks
 
 ```
 {
-    "user_id": integer,         required
+    "user_id": uuid,         required
     "deck_name": "string",      required
     "category": "string",
     "description": "string",
@@ -100,20 +58,16 @@ Will list tags on that deck.
 }
 ```
 
-### returns ...
-
-``` 
-{
-    return here
-}
-```
+## GET cards by deck ID
+### api/decks/:id/cards
+Gets all cards within a certain deck.
 
 ## PUT update existing deck by ID
 ### api/decks/:id
 
 ```
 {
-    "user_id": integer,         edit any of these fields
+    "user_id": uuid,         edit any of these fields
     "deck_name": "string",      
     "category": "string",
     "description": "string",
@@ -122,67 +76,36 @@ Will list tags on that deck.
 }
 ```
 
-### returns...
-
-``` 
-{
-    return here
-}
-```
-
 ## DELETE an existing deck by ID
 ### api/decks/:id
 
 Returns a successful response.
-Deleting a deck will make the cards attached to that deck inaccessible to the user.
-
-```
-{
-    return here
-}
-```
 
 ## GET all cards
 ### api/cards
 
 Returns array of all cards, no matter the deck.
-```
-[
-    {
-        return here
-    }
-]
-```
 
 ## GET specific card
 ### api/cards/:id
 
 Returns a specific card, no matter the deck, based on the ID.
-Will list tags on that card.
-
-```
-{
-    retun here
-}
-```
 
 ## POST new card
 ### api/cards
 
 ```
 {
-    "deck_id": integer,         required
+    "deck_id": uuid,         required
     "card_front": "string",     required
     "card_back": "string",      required
-    "notes": "string"
-}
-```
-
-### returns...
-
-``` 
-{
-    return here
+    "notes": "string",
+	"created_at": bigint,
+	"updated_at": bigint,
+	"comfort_level": integer, 			0, required
+	"is_starred": boolean,			false
+	"next_due": bigint,
+	"card_img": "string"
 }
 ```
 
@@ -191,20 +114,16 @@ Will list tags on that card.
 
 ```
 {
-    "deck_id": integer,         edit any of these fields
+    "deck_id": uuid,         edit any of these fields
     "card_front": "string",     
     "card_back": "string",      
     "notes": "string",
-    "comfort_level": decimal
-    "next_due": timestamp
-}
-```
-
-### returns...
-
-``` 
-{
-    return here
+	"created_at": bigint,
+	"updated_at": bigint,
+	"comfort_level": integer, 
+	"is_starred": boolean,
+	"next_due": bigint,
+	"card_img": "string"
 }
 ```
 
@@ -213,78 +132,44 @@ Will list tags on that card.
 
 Returns a successful response.
 
-```
-{
-    return here
-}
-```
+## GET all sessions
+### api/sessions
 
-## GET all tags
-### api/tags
+Returns an array of sessions.
 
-Returns an array of all tags, no matter the card or deck.
-```
-[
-    {
-        return here
-    }
-]
-```
+## GET existing session by ID
+### api/sessions/:id
 
-## GET specific tag by ID
-### api/tags/:id
+Returns a specific session by ID.
 
-Returns a specific tag by ID.
+## POST new session
+### api/sessions
 
 ```
 {
-    return here
+	"deck_id": uuid,			required
+	"user_id": uuid,			required
+	"total_looked_at": integer,			0, required
+	"session_start": bigint,				required
+	"session_end": bigint
 }
 ```
 
-## POST new tag
-### api/tags
+## PUT an existing session
+### api/session/:id
 
 ```
 {
-    "tag_name": "string",       required
-    "tag_description": "string"
+	"id": uuid			edit any of these fields
+	"deck_id": uuid,
+	"user_id": uuid,
+	"total_looked_at": integer,
+	"session_start": bigint,
+	"session_end": bigint
 }
 ```
 
-### returns...
-
-```
-{
-    return here
-}
-```
-
-## PUT update existing tag by ID
-### api/tags/:id
-
-```
-{
-    "tag_name": "string",       edit any of these fields
-    "tag_description": "string"
-}
-```
-
-### returns...
-
-```
-{
-    return here
-}
-```
-
-## DELETE an existing tag by ID
-### api/tags/:id
+## DELETE an existing session
+### api/session/:id
 
 Returns a successful response.
-
-```
-{
-    return here
-}
-```
